@@ -1,0 +1,220 @@
+{
+    "HomePage": {
+        "title": "Hispanic Tax Inc.",
+        "subtitle": "Servicios financieros y tributarios integrales."
+    },
+    "Navbar": {
+        "home": "Inicio",
+        "services": "Servicios",
+        "about": "Nosotros",
+        "contact": "Contacto",
+        "contact_us": "Contáctanos"
+    },
+    "TrustBar": {
+        "title": "Avalados y Afiliados a"
+    },
+    "Hero": {
+        "badge_suffix": "Años de Experiencia",
+        "title": "Impulsamos Negocios <highlight>Exitosos</highlight>",
+        "subtitle": "Tu aliado estratégico integral en Estados Unidos. Expertos en preparación de impuestos corporativos y personales, contabilidad precisa, gestión de nómina y creación de empresas para fortalecer la comunidad hispana.",
+        "cta_primary": "Agendar Cita",
+        "cta_secondary": "Ver Servicios",
+        "strategic_partners": "Aliados Estratégicos",
+        "stat_clients": "Clientes",
+        "stat_clients_number": "1,500+",
+        "stat_satisfaction": "Satisfacción",
+        "stat_satisfaction_number": "99%",
+        "service_1": "Impuestos Corporativos",
+        "service_2": "Creación de Empresas",
+        "service_3": "Contabilidad & QuickBooks",
+        "service_4": "Asesoría en Real Estate",
+        "right_label": "Soluciones Integrales",
+        "whatsapp_message": "Hola, tengo interés en los servicios de Hispanic."
+    },
+    "NewsFeed": {
+        "loading": "Cargando noticias financieras...",
+        "section_label": "Actualidad Financiera",
+        "title": "Noticias & Perspectivas",
+        "view_all": "Ver Todas"
+    },
+    "ContactForm": {
+        "title": "Contáctanos",
+        "subtitle": "¿Listo para transformar tu negocio? Envíanos un mensaje y te responderemos a la brevedad.",
+        "address_label": "Visítanos",
+        "phone_label": "Llámanos",
+        "name_label": "Nombre Completo",
+        "email_label": "Correo Electrónico",
+        "message_label": "Tu Mensaje",
+        "name_placeholder": "Juan Pérez",
+        "email_placeholder": "juan@ejemplo.com",
+        "message_placeholder": "¿En qué podemos ayudarte?",
+        "submit_btn": "Enviar Mensaje",
+        "success_msg": "Mensaje Enviado!",
+        "error_msg": "Intenta de Nuevo",
+        "work_hours_label": "Horario de Atención",
+        "work_hours_value": "Lun - Vie: 9:00 AM - 6:00 PM",
+        "social_label": "Síguenos"
+    },
+    "Services": {
+        "label": "Nuestras Soluciones",
+        "title": "Portafolio Integral de Servicios",
+        "subtitle": "Desde la constitución de tu empresa hasta la protección de tu patrimonio.",
+        "view_details": "Ver Detalles",
+        "close": "Cerrar",
+        "items": {
+            "incorporation": {
+                "title": "Creación y Registro de Empresas",
+                "desc": "Inicia tu negocio con éxito con la guía en cada paso del establecimiento de tu empresa en Estados Unidos.",
+                "details": [
+                    "Artículos y Certificado de existencia",
+                    "Employer Identification Number (EIN)",
+                    "Acuerdo de Operación (Operating Agreement)",
+                    "Minutas o actas",
+                    "Planeación fiscal preliminar",
+                    "Corporate Kit (Libro de minutas, actas y acciones)",
+                    "Asistencia en la apertura de cuenta de negocio en bancos"
+                ]
+            },
+            "taxes": {
+                "title": "Preparación de Impuestos y Planeación",
+                "desc": "Maximiza tus beneficios fiscales. Nos encargamos de preparar y presentar tus impuestos de forma eficiente.",
+                "details": [
+                    "Preparación y presentación de impuestos personales (IRS)",
+                    "Preparación y presentación de impuestos de empresas",
+                    "Preparación de declaración de impuesto sobre las ventas",
+                    "Planeación fiscal para empresas",
+                    "Presentación de formas por impuestos de nómina (payroll)"
+                ]
+            },
+            "real_estate": {
+                "title": "Asesoría en Real Estate",
+                "desc": "Recibe asesoramiento profesional en la compra y venta de propiedades para maximizar tus inversiones.",
+                "details": [
+                    "Asistencia en compra de propiedades de inversión",
+                    "Análisis de impacto en la venta de propiedades para extranjeros",
+                    "Impuesto en venta de propiedades",
+                    "Reclamo de retenciones ante el IRS",
+                    "Declaraciones de impuestos para inversionistas extranjeros"
+                ]
+            },
+            "protection": {
+                "title": "Protección Patrimonial y Planeación",
+                "desc": "Diseñamos estrategias fiscales a medida para reducir impuestos, aumentar utilidades y proteger tu patrimonio.",
+                "details": [
+                    "Modelo Holding",
+                    "Limited Liability Company (LLC)",
+                    "Trust (Fideicomisos)"
+                ]
+            },
+            "accounting": {
+                "title": "Contabilidad y QuickBooks",
+                "desc": "Administra tu negocio con confianza. Ofrecemos servicios contables usando la plataforma QuickBooks.",
+                "details": [
+                    "Proceso de transacciones de ingresos y gastos",
+                    "Conciliaciones de bancos",
+                    "Estado de Resultados (Profit & Loss)",
+                    "Balance General",
+                    "Análisis de variaciones y comparativos"
+                ]
+            }
+        }
+    },
+    "About": {
+        "label": "Nosotros",
+        "title": "Aliados Estratégicos para tu Crecimiento",
+        "p1": "Hispanic Financial se dedica a proveer soluciones financieras, tributarias y estratégicas integrales para empresas de todos los tamaños desde nuestra oficina en Coral Springs, FL.",
+        "p2": "Con más de 20 años de experiencia y más de 1500 clientes satisfechos, nuestro equipo de expertos trabaja de la mano con emprendedores y corporaciones para impulsar su crecimiento en los Estados Unidos.",
+        "stat_years": "Años de Experiencia",
+        "stat_clients": "Clientes Satisfechos",
+        "quote": "Nuestra misión es empoderar a la comunidad hispana con herramientas financieras de clase mundial.",
+        "innovation_title": "Innovación y Reinvención",
+        "innovation_desc_title": "Tecnología de Alto Impacto",
+        "innovation_desc": "Nos apoyamos en tecnologías recientes como Inteligencia Artificial, Machine Learning y GPT para fortalecer los procesos de tu empresa y brindarte resultados innovadores."
+    },
+    "Brochure": {
+        "label": "Catálogo de Servicios",
+        "title": "Descarga Nuestro Brochure 2026",
+        "subtitle": "Descubre en detalle cómo podemos impulsar tu negocio con nuestro portafolio completo de servicios y estrategias.",
+        "button": "Descargar PDF",
+        "feature_1": "Portafolio completo de servicios",
+        "feature_2": "Casos de éxito y testimonios",
+        "feature_3": "Estrategias de crecimiento",
+        "file_info": "PDF • 2.4 MB"
+    },
+    "WhatsApp": {
+        "message": "Hola, estoy interesado en los servicios de Hispanic.",
+        "tooltip": "Chatea con nosotros"
+    },
+    "NotFound": {
+        "title": "Página no encontrada",
+        "badge": "Error 404",
+        "status": "Perdido en la Navegación",
+        "title_part1": "¡Ups!",
+        "title_part2": "Camino equivocado.",
+        "description": "El camino financiero que buscas parece no estar disponible.",
+        "cta": "Volver al Inicio",
+        "box_title": "¿Buscas algo específico?",
+        "box_desc": "Nuestro equipo puede ayudarte a encontrar el plan tributario adecuado.",
+        "box_cta": "Go to Contact"
+    },
+    "fiscal_calendar": {
+        "title": "Calendario Fiscal 2026",
+        "subtitle": "Fechas clave y plazos importantes para individuos y empresas.",
+        "filter_all": "Todos",
+        "filter_business": "Empresas",
+        "filter_personal": "Personas",
+        "add_to_calendar": "Agregar a Google Calendar",
+        "events": {
+            "jan_15": {
+                "title": "Pago Estimado Q4 2025",
+                "desc": "Fecha límite para el cuarto pago de impuestos estimados del 2025."
+            },
+            "jan_31": {
+                "title": "Fecha Límite W-2 & 1099-NEC",
+                "desc": "Empleadores deben enviar W-2 a empleados y 1099-NEC a contratistas."
+            },
+            "mar_16": {
+                "title": "Declaración S-Corp y Partnerships",
+                "desc": "Vence plazo para formas 1120-S (S-Corps) y 1065 (Sociedades)."
+            },
+            "apr_15": {
+                "title": "Día de Impuestos (Personal y C-Corp)",
+                "desc": "Vence plazo para Personal (1040), C-Corp (1120) y FBAR."
+            },
+            "may_15": {
+                "title": "Fecha Límite Non-Profit",
+                "desc": "Vence forma 990 para organizaciones exentas de impuestos."
+            },
+            "jun_15": {
+                "title": "Pago Estimado Q2 2026",
+                "desc": "Segundo pago de impuestos estimados del año 2026."
+            },
+            "sep_15": {
+                "title": "Extensión S-Corp y Partnerships",
+                "desc": "Fecha límite final para declaraciones extendidas de S-Corp y Partnerships."
+            },
+            "oct_15": {
+                "title": "Extensión Personal y C-Corp",
+                "desc": "Fecha límite final para declaraciones extendidas Personales y Corporativas."
+            },
+            "dec_31": {
+                "title": "Cierre de Planeación Fiscal",
+                "desc": "Último día para realizar acciones fiscales del año 2026."
+            }
+        }
+    },
+    "persona_selector": {
+        "title": "¿Quién eres?",
+        "subtitle": "Selecciona la opción que mejor te describa para encontrar servicios relevantes.",
+        "personal": {
+            "title": "Personal y Familia",
+            "desc": "Preparación de impuestos, planificación y servicios financieros para individuos y familias.",
+            "cta": "Para Individuos"
+        },
+        "business": {
+            "title": "Negocios y Corporativo",
+            "desc": "Contabilidad, nómina y soluciones corporativas para empresas de todos los tamaños.",
+            "cta": "Para Empresas"
+        }
+    }
+}

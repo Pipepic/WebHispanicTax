@@ -1,0 +1,220 @@
+{
+  "HomePage": {
+    "title": "Hispanic Tax Inc.",
+    "subtitle": "Comprehensive financial and tax services."
+  },
+  "Navbar": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About Us",
+    "contact": "Contact",
+    "contact_us": "Contact Us"
+  },
+  "TrustBar": {
+    "title": "Trusted By & Affiliated With"
+  },
+  "Hero": {
+    "badge_suffix": "Years Experience",
+    "title": "Boosting Business <highlight>Success</highlight>",
+    "subtitle": "Your comprehensive strategic ally in the United States. Experts in corporate and personal tax preparation, precise accounting, payroll management, and business incorporation to strengthen the Hispanic community.",
+    "cta_primary": "Book a Consultation",
+    "cta_secondary": "Our Services",
+    "strategic_partners": "Strategic Partners",
+    "stat_clients": "Clients",
+    "stat_clients_number": "1,500+",
+    "stat_satisfaction": "Satisfaction",
+    "stat_satisfaction_number": "99%",
+    "service_1": "Corporate Tax",
+    "service_2": "Business Incorporation",
+    "service_3": "Accounting & QuickBooks",
+    "service_4": "Real Estate Advisory",
+    "right_label": "Comprehensive Solutions",
+    "whatsapp_message": "Hello, I am interested in Hispanic's services."
+  },
+  "NewsFeed": {
+    "loading": "Loading latest financial news...",
+    "section_label": "Financial Updates",
+    "title": "Latest News & Insights",
+    "view_all": "View All News"
+  },
+  "ContactForm": {
+    "title": "Get in Touch",
+    "subtitle": "Ready to transform your business? Send us a message and we'll get back to you shortly.",
+    "address_label": "Visit Us",
+    "phone_label": "Call Us",
+    "name_label": "Full Name",
+    "email_label": "Email Address",
+    "message_label": "Your Message",
+    "name_placeholder": "John Doe",
+    "email_placeholder": "john@example.com",
+    "message_placeholder": "How can we help you?",
+    "submit_btn": "Send Message",
+    "success_msg": "Message Sent!",
+    "error_msg": "Try Again",
+    "work_hours_label": "Business Hours",
+    "work_hours_value": "Mon - Fri: 9:00 AM - 6:00 PM",
+    "social_label": "Follow Us"
+  },
+  "Services": {
+    "label": "Our Solutions",
+    "title": "Comprehensive Business Services",
+    "subtitle": "From business incorporation to tax optimization.",
+    "view_details": "View Details",
+    "close": "Close",
+    "items": {
+      "incorporation": {
+        "title": "Business Incorporation & Registration",
+        "desc": "Start your business successfully with expert guidance in every step of establishing your company in the US.",
+        "details": [
+          "Articles and Certificate of Existence",
+          "Employer Identification Number (EIN)",
+          "Operating Agreement",
+          "Minutes or certificates",
+          "Preliminary tax planning",
+          "Corporate Kit (Minutes book, certificates, and shares)",
+          "Assistance in opening business bank accounts"
+        ]
+      },
+      "taxes": {
+        "title": "Tax Preparation & Planning",
+        "desc": "Maximize your tax benefits. We handle efficient and precise tax preparation and filing.",
+        "details": [
+          "Personal Income Tax filing (IRS)",
+          "Corporate Tax preparation and filing",
+          "Sales Tax declaration preparation",
+          "Tax planning for companies",
+          "Payroll tax form filing"
+        ]
+      },
+      "real_estate": {
+        "title": "Real Estate Advisory",
+        "desc": "Make informed decisions. Receive professional advice on buying and selling investment properties.",
+        "details": [
+          "Assistance in purchasing investment properties",
+          "Analysis of impact on property sales for foreigners",
+          "Property sale taxes",
+          "IRS withholding claims",
+          "Tax declarations for foreign investors"
+        ]
+      },
+      "protection": {
+        "title": "Wealth Protection & Strategic Planning",
+        "desc": "Optimize your tax burden with customized strategies to reduce taxes and protect your assets.",
+        "details": [
+          "Holding Model",
+          "Limited Liability Company (LLC)",
+          "Trusts"
+        ]
+      },
+      "accounting": {
+        "title": "Accounting & Quickbooks",
+        "desc": "Manage your business with confidence. We offer accounting services using the QuickBooks platform.",
+        "details": [
+          "Income and expense transaction processing",
+          "Bank reconciliations",
+          "Profit & Loss Statements",
+          "Balance Sheet",
+          "Variation and comparative analysis"
+        ]
+      }
+    }
+  },
+  "About": {
+    "label": "About Us",
+    "title": "Strategic Allies for Your Growth",
+    "p1": "Hispanic Financial is dedicated to providing comprehensive financial, tax, and strategic solutions for businesses of all sizes from our office in Coral Springs, FL.",
+    "p2": "With over 20 years of experience and more than 1500 satisfied clients, our team of experts works hand-in-hand with entrepreneurs and corporations to drive their growth in the United States.",
+    "stat_years": "Years of Experience",
+    "stat_clients": "Satisfied Clients",
+    "quote": "Our mission is to empower the Hispanic community with world-class financial tools.",
+    "innovation_title": "Innovation & Reinvention",
+    "innovation_desc_title": "High Impact Technology",
+    "innovation_desc": "We leverage recent technologies like AI, Machine Learning, and GPT to strengthen your business processes and provide innovative results."
+  },
+  "Brochure": {
+    "label": "Service Catalog",
+    "title": "Download Our 2026 Brochure",
+    "subtitle": "Discover in detail how we can boost your business with our full portfolio of services and strategies.",
+    "button": "Download PDF",
+    "feature_1": "Complete service portfolio",
+    "feature_2": "Success stories & testimonials",
+    "feature_3": "Growth strategies",
+    "file_info": "PDF • 2.4 MB"
+  },
+  "WhatsApp": {
+    "message": "Hello, I'm interested in Hispanic’s services.",
+    "tooltip": "Chat with us"
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "badge": "404 Error",
+    "status": "Lost in Navigation",
+    "title_part1": "Ouch!",
+    "title_part2": "Wrong Turn.",
+    "description": "The financial path you are looking for seems to be unavailable.",
+    "cta": "Return Home",
+    "box_title": "Looking for something specific?",
+    "box_desc": "Our team can help you find the right tax plan.",
+    "box_cta": "Go to Contact"
+  },
+  "fiscal_calendar": {
+    "title": "2026 Fiscal Calendar",
+    "subtitle": "Key tax dates and deadlines for individuals and businesses.",
+    "filter_all": "All Events",
+    "filter_business": "Business",
+    "filter_personal": "Personal",
+    "add_to_calendar": "Add to Google Calendar",
+    "events": {
+      "jan_15": {
+        "title": "Q4 2025 Estimated Tax Payment",
+        "desc": "Due date for the fourth installment of 2025 estimated tax."
+      },
+      "jan_31": {
+        "title": "W-2 & 1099-NEC Deadline",
+        "desc": "Deadline for employers to send W-2s to employees and 1099-NECs to contractors."
+      },
+      "mar_16": {
+        "title": "S-Corp & Partnership Filing",
+        "desc": "Forms 1120-S (S-Corps) and 1065 (Partnerships) are due today."
+      },
+      "apr_15": {
+        "title": "Personal & C-Corp Tax Day",
+        "desc": "Deadline for Personal (1040), C-Corp (1120), and FBAR filings."
+      },
+      "may_15": {
+        "title": "Non-Profit Tax Deadline",
+        "desc": "Form 990 is due for tax-exempt organizations."
+      },
+      "jun_15": {
+        "title": "Q2 2026 Estimated Tax",
+        "desc": "Second installment of 2026 estimated tax payment is due."
+      },
+      "sep_15": {
+        "title": "S-Corp & Partnership Extension",
+        "desc": "Final deadline for extended S-Corp and Partnership returns."
+      },
+      "oct_15": {
+        "title": "Personal & C-Corp Extension",
+        "desc": "Final deadline for extended Personal and C-Corp returns."
+      },
+      "dec_31": {
+        "title": "Tax Planning Deadline",
+        "desc": "Last day to make moves for the 2026 tax year (e.g., charitable donations)."
+      }
+    }
+  },
+  "persona_selector": {
+    "title": "Who Are You?",
+    "subtitle": "Select the option that best describes you to find relevant services.",
+    "personal": {
+      "title": "Personal & Family",
+      "desc": "Tax preparation, planning, and financial services for individuals and families.",
+      "cta": "For Individuals"
+    },
+    "business": {
+      "title": "Business & Corporate",
+      "desc": "Bookkeeping, payroll, and corporate tax solutions for businesses of all sizes.",
+      "cta": "For Businesses"
+    }
+  }
+}
