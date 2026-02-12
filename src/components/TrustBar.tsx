@@ -109,7 +109,6 @@ export default function TrustBar() {
                                 variants={itemVariants}
                                 whileHover={{
                                     scale: 1.1,
-                                    filter: 'grayscale(0%) opacity(100%)',
                                     transition: { duration: 0.4 }
                                 }}
                                 className="relative group cursor-default"
@@ -117,7 +116,7 @@ export default function TrustBar() {
                                 <img
                                     src={logo.src}
                                     alt={logo.name}
-                                    className="h-7 md:h-10 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                                    className="h-7 md:h-10 w-auto object-contain opacity-100 transition-all duration-700"
                                 />
                                 {/* Subtle glow on hover */}
                                 <div className="absolute -inset-4 bg-brand-blue/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />

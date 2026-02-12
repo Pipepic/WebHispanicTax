@@ -4,7 +4,7 @@ export default function StructuredData({ locale }: { locale: string }) {
     const organization = {
         "@type": ["FinancialService", "Organization", "LocalBusiness"],
         "@id": "https://www.hispanictaxinc.com/#organization",
-        "name": "Hispanic Tax Inc.",
+        "name": "Hispanic Financial",
         "alternateName": "Hispanic Financial",
         "description": isEn
             ? "Professional tax preparation, accounting, payroll, business incorporation, and real estate advisory services for the Hispanic community in Coral Springs, FL."
@@ -124,7 +124,7 @@ export default function StructuredData({ locale }: { locale: string }) {
         "mainEntity": isEn ? [
             {
                 "@type": "Question",
-                "name": "What services does Hispanic Tax Inc. offer?",
+                "name": "What services does Hispanic Financial offer?",
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "We offer business incorporation, tax preparation (personal and corporate), real estate advisory, wealth protection planning (LLCs, Trusts, Holdings), and full accounting services using QuickBooks."
@@ -135,7 +135,7 @@ export default function StructuredData({ locale }: { locale: string }) {
                 "name": "Do you serve clients in languages other than English?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, Hispanic Tax Inc. is fully bilingual. We provide all our services in both English and Spanish to better serve the Hispanic community in the United States."
+                    "text": "Yes, Hispanic Financial is fully bilingual. We provide all our services in both English and Spanish to better serve the Hispanic community in the United States."
                 }
             },
             {
@@ -148,7 +148,7 @@ export default function StructuredData({ locale }: { locale: string }) {
             },
             {
                 "@type": "Question",
-                "name": "Where is Hispanic Tax Inc. located?",
+                "name": "Where is Hispanic Financial located?",
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Our office is located at 7401 Wiles Rd. Suite 126, Coral Springs, FL 33067. We are open Monday through Friday from 9:00 AM to 6:00 PM."
@@ -165,7 +165,7 @@ export default function StructuredData({ locale }: { locale: string }) {
         ] : [
             {
                 "@type": "Question",
-                "name": "¿Qué servicios ofrece Hispanic Tax Inc.?",
+                "name": "¿Qué servicios ofrece Hispanic Financial?",
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Ofrecemos creación de empresas, preparación de impuestos (personales y corporativos), asesoría en bienes raíces, protección patrimonial (LLCs, Trusts, Holdings) y servicios completos de contabilidad con QuickBooks."
@@ -176,7 +176,7 @@ export default function StructuredData({ locale }: { locale: string }) {
                 "name": "¿Atienden en español?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sí, Hispanic Tax Inc. es completamente bilingüe. Todos nuestros servicios están disponibles en español e inglés para servir mejor a la comunidad hispana en Estados Unidos."
+                    "text": "Sí, Hispanic Financial es completamente bilingüe. Todos nuestros servicios están disponibles en español e inglés para servir mejor a la comunidad hispana en Estados Unidos."
                 }
             },
             {

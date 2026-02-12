@@ -39,14 +39,6 @@ const accentColors: Record<string, { bg: string; text: string; border: string; g
         hoverBorder: 'rgba(114,191,68,0.15)',
     },
     real_estate: {
-        bg: 'bg-amber-500/5',
-        text: 'text-amber-600',
-        border: 'border-amber-500/10',
-        glow: 'rgba(245,158,11,0.12)',
-        hoverBg: 'rgba(245,158,11,0.03)',
-        hoverBorder: 'rgba(245,158,11,0.15)',
-    },
-    protection: {
         bg: 'bg-brand-dark/5',
         text: 'text-brand-dark',
         border: 'border-brand-dark/10',
@@ -54,13 +46,21 @@ const accentColors: Record<string, { bg: string; text: string; border: string; g
         hoverBg: 'rgba(38,58,105,0.03)',
         hoverBorder: 'rgba(38,58,105,0.12)',
     },
+    protection: {
+        bg: 'bg-brand-blue/5',
+        text: 'text-brand-blue',
+        border: 'border-brand-blue/10',
+        glow: 'rgba(34,104,155,0.15)',
+        hoverBg: 'rgba(34,104,155,0.03)',
+        hoverBorder: 'rgba(34,104,155,0.15)',
+    },
     accounting: {
-        bg: 'bg-emerald-500/5',
-        text: 'text-emerald-600',
-        border: 'border-emerald-500/10',
-        glow: 'rgba(16,185,129,0.15)',
-        hoverBg: 'rgba(16,185,129,0.03)',
-        hoverBorder: 'rgba(16,185,129,0.15)',
+        bg: 'bg-brand-green/5',
+        text: 'text-brand-green',
+        border: 'border-brand-green/10',
+        glow: 'rgba(114,191,68,0.15)',
+        hoverBg: 'rgba(114,191,68,0.03)',
+        hoverBorder: 'rgba(114,191,68,0.15)',
     },
 };
 

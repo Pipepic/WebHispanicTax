@@ -200,8 +200,9 @@ export default function About() {
                             <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-brand-blue/10 border border-white/[0.06] group shadow-2xl shadow-black/30 relative">
                                 <Image
                                     src="/images/ceo/ceo-alvaro.webp"
-                                    alt="Alvaro Patino - CEO Hispanic Tax Inc."
+                                    alt="Alvaro Patino - CEO Hispanic Financial"
                                     fill
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
                                     className="object-cover group-hover:scale-105 transition-transform duration-[2s] ease-out"
                                 />
 

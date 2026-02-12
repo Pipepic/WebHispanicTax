@@ -72,7 +72,7 @@ export default function FiscalCalendar() {
 
     const getGoogleCalendarUrl = (event: typeof events[0], title: string, desc: string) => {
         const baseUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE";
-        const details = encodeURIComponent(`${desc}\n\nProvided by Hispanic Tax Inc.`);
+        const details = encodeURIComponent(`${desc}\n\nProvided by Hispanic Financial`);
         const text = encodeURIComponent(title);
         return `${baseUrl}&text=${text}&dates=${event.googleDate}&details=${details}`;
     };
@@ -191,7 +191,7 @@ export default function FiscalCalendar() {
                                                     "organizer": {
                                                         "@type": "Organization",
                                                         "@id": "https://www.hispanictaxinc.com/#organization",
-                                                        "name": "Hispanic Tax Inc.",
+                                                        "name": "Hispanic Financial",
                                                         "url": "https://www.hispanictaxinc.com"
                                                     }
                                                 })

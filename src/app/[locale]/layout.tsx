@@ -16,14 +16,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
 
   const isEn = locale === 'en';
-  const title = isEn ? 'Hispanic Tax Inc. - Expert Financial & Tax Services' : 'Hispanic Tax Inc. - Servicios Financieros Integrales';
+  const title = isEn ? 'Hispanic Financial - Expert Financial & Tax Services' : 'Hispanic Financial - Servicios Financieros Integrales';
   const description = isEn
     ? 'Your strategic ally in the US. Professional tax preparation, accounting, payroll, and business incorporation for the Hispanic community.'
     : 'Tu aliado estratégico en Estados Unidos. Servicios de impuestos, contabilidad, nómina y creación de empresas para la comunidad hispana.';
 
   return {
     title: {
-      template: '%s | Hispanic Tax Inc.',
+      template: '%s | Hispanic Financial',
       default: title,
     },
     description,
@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'protección patrimonial', 'wealth protection', 'trust', 'holding',
       'IRS', 'tax planning', 'planeación fiscal',
       'hispanic', 'hispano', 'latino',
+      'hispanic financial',
       'coral springs', 'florida', 'USA', 'estados unidos',
     ],
     alternates: {
@@ -47,10 +48,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
-      title: 'Hispanic Tax Inc.',
+      title: 'Hispanic Financial',
       description: description,
       url: `https://www.hispanictaxinc.com/${locale}`,
-      siteName: 'Hispanic Tax Inc.',
+      siteName: 'Hispanic Financial',
       images: [
         {
           url: 'https://www.hispanictaxinc.com/og-image.jpg',
@@ -63,7 +64,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Hispanic Tax Inc.',
+      title: 'Hispanic Financial',
       description: description,
       images: ['https://www.hispanictaxinc.com/og-image.jpg'],
     },

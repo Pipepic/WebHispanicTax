@@ -34,7 +34,7 @@ export default function MobileFAB() {
                             exit={{ opacity: 0, y: 15, scale: 0.8 }}
                             transition={{ type: "spring", stiffness: 400, damping: 25 }}
                             href="tel:+19544645458"
-                            className="bg-brand-blue text-white p-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-brand-blue/90 transition-all border border-white/20"
+                            className="bg-brand-green text-white p-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-brand-green/90 transition-all border border-white/20"
                         >
                             <span className="text-xs font-bold px-2">Llámanos</span>
                             <Phone className="w-5 h-5" />
@@ -47,7 +47,7 @@ export default function MobileFAB() {
                             href={`https://wa.me/19544645458?text=${encodeURIComponent(t('whatsapp_message'))}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-[#25D366] text-white p-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#22c35e] transition-all border border-white/20"
+                            className="bg-brand-green text-white p-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-brand-green/90 transition-all border border-white/20"
                         >
                             <span className="text-xs font-bold px-2">WhatsApp</span>
                             <MessageCircle className="w-5 h-5" />
@@ -72,8 +72,8 @@ export default function MobileFAB() {
                         whileHover={{ scale: 1.1, rotate: isOpen ? 45 : 5 }}
                         whileTap={{ scale: 0.9 }}
                         className={`group p-4 rounded-full shadow-2xl text-white transition-all duration-300 relative ${isOpen
-                                ? 'bg-slate-800 rotate-45'
-                                : 'bg-[#25D366] hover:bg-[#22c35e]'
+                            ? 'bg-slate-800 rotate-45'
+                            : 'bg-brand-green hover:bg-brand-green/90'
                             }`}
                     >
                         <div className="relative w-6 h-6 flex items-center justify-center">
@@ -90,8 +90,8 @@ export default function MobileFAB() {
                         {/* Subtle indicator */}
                         {!isOpen && (
                             <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-green"></span>
                             </span>
                         )}
                     </motion.button>

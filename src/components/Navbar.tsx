@@ -77,7 +77,7 @@ export default function Navbar() {
                     >
                         <Image
                             src="/images/hflogo/logo-brand.webp"
-                            alt="Hispanic Tax Inc Logo"
+                            alt="Hispanic Financial Logo"
                             width={200}
                             height={40}
                             className={`w-auto object-contain transition-all duration-300 ease-in-out ${isScrolled ? 'h-7 md:h-8' : 'h-10 md:h-12'

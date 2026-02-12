@@ -120,10 +120,10 @@ export default function Hero() {
     };
 
     const serviceIcons = [
-        { icon: Calculator, label: t('service_1') },
-        { icon: Building2, label: t('service_2') },
-        { icon: BarChart3, label: t('service_3') },
-        { icon: Landmark, label: t('service_4') },
+        { icon: Calculator, label: t('service_1'), color: '#D5CD27', textColor: '#263A69' },
+        { icon: Building2, label: t('service_2'), color: '#72BF44', textColor: '#ffffff' },
+        { icon: BarChart3, label: t('service_3'), color: '#22689B', textColor: '#ffffff' },
+        { icon: Landmark, label: t('service_4'), color: '#263A69', textColor: '#ffffff' },
     ];
 
     return (
@@ -237,7 +237,7 @@ export default function Hero() {
                                     href={`https://wa.me/19544645458?text=${encodeURIComponent(t('whatsapp_message'))}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-10 py-5 bg-[#25D366] text-white rounded-full font-bold text-xs tracking-widest uppercase shadow-xl shadow-[#25D366]/20 hover:shadow-[#25D366]/40 transition-all duration-300"
+                                    className="inline-flex items-center gap-2 px-10 py-5 bg-brand-green text-white rounded-full font-bold text-xs tracking-widest uppercase shadow-xl shadow-brand-green/20 hover:shadow-brand-green/40 transition-all duration-300"
                                 >
                                     <MessageCircle className="w-5 h-5" />
                                     WhatsApp
@@ -288,7 +288,7 @@ export default function Hero() {
                                         <img
                                             src={logo.src}
                                             alt={logo.name}
-                                            className="h-6 md:h-8 lg:h-11 w-auto object-contain lg:grayscale lg:group-hover:grayscale-0 transition-all duration-700 opacity-90 lg:opacity-70 lg:group-hover:opacity-100 relative z-10"
+                                            className="h-6 md:h-8 lg:h-11 w-auto object-contain transition-all duration-700 opacity-100 relative z-10"
                                         />
                                     </motion.div>
                                 );
@@ -372,18 +372,28 @@ export default function Hero() {
                             </p>
                             <div className="grid grid-cols-2 gap-2">
                                 {serviceIcons.map((service, index) => (
-                                    <motion.div
+                                    <motion.a
                                         key={service.label}
+                                        href="#services"
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 3.2 + index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                        className="flex items-center gap-2 py-2 px-3 rounded-xl bg-white/40 backdrop-blur-sm border border-brand-dark/[0.04] group hover:bg-brand-blue/5 hover:border-brand-blue/10 transition-all duration-500"
+                                        style={{
+                                            backgroundColor: service.color,
+                                        }}
+                                        className="flex items-center gap-2 py-2.5 px-4 rounded-xl shadow-lg border-0 group transition-all duration-300 hover:-translate-y-1 hover:brightness-110 active:scale-95"
                                     >
-                                        <service.icon className="w-3.5 h-3.5 text-brand-blue/50 group-hover:text-brand-blue transition-colors" />
-                                        <span className="text-[10px] font-semibold text-brand-dark/60 group-hover:text-brand-dark/80 transition-colors leading-tight">
+                                        <service.icon
+                                            className="w-4 h-4 shrink-0"
+                                            style={{ color: service.textColor }}
+                                        />
+                                        <span
+                                            className="text-[10px] font-bold uppercase tracking-[0.05em] leading-tight"
+                                            style={{ color: service.textColor }}
+                                        >
                                             {service.label}
                                         </span>
-                                    </motion.div>
+                                    </motion.a>
                                 ))}
                             </div>
                         </motion.div>
