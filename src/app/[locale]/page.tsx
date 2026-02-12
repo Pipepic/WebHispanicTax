@@ -1,7 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import TrustBar from '@/components/TrustBar';
-import PersonaSelector from '@/components/PersonaSelector';
 import ContactForm from '@/components/ContactForm';
 import Services from '@/components/Services';
 import About from '@/components/About';
@@ -26,7 +25,6 @@ export default function Home() {
       <Navbar />
       <Hero />
       <TrustBar />
-      <PersonaSelector />
       <Services />
       <FiscalCalendar />
       <BrochureDownload />
