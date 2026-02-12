@@ -1,11 +1,8 @@
-'use client';
-
 export default function StructuredData({ locale }: { locale: string }) {
     const isEn = locale === 'en';
 
     const organization = {
-        "@context": "https://schema.org",
-        "@type": "FinancialService",
+        "@type": ["FinancialService", "Organization", "LocalBusiness"],
         "@id": "https://www.hispanictaxinc.com/#organization",
         "name": "Hispanic Tax Inc.",
         "alternateName": "Hispanic Financial",
@@ -13,7 +10,10 @@ export default function StructuredData({ locale }: { locale: string }) {
             ? "Professional tax preparation, accounting, payroll, business incorporation, and real estate advisory services for the Hispanic community in Coral Springs, FL."
             : "Servicios profesionales de preparación de impuestos, contabilidad, nómina, creación de empresas y asesoría en bienes raíces para la comunidad hispana en Coral Springs, FL.",
         "url": "https://www.hispanictaxinc.com",
-        "logo": "https://www.hispanictaxinc.com/logo.png",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.hispanictaxinc.com/logo.png"
+        },
         "image": "https://www.hispanictaxinc.com/og-image.jpg",
         "address": {
             "@type": "PostalAddress",
@@ -30,6 +30,7 @@ export default function StructuredData({ locale }: { locale: string }) {
         },
         "telephone": "+19545093745",
         "email": "info@hispanictaxinc.com",
+        "priceRange": "$$",
         "openingHoursSpecification": [
             {
                 "@type": "OpeningHoursSpecification",
@@ -43,17 +44,10 @@ export default function StructuredData({ locale }: { locale: string }) {
             "https://www.instagram.com/hispanictaxinc",
             "https://www.linkedin.com/company/hispanictaxinc"
         ],
-        "priceRange": "$$",
-        "areaServed": [
-            {
-                "@type": "State",
-                "name": "Florida"
-            },
-            {
-                "@type": "Country",
-                "name": "United States"
-            }
-        ],
+        "areaServed": {
+            "@type": "State",
+            "name": "Florida"
+        },
         "founder": {
             "@type": "Person",
             "name": "Alvaro Patino"
@@ -126,7 +120,6 @@ export default function StructuredData({ locale }: { locale: string }) {
     };
 
     const faqPage = {
-        "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": isEn ? [
             {
@@ -213,16 +206,16 @@ export default function StructuredData({ locale }: { locale: string }) {
         ]
     };
 
+    const schema = {
+        "@context": "https://schema.org",
+        "@graph": [organization, faqPage]
+    };
+
     return (
-        <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
-            />
-        </>
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
     );
 }
+
