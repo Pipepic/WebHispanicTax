@@ -80,8 +80,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     icons: {
-      icon: '/favicon.png',
-      apple: '/favicon.png',
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/favicon.png', type: 'image/png' },
+      ],
+      apple: [
+        { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      ],
     },
     other: {
       'geo.region': 'US-FL',
