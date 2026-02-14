@@ -261,71 +261,43 @@ export default function Hero() {
                         initial="hidden"
                         animate="visible"
                     >
-                        {/* Trust Logos */}
-                        <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-5 w-full max-w-2xl lg:max-w-[280px]">
-                            {trustLogos.map((logo, index) => {
-                                // Assign different parallax speeds based on index
-                                const parallaxes = [rightY1, rightY2, rightY3];
-                                const yValue = parallaxes[index % 3];
+                        {/* Trust Logos Column */}
+                        <div className="w-full max-w-2xl lg:max-w-[280px]">
+                            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-5">
+                                {trustLogos.map((logo, index) => {
+                                    // Assign different parallax speeds based on index
+                                    const parallaxes = [rightY1, rightY2, rightY3];
+                                    const yValue = parallaxes[index % 3];
 
-                                return (
-                                    <motion.div
-                                        key={logo.id}
-                                        variants={logoItemVariants}
-                                        style={{ y: yValue }}
-                                        className="relative p-4 lg:p-7 bg-brand-blue/[0.06] backdrop-blur-md border border-brand-blue/10 rounded-2xl lg:rounded-[2.5rem] flex items-center justify-center group transition-all duration-700 ease-out hover:bg-white hover:border-brand-gold/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 overflow-hidden"
-                                    >
-                                        {/* Glass shimmer reflection */}
-                                        <div
-                                            className="absolute inset-0 rounded-2xl lg:rounded-[2.5rem] pointer-events-none"
-                                            style={{
-                                                background: 'linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.2) 38%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.2) 62%, transparent 70%)',
-                                                backgroundSize: '200% 100%',
-                                                animation: 'glass-shimmer 10s ease-in-out infinite',
-                                                animationDelay: `${logo.id * 2}s`,
-                                            }}
-                                        />
-                                        <img
-                                            src={logo.src}
-                                            alt={logo.name}
-                                            className="h-6 md:h-8 lg:h-11 w-auto object-contain transition-all duration-700 opacity-100 relative z-10"
-                                        />
-                                    </motion.div>
-                                );
-                            })}
+                                    return (
+                                        <motion.div
+                                            key={logo.id}
+                                            variants={logoItemVariants}
+                                            style={{ y: yValue }}
+                                            className="relative p-4 lg:p-7 bg-brand-blue/[0.06] backdrop-blur-md border border-brand-blue/10 rounded-2xl lg:rounded-[2.5rem] flex items-center justify-center group transition-all duration-700 ease-out hover:bg-white hover:border-brand-gold/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 overflow-hidden"
+                                        >
+                                            {/* Glass shimmer reflection */}
+                                            <div
+                                                className="absolute inset-0 rounded-2xl lg:rounded-[2.5rem] pointer-events-none"
+                                                style={{
+                                                    background: 'linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.2) 38%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.2) 62%, transparent 70%)',
+                                                    backgroundSize: '200% 100%',
+                                                    animation: 'glass-shimmer 10s ease-in-out infinite',
+                                                    animationDelay: `${logo.id * 2}s`,
+                                                }}
+                                            />
+                                            <img
+                                                src={logo.src}
+                                                alt={logo.name}
+                                                className="h-6 md:h-8 lg:h-11 w-auto object-contain transition-all duration-700 opacity-100 relative z-10"
+                                            />
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
                         </div>
 
-                        {/* Strategic Partners Label */}
-                        <motion.div
-                            variants={logoItemVariants}
-                            style={{ y: rightY3 }}
-                            className="text-right hidden lg:block"
-                        >
-                            <motion.span
-                                className="font-bold uppercase tracking-[0.4em] border-r-2 pr-4 inline-block"
-                                initial={{
-                                    fontSize: '12px',
-                                    color: '#D5CD27',
-                                    borderColor: 'rgba(213, 205, 39, 0.8)',
-                                    textShadow: '0 0 20px rgba(213, 205, 39, 0.4)',
-                                    letterSpacing: '0.5em',
-                                }}
-                                animate={{
-                                    fontSize: '10px',
-                                    color: '#94a3b8',
-                                    borderColor: 'rgba(213, 205, 39, 0.5)',
-                                    textShadow: '0 0 0px rgba(213, 205, 39, 0)',
-                                    letterSpacing: '0.4em',
-                                }}
-                                transition={{
-                                    delay: 4,
-                                    duration: 2,
-                                    ease: [0.16, 1, 0.3, 1]
-                                }}
-                            >
-                                {t('strategic_partners')}
-                            </motion.span>
-                        </motion.div>
+
 
                         {/* Mini Stats Row (desktop only) */}
                         <motion.div
@@ -367,7 +339,7 @@ export default function Hero() {
                             style={{ y: rightY4 }}
                             className="hidden lg:block w-full max-w-[280px] mt-2"
                         >
-                            <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold mb-3">
+                            <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold mb-3 text-center">
                                 {t('right_label')}
                             </p>
                             <div className="grid grid-cols-2 gap-2">

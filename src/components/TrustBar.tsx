@@ -20,9 +20,9 @@ export default function TrustBar() {
         const triggerRandomShimmer = async () => {
             if (!isMounted) return;
 
-            // Animate shimmer across the bar
+            // Animate shimmer across the bar with high visibility
             await controls.start({
-                x: ['-100%', '100%'],
+                x: ['-120%', '120%'],
                 opacity: [0, 1, 0],
                 transition: { duration: 2.5, ease: "easeInOut" }
             });
@@ -46,7 +46,7 @@ export default function TrustBar() {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2,
+                staggerChildren: 0.15,
                 delayChildren: 0.1,
             }
         }
@@ -72,15 +72,16 @@ export default function TrustBar() {
     };
 
     return (
-        <section className="py-12 bg-white border-t border-b border-slate-100 overflow-hidden relative group/section">
+        <section className="py-12 bg-white border-t border-b border-slate-100/50 overflow-hidden relative group/section">
             {/* Cinematic light sweep effect (Random repeat) */}
             <motion.div
                 animate={controls}
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-blue/5 to-transparent -skew-x-12 pointer-events-none z-10"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent -skew-x-12 pointer-events-none z-10"
+                style={{ width: '150%' }}
             />
 
             {/* Subtle background light effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-blue/[0.02] to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-blue/[0.04] to-transparent pointer-events-none" />
 
             <motion.div
                 className="container mx-auto px-6"
@@ -98,7 +99,7 @@ export default function TrustBar() {
                             initial={{ scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}
                             transition={{ delay: 0.5, duration: 1, ease: "circOut" }}
-                            className="absolute -bottom-2 left-0 right-0 h-[1px] bg-brand-gold/30 origin-left"
+                            className="absolute -bottom-2 left-0 right-0 h-[1px] bg-brand-gold/40 origin-left"
                         />
                     </motion.div>
 
@@ -107,19 +108,29 @@ export default function TrustBar() {
                             <motion.div
                                 key={logo.name}
                                 variants={itemVariants}
-                                whileHover={{
-                                    scale: 1.1,
-                                    transition: { duration: 0.4 }
-                                }}
-                                className="relative group cursor-default"
+                                whileInView="visible"
+                                viewport={{ once: true }}
                             >
-                                <img
-                                    src={logo.src}
-                                    alt={logo.name}
-                                    className="h-7 md:h-10 w-auto object-contain opacity-100 transition-all duration-700"
-                                />
-                                {/* Subtle glow on hover */}
-                                <div className="absolute -inset-4 bg-brand-blue/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
+                                <motion.div
+                                    whileHover={{
+                                        scale: 1.1,
+                                        y: -5,
+                                        transition: { duration: 0.4, ease: "easeOut" as any }
+                                    }}
+                                    className="relative group cursor-default"
+                                >
+                                    <img
+                                        src={logo.src}
+                                        alt={logo.name}
+                                        className="h-7 md:h-10 w-auto object-contain opacity-100 drop-shadow-sm transition-all duration-700"
+                                    />
+                                    {/* Glass shimmer on logo */}
+                                    <div
+                                        className="absolute inset-x-[-20%] inset-y-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] opacity-0 group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none"
+                                        style={{ backgroundSize: '200% 100%' }}
+                                    />
+                                    <div className="absolute -inset-6 bg-brand-blue/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
+                                </motion.div>
                             </motion.div>
                         ))}
                     </div>

@@ -63,7 +63,7 @@
         "close": "Cerrar",
         "items": {
             "incorporation": {
-                "title": "Creación y Registro de Empresas",
+                "title": "Creación y Registro\nde Empresas",
                 "desc": "Inicia tu negocio con éxito con la guía en cada paso del establecimiento de tu empresa en Estados Unidos.",
                 "details": [
                     "Artículos y Certificado de existencia",
@@ -76,7 +76,7 @@
                 ]
             },
             "taxes": {
-                "title": "Preparación de Impuestos y Planeación",
+                "title": "Preparación de Impuestos\ny Planeación",
                 "desc": "Maximiza tus beneficios fiscales. Nos encargamos de preparar y presentar tus impuestos de forma eficiente.",
                 "details": [
                     "Preparación y presentación de impuestos personales (IRS)",
@@ -87,7 +87,7 @@
                 ]
             },
             "real_estate": {
-                "title": "Asesoría en Real Estate",
+                "title": "Asesoría en\nReal Estate",
                 "desc": "Recibe asesoramiento profesional en la compra y venta de propiedades para maximizar tus inversiones.",
                 "details": [
                     "Asistencia en compra de propiedades de inversión",
@@ -98,7 +98,7 @@
                 ]
             },
             "protection": {
-                "title": "Protección Patrimonial y Planeación",
+                "title": "Protección Patrimonial\ny Planeación",
                 "desc": "Diseñamos estrategias fiscales a medida para reducir impuestos, aumentar utilidades y proteger tu patrimonio.",
                 "details": [
                     "Modelo Holding",
@@ -107,7 +107,7 @@
                 ]
             },
             "accounting": {
-                "title": "Contabilidad y QuickBooks",
+                "title": "Contabilidad y\nQuickBooks",
                 "desc": "Administra tu negocio con confianza. Ofrecemos servicios contables usando la plataforma QuickBooks.",
                 "details": [
                     "Proceso de transacciones de ingresos y gastos",
