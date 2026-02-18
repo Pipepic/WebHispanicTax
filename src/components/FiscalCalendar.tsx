@@ -2,8 +2,8 @@
 
 import { Calendar, Building, User, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import { useState, useEffect, useRef } from 'react';
 
 const events = [
     {
@@ -64,11 +64,95 @@ const events = [
 
 export default function FiscalCalendar() {
     const t = useTranslations('fiscal_calendar');
+    const locale = useLocale();
     const [filter, setFilter] = useState<'all' | 'business' | 'personal'>('all');
+    const [mounted, setMounted] = useState(false);
+    const [markerTop, setMarkerTop] = useState<number | string>(0);
+    const timelineRef = useRef<HTMLDivElement>(null);
+    const bubbleRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const now = new Date();
+    const todayLabel = now.toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', { month: 'short', day: 'numeric' });
 
     const filteredEvents = events.filter(ev =>
         filter === 'all' || ev.type === 'both' || ev.type === filter
     );
+
+    // Calculate precise position for "Today" marker
+    useEffect(() => {
+        if (!mounted || !timelineRef.current) return;
+
+        const updatePosition = () => {
+            if (!timelineRef.current) return;
+
+            const container = timelineRef.current;
+            const containerRect = container.getBoundingClientRect();
+
+            // 1. Create entry/exit anchors
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            const endOfYear = new Date(now.getFullYear(), 11, 31);
+
+            const anchors = [
+                { date: startOfYear, pos: 0 },
+                { date: endOfYear, pos: containerRect.height }
+            ];
+
+            // 2. Add visible event anchors
+            filteredEvents.forEach(ev => {
+                const el = bubbleRefs.current[ev.id];
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    anchors.push({
+                        date: new Date(ev.date),
+                        pos: rect.top - containerRect.top + rect.height / 2
+                    });
+                }
+            });
+
+            // 3. Sort by date
+            anchors.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+            // 4. Find where "today" falls
+            let top: number;
+            const todayTime = now.getTime();
+
+            if (todayTime <= anchors[0].date.getTime()) {
+                top = anchors[0].pos;
+            } else if (todayTime >= anchors[anchors.length - 1].date.getTime()) {
+                top = anchors[anchors.length - 1].pos;
+            } else {
+                let start = anchors[0];
+                let end = anchors[anchors.length - 1];
+
+                for (let i = 0; i < anchors.length - 1; i++) {
+                    if (todayTime >= anchors[i].date.getTime() && todayTime <= anchors[i + 1].date.getTime()) {
+                        start = anchors[i];
+                        end = anchors[i + 1];
+                        break;
+                    }
+                }
+
+                const range = end.date.getTime() - start.date.getTime();
+                const progress = (todayTime - start.date.getTime()) / range;
+                top = start.pos + (end.pos - start.pos) * progress;
+            }
+
+            setMarkerTop(top);
+        };
+
+        // Re-calculate after a short delay to ensure Framer Motion entries finish
+        const timer = setTimeout(updatePosition, 100);
+
+        window.addEventListener('resize', updatePosition);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('resize', updatePosition);
+        };
+    }, [mounted, filteredEvents, filter]);
 
     const getGoogleCalendarUrl = (event: typeof events[0], title: string, desc: string) => {
         const baseUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE";
@@ -132,7 +216,34 @@ export default function FiscalCalendar() {
                 </div>
 
                 {/* Timeline */}
-                <div className="max-w-4xl mx-auto space-y-8 relative before:absolute before:left-8 md:before:left-1/2 before:top-0 before:bottom-0 before:w-px before:bg-slate-200">
+                <div
+                    ref={timelineRef}
+                    className="max-w-4xl mx-auto space-y-8 relative before:absolute before:left-8 md:before:left-1/2 before:top-0 before:bottom-0 before:w-px before:bg-slate-200"
+                >
+
+                    {/* Today Marker */}
+                    {mounted && (
+                        <div
+                            className="absolute left-8 md:left-1/2 -translate-x-1/2 z-20 pointer-events-none transition-all duration-700 ease-out"
+                            style={{ top: markerTop }}
+                        >
+                            <motion.div
+                                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="w-4 h-4 rounded-full bg-[#D5CD27] blur-[2px]"
+                            />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#D5CD27] shadow-[0_0_10px_#D5CD27]" />
+
+                            {/* Date Label */}
+                            <div className="absolute left-6 top-1/2 -translate-y-1/2 whitespace-nowrap">
+                                <span className="bg-[#D5CD27] text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded shadow-sm flex items-center gap-1">
+                                    <span className="w-1 h-1 rounded-full bg-brand-dark animate-pulse" />
+                                    {t('today')}: {todayLabel}
+                                </span>
+                            </div>
+                        </div>
+                    )}
+
                     {filteredEvents.map((event, index) => {
                         const title = t(`events.${event.id}.title`);
                         const desc = t(`events.${event.id}.desc`);
@@ -144,15 +255,17 @@ export default function FiscalCalendar() {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="relative flex flex-col md:flex-row items-center group"
+                                className="relative flex flex-col md:flex-row items-center group hover:z-30 transition-all duration-300"
                             >
-                                {/* Date Bubble - Mobile Left, Desktop Center */}
-                                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-4 border-brand-green z-10 group-hover:scale-125 transition-transform" />
+                                <div
+                                    ref={(el) => { bubbleRefs.current[event.id] = el }}
+                                    className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-4 border-brand-green z-10 group-hover:scale-125 transition-transform"
+                                />
 
                                 <div className={`w-full md:w-1/2 pl-20 md:pl-0 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:order-2'}`}>
                                     <div className="glass-card p-6 rounded-2xl hover:shadow-xl transition-shadow duration-300 border-l-4 border-brand-blue">
                                         <div className={`text-brand-gold font-bold text-sm mb-1 uppercase tracking-wider flex items-center gap-2 ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
-                                            {dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                            {dateObj.toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', { month: 'short', day: 'numeric' })}
                                             {event.type === 'business' && <Building className="w-4 h-4 text-slate-400" />}
                                             {event.type === 'personal' && <User className="w-4 h-4 text-slate-400" />}
                                         </div>

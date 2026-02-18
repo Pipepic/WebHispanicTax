@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { motion, useInView, animate, useMotionValue, useTransform } from 'framer-motion';
+import { motion, useInView, animate, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Cpu, BrainCircuit, BarChart3, RefreshCw } from 'lucide-react';
@@ -38,8 +38,19 @@ export default function About() {
     // Mouse tilt for CEO photo
     const mouseX = useMotionValue(0.5);
     const mouseY = useMotionValue(0.5);
-    const photoRotateX = useTransform(mouseY, [0, 1], [3, -3]);
-    const photoRotateY = useTransform(mouseX, [0, 1], [-3, 3]);
+
+    // Smooth spring motion for "premium" feel
+    const smoothMouseX = useSpring(mouseX, { damping: 25, stiffness: 120 });
+    const smoothMouseY = useSpring(mouseY, { damping: 25, stiffness: 120 });
+
+    const photoRotateX = useTransform(smoothMouseY, [0, 1], [10, -10]);
+    const photoRotateY = useTransform(smoothMouseX, [0, 1], [-10, 10]);
+
+    // Parallax layers movement
+    const bgX = useTransform(smoothMouseX, [0, 1], [15, -15]);
+    const bgY = useTransform(smoothMouseY, [0, 1], [15, -15]);
+    const fgX = useTransform(smoothMouseX, [0, 1], [-20, 20]);
+    const fgY = useTransform(smoothMouseY, [0, 1], [-20, 20]);
 
     const handlePhotoMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -84,7 +95,7 @@ export default function About() {
                 }}
             />
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-6 relative z-10">
                 <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 
                     {/* Left: Text content */}
@@ -125,7 +136,7 @@ export default function About() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                    className="text-lg text-slate-300/80 leading-relaxed"
+                                    className="text-base md:text-lg text-slate-300/80 leading-relaxed md:leading-relaxed"
                                 >
                                     {t('p1')}
                                 </motion.p>
@@ -134,7 +145,7 @@ export default function About() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                    className="text-lg text-slate-300/80 leading-relaxed"
+                                    className="text-base md:text-lg text-slate-300/80 leading-relaxed md:leading-relaxed"
                                 >
                                     {t('p2')}
                                 </motion.p>
@@ -146,7 +157,7 @@ export default function About() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                className="mt-16 flex gap-16"
+                                className="mt-16 flex flex-col sm:flex-row gap-12 sm:gap-16"
                             >
                                 <div className="group">
                                     <div className="text-5xl md:text-6xl font-black text-brand-gold mb-3 tabular-nums group-hover:text-white transition-colors duration-500">
@@ -156,7 +167,7 @@ export default function About() {
                                         {t('stat_years')}
                                     </div>
                                 </div>
-                                <div className="w-px bg-white/5" />
+                                <div className="hidden sm:block w-px bg-white/5" />
                                 <div className="group">
                                     <div className="text-5xl md:text-6xl font-black text-brand-gold mb-3 tabular-nums group-hover:text-white transition-colors duration-500">
                                         <Counter value={1500} />+
@@ -197,14 +208,34 @@ export default function About() {
                             {/* Gold glow behind photo */}
                             <div className="absolute inset-8 bg-brand-gold/[0.06] rounded-[2.5rem] blur-[60px] -z-10" />
 
-                            <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-brand-blue/10 border border-white/[0.06] group shadow-2xl shadow-black/30 relative">
-                                <Image
-                                    src="/images/ceo/ceo-alvaro.webp"
-                                    alt="Alvaro Patino - CEO Hispanic Financial"
-                                    fill
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
-                                    className="object-cover group-hover:scale-105 transition-transform duration-[2s] ease-out"
-                                />
+                            <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-brand-blue/10 border border-white/[0.06] group shadow-2xl shadow-black/30 relative preserve-3d">
+                                {/* Background Layer */}
+                                <motion.div
+                                    style={{ x: bgX, y: bgY, scale: 1.1 }}
+                                    className="absolute inset-0"
+                                >
+                                    <Image
+                                        src="/images/ceo/ceo-bg.png"
+                                        alt="Background"
+                                        fill
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                        className="object-cover"
+                                    />
+                                </motion.div>
+
+                                {/* CEO (Foreground) Layer */}
+                                <motion.div
+                                    style={{ x: fgX, y: fgY, scale: 1.1, z: 50 }}
+                                    className="absolute inset-0"
+                                >
+                                    <Image
+                                        src="/images/ceo/ceo-fg.png"
+                                        alt="Alvaro Patino - CEO Hispanic Financial"
+                                        fill
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                        className="object-contain mt-12 scale-[1.3] filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                                    />
+                                </motion.div>
 
                                 {/* Gradient overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/30 to-transparent opacity-80" />
@@ -220,21 +251,21 @@ export default function About() {
                                 />
 
                                 {/* CEO info at bottom */}
-                                <div className="absolute bottom-0 left-0 right-0 p-10 md:p-12">
+                                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                     >
-                                        <h3 className="text-3xl font-black mb-1 tracking-tight">Alvaro Patino</h3>
+                                        <h3 className="text-2xl md:text-3xl font-black mb-1 tracking-tight">Alvaro Patino</h3>
                                         <div className="text-brand-gold font-bold uppercase tracking-[0.3em] text-[10px] mb-6">
                                             Founder & CEO
                                         </div>
 
                                         {/* Quote with subtle glass background */}
-                                        <div className="bg-white/[0.04] backdrop-blur-sm rounded-2xl border border-white/[0.06] p-5">
-                                            <p className="text-slate-200/80 italic font-light leading-relaxed text-base">
+                                        <div className="bg-white/[0.04] backdrop-blur-sm rounded-2xl border border-white/[0.06] p-4 md:p-5">
+                                            <p className="text-slate-200/80 italic font-light leading-relaxed text-sm md:text-base">
                                                 &ldquo;{t('quote')}&rdquo;
                                             </p>
                                         </div>
@@ -272,7 +303,7 @@ export default function About() {
                                 className="w-16 h-1 bg-brand-blue/30 rounded-full origin-left"
                             />
 
-                            <p className="text-slate-400 leading-relaxed text-lg">
+                            <p className="text-slate-400 leading-relaxed text-base md:text-lg">
                                 {t('innovation_desc')}
                             </p>
                         </div>
@@ -295,7 +326,7 @@ export default function About() {
                                             scale: 1.05,
                                             transition: { type: 'spring', stiffness: 300, damping: 20 },
                                         }}
-                                        className="p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06] flex flex-col items-center justify-center text-center gap-4 group cursor-default hover:bg-brand-blue/10 hover:border-brand-blue/15 transition-colors duration-500"
+                                        className="p-6 md:p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06] flex flex-col items-center justify-center text-center gap-4 group cursor-default hover:bg-brand-blue/10 hover:border-brand-blue/15 transition-colors duration-500"
                                     >
                                         <div className="p-3 rounded-xl bg-brand-gold/10 group-hover:bg-brand-gold/20 transition-colors duration-500">
                                             <Icon className="w-5 h-5 text-brand-gold" />

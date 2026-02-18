@@ -164,6 +164,7 @@
     "filter_business": "Business",
     "filter_personal": "Personal",
     "add_to_calendar": "Add to Google Calendar",
+    "today": "Today",
     "events": {
       "jan_15": {
         "title": "Q4 2025 Estimated Tax Payment",

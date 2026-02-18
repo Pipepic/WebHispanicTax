@@ -72,7 +72,7 @@ export default function TrustBar() {
     };
 
     return (
-        <section className="py-12 bg-white border-t border-b border-slate-100/50 overflow-hidden relative group/section">
+        <section className="md:hidden lg:block py-12 bg-white border-t border-b border-slate-100/50 overflow-hidden relative group/section">
             {/* Cinematic light sweep effect (Random repeat) */}
             <motion.div
                 animate={controls}

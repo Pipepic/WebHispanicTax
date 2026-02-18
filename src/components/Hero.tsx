@@ -262,7 +262,7 @@ export default function Hero() {
                         animate="visible"
                     >
                         {/* Trust Logos Column */}
-                        <div className="w-full max-w-2xl lg:max-w-[280px]">
+                        <div className="hidden md:block w-full max-w-2xl lg:max-w-[280px]">
                             <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-5">
                                 {trustLogos.map((logo, index) => {
                                     // Assign different parallax speeds based on index

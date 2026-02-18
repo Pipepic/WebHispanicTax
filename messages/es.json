@@ -164,6 +164,7 @@
         "filter_business": "Empresas",
         "filter_personal": "Personas",
         "add_to_calendar": "Agregar a Google Calendar",
+        "today": "Hoy",
         "events": {
             "jan_15": {
                 "title": "Pago Estimado Q4 2025",
