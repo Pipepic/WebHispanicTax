@@ -402,7 +402,14 @@ export default function Services() {
                             index={index}
                             viewLabel={t('view_details')}
                             closeLabel={t('close')}
-                            image={key === 'incorporation' ? '/images/services/incorporation.webp' : undefined}
+                            image={
+                                key === 'incorporation' ? '/images/services/incorporation.webp' :
+                                    key === 'taxes' ? '/images/services/taxes.webp' :
+                                        key === 'real_estate' ? '/images/services/real_estate.webp' :
+                                            key === 'protection' ? '/images/services/protection.webp' :
+                                                key === 'accounting' ? '/images/services/accounting.webp' :
+                                                    undefined
+                            }
                         />
                     ))}
                 </div>
