@@ -16,10 +16,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
 
   const isEn = locale === 'en';
-  const title = isEn ? 'Hispanic Financial - Expert Financial & Tax Services' : 'Hispanic Financial - Servicios Financieros Integrales';
+  const title = isEn ? 'Hispanic Financial - Tax Preparation & Business Accounting Coral Springs' : 'Hispanic Financial - Asesoría Fiscal, IRS y Creación de Empresas en Florida';
   const description = isEn
-    ? 'Your strategic ally in the US. Professional tax preparation, accounting, payroll, and business incorporation for the Hispanic community.'
-    : 'Tu aliado estratégico en Estados Unidos. Servicios de impuestos, contabilidad, nómina y creación de empresas para la comunidad hispana.';
+    ? 'Expert tax preparation, corporate accounting, QuickBooks, and business incorporation for the Hispanic community in Coral Springs and Florida. Maximize your IRS returns.'
+    : 'Expertos en preparación de impuestos corporativos, contabilidad con QuickBooks y creación de LLC en Coral Springs, Florida. Maximiza tus devoluciones del IRS y protege tu patrimonio.';
 
   return {
     title: {
@@ -29,12 +29,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description,
     keywords: [
       'impuestos', 'taxes', 'tax preparation', 'preparación de impuestos',
-      'contabilidad', 'accounting', 'QuickBooks',
+      'contabilidad', 'accounting', 'QuickBooks bookkeeping florida',
       'creación de empresas', 'business incorporation', 'LLC', 'EIN',
       'real estate', 'bienes raíces', 'FIRPTA',
       'payroll', 'nómina',
       'protección patrimonial', 'wealth protection', 'trust', 'holding',
-      'IRS', 'tax planning', 'planeación fiscal',
+      'IRS taxes', 'tax planning', 'planeación fiscal', 'asesoría fiscal hispana',
       'hispanic', 'hispano', 'latino',
       'hispanic financial',
       'coral springs', 'florida', 'USA', 'estados unidos',
