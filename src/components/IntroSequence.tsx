@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
-const LAST_FRAME = 228; // Sequence is 000 to 228
-const TOTAL_FRAMES = 229;
+const START_FRAME = 17;
+const LAST_FRAME = 228;
 const FRAME_PREFIX = '/images/intro/intro.';
 const FRAME_SUFFIX = '.webp';
 
@@ -16,22 +16,22 @@ export default function IntroSequence() {
 
     useEffect(() => {
         let loadedCount = 0;
+        const totalToLoad = LAST_FRAME - START_FRAME + 1;
         const loadedImages: HTMLImageElement[] = [];
 
         const preloadFrames = async () => {
-            for (let i = 0; i <= LAST_FRAME; i++) {
+            for (let i = START_FRAME; i <= LAST_FRAME; i++) {
                 const img = new Image();
-                // Ensure the path is absolutely from the root
                 img.src = `${FRAME_PREFIX}${pad(i)}${FRAME_SUFFIX}`;
                 img.onload = () => {
                     loadedCount++;
-                    // Start displaying when we have a good buffer (e.g., 30 frames / 1 second)
-                    if (loadedCount === 30) {
+                    // Start displaying when we have a good buffer (e.g., 30 frames)
+                    if (loadedCount === Math.min(30, totalToLoad)) {
                         setIsLoaded(true);
                     }
                 };
                 img.onerror = () => {
-                    if (i === 0) console.error("Could not load intro animation frame 0 at:", img.src);
+                    if (i === START_FRAME) console.error(`Could not load intro animation frame ${START_FRAME} at:`, img.src);
                 };
                 loadedImages.push(img);
             }
@@ -47,18 +47,19 @@ export default function IntroSequence() {
         let frameId: number;
         let startTime = Date.now();
         const fps = 30;
+        const sequenceLength = images.length;
 
         const render = () => {
             const now = Date.now();
             const elapsed = now - startTime;
 
-            // Calculate current frame, capped at the last frame
+            // Calculate current frame index (0-based relative to loaded images)
             const currentFrameIndex = Math.floor((elapsed / 1000) * fps);
-            const displayFrame = Math.min(currentFrameIndex, LAST_FRAME);
+            const displayIndex = Math.min(currentFrameIndex, sequenceLength - 1);
 
             const canvas = canvasRef.current;
             const ctx = canvas?.getContext('2d');
-            const img = images[displayFrame];
+            const img = images[displayIndex];
 
             if (canvas && ctx && img && img.complete) {
                 // Resize handling
@@ -83,17 +84,19 @@ export default function IntroSequence() {
                     drawY = 0;
                 }
 
-                // IMPORTANT: Reset alpha to 1.0 for the background fill
                 ctx.globalAlpha = 1.0;
                 ctx.fillStyle = '#ffffff';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Opacity ramp logic
+                // Opacity ramp logic - adjusted to be relative to the new sequence
+                // Original was 40 to 200 in a 229 frame sequence.
+                // We'll keep the relative timing if possible, or adjust to absolute frame numbers if they match visual cues.
+                // Let's use absolute frame numbers for consistency if the user just trimmed the start.
+                const absoluteFrame = displayIndex + START_FRAME;
                 let opacity = 1.0;
-                if (displayFrame >= 40 && displayFrame <= 200) {
-                    // Linear decrease from 1.0 at 40 to 0.15 at 200
-                    opacity = 1.0 - (0.85 * (displayFrame - 40) / 160);
-                } else if (displayFrame > 200) {
+                if (absoluteFrame >= 40 && absoluteFrame <= 200) {
+                    opacity = 1.0 - (0.85 * (absoluteFrame - 40) / 160);
+                } else if (absoluteFrame > 200) {
                     opacity = 0.15;
                 }
 
@@ -101,7 +104,7 @@ export default function IntroSequence() {
                 ctx.drawImage(img, drawX, drawY, drawW, drawH);
             }
 
-            if (currentFrameIndex < LAST_FRAME) {
+            if (currentFrameIndex < sequenceLength - 1) {
                 frameId = requestAnimationFrame(render);
             }
         };
@@ -110,6 +113,7 @@ export default function IntroSequence() {
 
         return () => cancelAnimationFrame(frameId);
     }, [isLoaded, images]);
+
 
     return (
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-white">
