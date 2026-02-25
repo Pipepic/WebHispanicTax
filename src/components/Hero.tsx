@@ -1,30 +1,72 @@
 'use client';
 
-import { motion, useMotionValue, useTransform, animate, useScroll, useSpring } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import IntroSequence from './IntroSequence';
 import { Building2, Calculator, Landmark, BarChart3, MessageCircle } from 'lucide-react';
 
-function ExperienceCounter() {
-    const count = useMotionValue(0);
-    const rounded = useTransform(count, (latest) => Math.round(latest));
+const flagsData = [
+    { name: 'México', emoji: '🇲🇽' },
+    { name: 'Colombia', emoji: '🇨🇴' },
+    { name: 'Bolivia', emoji: '🇧🇴' },
+    { name: 'Argentina', emoji: '🇦🇷' },
+    { name: 'Venezuela', emoji: '🇻🇪' },
+    { name: 'España', emoji: '🇪🇸' },
+    { name: 'Qatar', emoji: '🇶🇦' },
+    { name: 'Guatemala', emoji: '🇬🇹' },
+    { name: 'Honduras', emoji: '🇭🇳' },
+];
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            animate(count, 20, { duration: 2.5, ease: "easeOut" });
-        }, 1200);
-        return () => clearTimeout(timeout);
-    }, []);
 
-    return <motion.span>{rounded}</motion.span>;
-}
 
 const trustLogos = [
     { id: 1, name: 'ACFE', src: '/images/logos/ACFE.webp' },
     { id: 2, name: 'AICPA', src: '/images/logos/AICPA.webp' },
     { id: 3, name: 'AAA', src: '/images/logos/American_Accounting_Association.webp' },
 ];
+
+function FlagCarousel() {
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+    // Quadruple the flags for extra long marquee to ensure smooth loop
+    const extendedFlags = [...flagsData, ...flagsData, ...flagsData, ...flagsData];
+
+    return (
+        <div className="absolute top-full left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 mt-8 w-[100vw] lg:w-[450px] overflow-hidden py-2 pointer-events-auto cursor-default group/marquee flex justify-center lg:justify-start">
+            <div className="flex gap-8 items-center w-max animate-marquee group-hover/marquee:pause">
+                {extendedFlags.map((flag, idx) => (
+                    <div
+                        key={idx}
+                        className="flex items-center gap-3 group/flag"
+                        onMouseEnter={() => {
+                            setHoveredIndex(idx);
+                        }}
+                        onMouseLeave={() => {
+                            setHoveredIndex(null);
+                        }}
+                    >
+                        <span className="text-2xl md:text-3xl filter transition-transform duration-300 group-hover/flag:scale-125">
+                            {flag.emoji}
+                        </span>
+                        <AnimatePresence>
+                            {hoveredIndex === idx && (
+                                <motion.span
+                                    initial={{ opacity: 0, x: -10, width: 0 }}
+                                    animate={{ opacity: 1, x: 0, width: 'auto' }}
+                                    exit={{ opacity: 0, x: -10, width: 0 }}
+                                    className="text-[10px] font-black text-brand-blue uppercase tracking-[0.2em] whitespace-nowrap"
+                                >
+                                    {flag.name}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
 
 export default function Hero() {
     const t = useTranslations('Hero');
@@ -175,26 +217,36 @@ export default function Hero() {
                         initial="hidden"
                         animate="visible"
                     >
-                        <motion.div
-                            variants={itemVariants}
-                            className="relative inline-flex items-center gap-3 py-2 px-6 rounded-full bg-brand-green/15 text-brand-green font-bold text-xs mb-8 tracking-[0.2em] uppercase border border-brand-green/30 shadow-[0_0_20px_rgba(114,191,68,0.2)] backdrop-blur-sm"
-                        >
-                            {/* Pulsing attention dot */}
-                            <span className="relative flex h-2.5 w-2.5 shrink-0">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green/60"></span>
-                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-green shadow-[0_0_8px_rgba(114,191,68,0.5)]"></span>
-                            </span>
-
-                            <span className="flex items-center text-sm">
-                                <ExperienceCounter />+
-                            </span>
-                            <span className="opacity-90">{t('badge_suffix')}</span>
-                        </motion.div>
-
                         <motion.h1
                             variants={itemVariants}
-                            className="text-5xl md:text-7xl xl:text-8xl font-black text-brand-dark tracking-tight mb-8 leading-[1.05] drop-shadow-sm"
+                            className="text-5xl md:text-7xl xl:text-8xl font-black text-brand-dark tracking-tight mb-20 leading-[1.05] drop-shadow-sm relative"
                         >
+                            {/* Stamped Seal of Quality - Repositioned to overlap Impulsamos and Negocios */}
+                            <motion.div
+                                initial={{ scale: 3, opacity: 0, rotate: 0, filter: 'blur(20px)' }}
+                                animate={{ scale: 0.95, opacity: 1, rotate: 21, filter: 'blur(0px)' }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 260,
+                                    damping: 20,
+                                    delay: 6.5
+                                }}
+                                className="absolute top-14 left-[30%] md:left-[400px] z-20 w-32 md:w-52 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.2)] pointer-events-none hidden lg:block"
+                            >
+                                <img
+                                    src="/images/seal/sello20.webp"
+                                    alt="20 Years Experience Seal"
+                                    className="w-full h-auto object-contain"
+                                />
+                                {/* Impact pulse effect */}
+                                <motion.div
+                                    initial={{ scale: 1, opacity: 0 }}
+                                    animate={{ scale: 1.4, opacity: 0 }}
+                                    transition={{ delay: 6.9, duration: 0.8, ease: "easeOut" }}
+                                    className="absolute inset-0 rounded-full border-4 border-brand-gold/30"
+                                />
+                            </motion.div>
+
                             {t.rich('title', {
                                 highlight: (chunks) => (
                                     <span className="relative inline-block">
@@ -205,6 +257,7 @@ export default function Hero() {
                                             animate={{ scaleX: 1 }}
                                             transition={{ delay: 2, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                                         />
+                                        <FlagCarousel />
                                     </span>
                                 )
                             })}

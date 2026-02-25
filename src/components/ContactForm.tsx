@@ -60,16 +60,16 @@ export default function ContactForm() {
         {
             icon: <Phone className="w-5 h-5" />,
             label: t('phone_label'),
-            value: "+1 954 509 3745",
+            value: "+1 (954) 464-5458",
             accent: "gold",
-            link: "tel:+19545093745"
+            link: "tel:+19544645458"
         },
         {
             icon: <Mail className="w-5 h-5" />,
             label: "Email",
-            value: "info@hispanictaxinc.com",
+            value: "apatino@hispanictaxinc.com",
             accent: "green",
-            link: "mailto:info@hispanictaxinc.com"
+            link: "mailto:apatino@hispanictaxinc.com"
         },
         {
             icon: <Clock className="w-5 h-5" />,

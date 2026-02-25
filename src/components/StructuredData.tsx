@@ -28,8 +28,8 @@ export default function StructuredData({ locale }: { locale: string }) {
             "latitude": 26.286282,
             "longitude": -80.244302
         },
-        "telephone": "+19545093745",
-        "email": "info@hispanictaxinc.com",
+        "telephone": "+19544645458",
+        "email": "apatino@hispanictaxinc.com",
         "priceRange": "$$",
         "openingHoursSpecification": [
             {
