@@ -231,10 +231,10 @@ export default function Hero() {
                                     damping: 20,
                                     delay: 6.5
                                 }}
-                                className="absolute top-14 left-[30%] md:left-[400px] z-20 w-32 md:w-52 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.2)] pointer-events-none hidden lg:block"
+                                className="absolute top-[-20px] -right-4 md:top-14 md:left-[400px] z-20 w-24 md:w-52 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.2)] pointer-events-none"
                             >
                                 <img
-                                    src="/images/seal/sello20.webp"
+                                    src="/sello/sello20.webp"
                                     alt="20 Years Experience Seal"
                                     className="w-full h-auto object-contain"
                                 />
