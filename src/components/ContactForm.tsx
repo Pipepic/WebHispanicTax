@@ -264,6 +264,7 @@ export default function ContactForm() {
                                             <input
                                                 type="text"
                                                 id="name"
+                                                autoComplete="name"
                                                 required
                                                 placeholder={t('name_placeholder')}
                                                 className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-blue/30 focus:ring-4 focus:ring-brand-blue/[0.03] outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
@@ -282,6 +283,7 @@ export default function ContactForm() {
                                             <input
                                                 type="email"
                                                 id="email"
+                                                autoComplete="email"
                                                 required
                                                 placeholder={t('email_placeholder')}
                                                 className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-blue/30 focus:ring-4 focus:ring-brand-blue/[0.03] outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
