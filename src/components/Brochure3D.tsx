@@ -55,9 +55,35 @@ export default function Brochure3D() {
     // 0.85 -> 1.00: Backfold (-35 / +35) para simular estar semicerrado en la mesa
 
     // Using -179.4 to prevent Z-fighting with the left panel when folded
-    const leftRotateY = useTransform(scrollYProgress, [0, 0.1, 0.35, 0.85, 1], [180, 180, 0, 0, 35]);
-    const rightRotateY = useTransform(scrollYProgress, [0, 0.45, 0.70, 0.85, 1], [-179.4, -179.4, 0, 0, -35]);
-    const globalRotateY = useTransform(scrollYProgress, [0, 0.75, 1], [0, 0, -180]);
+    const leftRotateYRaw = useTransform(scrollYProgress, [0, 0.1, 0.35, 0.85, 1], [180, 180, 0, 0, 35]);
+    const rightRotateYRaw = useTransform(scrollYProgress, [0, 0.45, 0.70, 0.85, 1], [-179.4, -179.4, 0, 0, -35]);
+    const globalRotateYRaw = useTransform(scrollYProgress, [0, 0.75, 1], [0, 0, -180]);
+
+    // Spring physics for premium mass/inertia feel
+    const springConfig = { stiffness: 60, damping: 15, mass: 1 };
+    const leftRotateY = useSpring(leftRotateYRaw, springConfig);
+    const rightRotateY = useSpring(rightRotateYRaw, springConfig);
+    const globalRotateY = useSpring(globalRotateYRaw, springConfig);
+
+    // --- GLARE / REFLECTION PHYSICS ---
+    // Moving light reflections based on panel angles simulating specularity
+    const p1GlareOpacity = useTransform(leftRotateY, [180, 135, 90], [0, 0.5, 0]);
+    const p1GlareX = useTransform(leftRotateY, [180, 90], ["-50%", "50%"]);
+
+    const p2GlareOpacity = useTransform(leftRotateY, [90, 45, 0], [0, 0.4, 0]);
+    const p2GlareX = useTransform(leftRotateY, [90, 0], ["50%", "-50%"]);
+
+    const p3GlareOpacity = useTransform(globalRotateY, [0, -45, -90], [0, 0.4, 0]);
+    const p3GlareX = useTransform(globalRotateY, [0, -90], ["-50%", "50%"]);
+
+    const p4GlareOpacity = useTransform(rightRotateY, [-90, -45, 0], [0, 0.4, 0]);
+    const p4GlareX = useTransform(rightRotateY, [-90, 0], ["-50%", "50%"]);
+
+    const p5GlareOpacity = useTransform(globalRotateY, [-90, -135, -180], [0, 0.4, 0]);
+    const p5GlareX = useTransform(globalRotateY, [-90, -180], ["50%", "-50%"]);
+
+    const p6GlareOpacity = useTransform(globalRotateY, [-90, -135, -180], [0, 0.4, 0]);
+    const p6GlareX = useTransform(globalRotateY, [-90, -180], ["50%", "-50%"]);
 
     // Dinámicas de Escala y Posición X para visualización óptima
     // Escala: Inicia en 1.35 (Portada reducida un 10%) -> 1.4 para dos caras -> 1.15 para tres caras
@@ -104,15 +130,23 @@ export default function Brochure3D() {
                         {/* 1. LAYER: CENTER PANEL */}
                         <div className="absolute inset-0 w-full h-full preserve-3d shadow-2xl">
                             {/* Front (Page 3) */}
-                            <div className="absolute inset-0 w-full h-full backface-hidden bg-white">
+                            <div className="absolute inset-0 w-full h-full backface-hidden bg-white overflow-hidden">
                                 <Image src={getImagePath(3)} alt="Page 3" fill className="object-fill" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                                {/* Dynamic Glare */}
+                                <motion.div className="absolute inset-0 pointer-events-none mix-blend-overlay z-20" style={{ opacity: p3GlareOpacity }}>
+                                    <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent w-[200%] -left-[50%]" style={{ x: p3GlareX }} />
+                                </motion.div>
                                 {/* Inner Shadow for realism */}
-                                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/20 to-transparent pointer-events-none" />
-                                <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black/20 to-transparent pointer-events-none" />
+                                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/20 to-transparent pointer-events-none z-10" />
+                                <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black/20 to-transparent pointer-events-none z-10" />
                             </div>
                             {/* Back (Page 6) */}
-                            <div style={{ transform: 'rotateY(180deg)' }} className="absolute inset-0 w-full h-full backface-hidden bg-white">
+                            <div style={{ transform: 'rotateY(180deg)' }} className="absolute inset-0 w-full h-full backface-hidden bg-white overflow-hidden">
                                 <Image src={getImagePath(6)} alt="Page 6" fill className="object-fill" sizes="(max-width: 768px) 100vw, 50vw" />
+                                {/* Dynamic Glare */}
+                                <motion.div className="absolute inset-0 pointer-events-none mix-blend-overlay z-20" style={{ opacity: p6GlareOpacity }}>
+                                    <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent w-[200%] -left-[50%]" style={{ x: p6GlareX }} />
+                                </motion.div>
                             </div>
                         </div>
 
@@ -122,15 +156,23 @@ export default function Brochure3D() {
                             style={{ rotateY: rightRotateY, z: rightZ }}
                         >
                             {/* Front (Page 4) */}
-                            <div className="absolute inset-0 w-full h-full backface-hidden bg-white">
+                            <div className="absolute inset-0 w-full h-full backface-hidden bg-white overflow-hidden">
                                 <Image src={getImagePath(4)} alt="Page 4" fill className="object-fill" sizes="(max-width: 768px) 100vw, 50vw" />
+                                {/* Dynamic Glare */}
+                                <motion.div className="absolute inset-0 pointer-events-none mix-blend-overlay z-20" style={{ opacity: p4GlareOpacity }}>
+                                    <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent w-[200%] -left-[50%]" style={{ x: p4GlareX }} />
+                                </motion.div>
                                 {/* Shadow coming from the center crease */}
-                                <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-black/30 to-transparent pointer-events-none" />
+                                <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-black/30 to-transparent pointer-events-none z-10" />
                             </div>
                             {/* Back (Page 5) */}
-                            <div style={{ transform: 'rotateY(180deg)' }} className="absolute inset-0 w-full h-full backface-hidden bg-white">
+                            <div style={{ transform: 'rotateY(180deg)' }} className="absolute inset-0 w-full h-full backface-hidden bg-white overflow-hidden">
                                 <Image src={getImagePath(5)} alt="Page 5" fill className="object-fill" sizes="(max-width: 768px) 100vw, 50vw" />
-                                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none" />
+                                {/* Dynamic Glare */}
+                                <motion.div className="absolute inset-0 pointer-events-none mix-blend-overlay z-20" style={{ opacity: p5GlareOpacity }}>
+                                    <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent w-[200%] -left-[50%]" style={{ x: p5GlareX }} />
+                                </motion.div>
+                                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none z-10" />
                             </div>
                         </motion.div>
 
@@ -140,16 +182,24 @@ export default function Brochure3D() {
                             style={{ rotateY: leftRotateY, z: leftZ }}
                         >
                             {/* Front (Page 2) */}
-                            <div className="absolute inset-0 w-full h-full backface-hidden bg-white">
+                            <div className="absolute inset-0 w-full h-full backface-hidden bg-white overflow-hidden">
                                 <Image src={getImagePath(2)} alt="Page 2" fill className="object-fill" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                                {/* Dynamic Glare */}
+                                <motion.div className="absolute inset-0 pointer-events-none mix-blend-overlay z-20" style={{ opacity: p2GlareOpacity }}>
+                                    <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent w-[200%] -left-[50%]" style={{ x: p2GlareX }} />
+                                </motion.div>
                                 {/* Shadow coming from the center crease */}
-                                <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black/30 to-transparent pointer-events-none" />
+                                <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black/30 to-transparent pointer-events-none z-10" />
                             </div>
                             {/* Back (Page 1 - Cover) */}
-                            <div style={{ transform: 'rotateY(180deg)' }} className="absolute inset-0 w-full h-full backface-hidden bg-white">
+                            <div style={{ transform: 'rotateY(180deg)' }} className="absolute inset-0 w-full h-full backface-hidden bg-white overflow-hidden">
                                 <Image src={getImagePath(1)} alt="Page 1" fill className="object-fill" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                                {/* Dynamic Glare */}
+                                <motion.div className="absolute inset-0 pointer-events-none mix-blend-overlay z-20" style={{ opacity: p1GlareOpacity }}>
+                                    <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent w-[200%] -left-[50%]" style={{ x: p1GlareX }} />
+                                </motion.div>
                                 {/* Ambient edge dark */}
-                                <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
+                                <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black/10 to-transparent pointer-events-none z-10" />
                             </div>
                         </motion.div>
 

@@ -280,9 +280,10 @@ export default function Hero() {
                             <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                 <a
                                     href="#contact"
-                                    className="inline-flex items-center px-10 py-5 bg-brand-dark text-white rounded-full font-bold text-xs tracking-widest uppercase shadow-xl shadow-brand-dark/20 hover:shadow-brand-dark/40 transition-all duration-300"
+                                    className="group relative overflow-hidden inline-flex items-center px-10 py-5 bg-brand-dark text-white rounded-full font-bold text-xs tracking-widest uppercase shadow-xl shadow-brand-dark/20 hover:shadow-brand-dark/40 transition-all duration-300"
                                 >
-                                    {t('cta_primary')}
+                                    <span className="absolute inset-0 bg-white/20 rounded-full translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                                    <span className="relative z-10">{t('cta_primary')}</span>
                                 </a>
                             </motion.div>
                             <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -290,10 +291,11 @@ export default function Hero() {
                                     href={`https://wa.me/19544645458?text=${encodeURIComponent(t('whatsapp_message'))}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-10 py-5 bg-brand-green text-white rounded-full font-bold text-xs tracking-widest uppercase shadow-xl shadow-brand-green/20 hover:shadow-brand-green/40 transition-all duration-300"
+                                    className="group relative overflow-hidden inline-flex items-center gap-2 px-10 py-5 bg-brand-green text-white rounded-full font-bold text-xs tracking-widest uppercase shadow-xl shadow-brand-green/20 hover:shadow-brand-green/40 transition-all duration-300"
                                 >
-                                    <MessageCircle className="w-5 h-5" />
-                                    WhatsApp
+                                    <span className="absolute inset-0 bg-white/20 rounded-full translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                                    <MessageCircle className="w-5 h-5 relative z-10" />
+                                    <span className="relative z-10">WhatsApp</span>
                                 </a>
                             </motion.div>
                         </motion.div>

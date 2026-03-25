@@ -116,9 +116,10 @@ export default function Navbar() {
 
                     <a
                         href="#contact"
-                        className="bg-brand-gold text-brand-dark px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-brand-gold/20 hover:shadow-brand-gold/40 hover:-translate-y-0.5 transition-all"
+                        className="group relative overflow-hidden bg-brand-gold text-brand-dark px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-brand-gold/20 hover:shadow-brand-gold/40 hover:-translate-y-0.5 transition-all"
                     >
-                        {t('contact_us')}
+                        <span className="absolute inset-0 bg-white rounded-full translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                        <span className="relative z-10">{t('contact_us')}</span>
                     </a>
                 </div>
 
