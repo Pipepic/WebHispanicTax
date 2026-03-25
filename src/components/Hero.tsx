@@ -296,14 +296,6 @@ export default function Hero() {
                                     WhatsApp
                                 </a>
                             </motion.div>
-                            <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                <a
-                                    href="#services"
-                                    className="inline-flex items-center px-10 py-5 bg-white text-brand-blue border border-brand-blue/20 rounded-full font-bold text-xs tracking-widest uppercase hover:bg-brand-blue/5 hover:border-brand-blue/30 transition-all duration-300 shadow-sm hover:shadow-md"
-                                >
-                                    {t('cta_secondary')}
-                                </a>
-                            </motion.div>
                         </motion.div>
                     </motion.div>
 

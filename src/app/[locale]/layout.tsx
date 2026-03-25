@@ -117,7 +117,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth" className="relative">
       <body
         className={`${outfit.variable} antialiased bg-background text-foreground overflow-x-hidden`}
         suppressHydrationWarning

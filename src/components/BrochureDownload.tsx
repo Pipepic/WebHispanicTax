@@ -2,8 +2,9 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { motion, useAnimationControls } from 'framer-motion';
-import { Download, FileText, Sparkles } from 'lucide-react';
+import { Download, FileText, Sparkles, ExternalLink } from 'lucide-react';
 import { useRef, useCallback } from 'react';
+import Link from 'next/link';
 
 export default function BrochureDownload() {
     const t = useTranslations('Brochure');
@@ -187,6 +188,14 @@ export default function BrochureDownload() {
                                             <Download className="w-5 h-5 relative z-10" />
                                             <span className="relative z-10">{t('button')}</span>
                                         </motion.a>
+
+                                        <Link
+                                            href="/brochure"
+                                            className="inline-flex items-center gap-2 px-8 py-5 bg-white/5 hover:bg-white/10 text-white rounded-full font-bold text-xs tracking-widest uppercase transition-all border border-brand-gold/20 hover:border-brand-gold/40 shadow-xl shadow-brand-gold/5 backdrop-blur-sm"
+                                        >
+                                            <ExternalLink className="w-4 h-4" />
+                                            {t('online_btn')}
+                                        </Link>
 
                                         <span className="text-[11px] text-white/30 font-semibold tracking-wider uppercase">
                                             {t('file_info')}

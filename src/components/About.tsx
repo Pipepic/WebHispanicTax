@@ -286,7 +286,7 @@ export default function About() {
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div className="space-y-6">
-                            <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-blue/10 text-brand-blue font-bold text-[10px] tracking-[0.3em] uppercase border border-brand-blue/15">
+                            <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-gold/10 text-brand-gold font-bold text-[10px] tracking-[0.3em] uppercase border border-brand-gold/15">
                                 <Cpu className="w-3 h-3" />
                                 {t('innovation_title')}
                             </span>
@@ -300,7 +300,7 @@ export default function About() {
                                 whileInView={{ scaleX: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.3, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                                className="w-16 h-1 bg-brand-blue/30 rounded-full origin-left"
+                                className="w-16 h-1 bg-brand-gold/30 rounded-full origin-left"
                             />
 
                             <p className="text-slate-400 leading-relaxed text-base md:text-lg">
