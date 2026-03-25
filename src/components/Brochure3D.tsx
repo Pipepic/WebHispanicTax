@@ -124,7 +124,7 @@ export default function Brochure3D() {
                         {/* Global Rotation Group - Aspect ratio locked to image proportions (816x1056) */}
                         <motion.div 
                             className="relative h-[65vh] aspect-[816/1056] preserve-3d shadow-2xl"
-                            style={{ rotateY: globalRotateY, scale: dynamicScale, x: dynamicX }}
+                            style={{ rotateY: globalRotateY, scale: dynamicScale, x: dynamicX, willChange: 'transform' }}
                         >
                         
                         {/* 1. LAYER: CENTER PANEL */}
@@ -153,7 +153,7 @@ export default function Brochure3D() {
                         {/* 2. LAYER: RIGHT PANEL (Rendered before Left so it stays underneath when closed) */}
                         <motion.div 
                             className="absolute top-0 left-full w-full h-full origin-left preserve-3d shadow-[-10px_0_30px_rgba(0,0,0,0.3)]"
-                            style={{ rotateY: rightRotateY, z: rightZ }}
+                            style={{ rotateY: rightRotateY, z: rightZ, willChange: 'transform' }}
                         >
                             {/* Front (Page 4) */}
                             <div className="absolute inset-0 w-full h-full backface-hidden bg-white overflow-hidden">
@@ -179,7 +179,7 @@ export default function Brochure3D() {
                         {/* 3. LAYER: LEFT PANEL (Rendered last so it sits on top when closed) */}
                         <motion.div 
                             className="absolute top-0 right-full w-full h-full origin-right preserve-3d shadow-[10px_0_30px_rgba(0,0,0,0.3)]"
-                            style={{ rotateY: leftRotateY, z: leftZ }}
+                            style={{ rotateY: leftRotateY, z: leftZ, willChange: 'transform' }}
                         >
                             {/* Front (Page 2) */}
                             <div className="absolute inset-0 w-full h-full backface-hidden bg-white overflow-hidden">

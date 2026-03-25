@@ -107,8 +107,8 @@ function ServiceCard({
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ delay: index * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             whileHover={{
@@ -119,11 +119,12 @@ function ServiceCard({
                 rotateX,
                 rotateY,
                 transformPerspective: 1200,
+                willChange: 'transform, opacity, filter'
             }}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={handleMouseLeave}
-            className={`relative group rounded-[2rem] border min-h-[440px] flex flex-col p-8 md:p-10 overflow-hidden cursor-default bg-white transition-all duration-700 ${isOpen
+            className={`relative group rounded-[2rem] border min-h-[440px] flex flex-col p-8 md:p-10 overflow-hidden cursor-default bg-white ${isOpen
                 ? `ring-4 ring-brand-blue/5 shadow-2xl border-brand-blue/20`
                 : `border-slate-100/80`
                 }`}
@@ -348,8 +349,8 @@ export default function Services() {
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-24">
                     <motion.span
-                        initial={{ opacity: 0, y: 15, filter: 'blur(6px)' }}
-                        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-brand-blue/[0.06] text-brand-blue font-bold text-[10px] tracking-[0.3em] uppercase mb-8 border border-brand-blue/10"
@@ -362,8 +363,8 @@ export default function Services() {
                     </motion.span>
 
                     <motion.h2
-                        initial={{ opacity: 0, y: 25, filter: 'blur(10px)' }}
-                        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                         className="text-4xl md:text-6xl xl:text-7xl font-black text-brand-dark mb-8 tracking-tight leading-[1.05]"

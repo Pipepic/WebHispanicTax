@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 const logos = [
     { name: 'ACFE', src: '/images/logos/ACFE.webp' },
@@ -66,7 +67,7 @@ export default function TrustBar() {
             filter: 'blur(0px)',
             transition: {
                 duration: 1.2,
-                ease: [0.16, 1, 0.3, 1] as any
+                ease: [0.16, 1, 0.3, 1] as const
             }
         }
     };
@@ -104,7 +105,7 @@ export default function TrustBar() {
                     </motion.div>
 
                     <div className="flex items-center gap-10 md:gap-16">
-                        {logos.map((logo, index) => (
+                        {logos.map((logo) => (
                             <motion.div
                                 key={logo.name}
                                 variants={itemVariants}
@@ -115,14 +116,17 @@ export default function TrustBar() {
                                     whileHover={{
                                         scale: 1.1,
                                         y: -5,
-                                        transition: { duration: 0.4, ease: "easeOut" as any }
+                                        transition: { duration: 0.4, ease: "easeOut" }
                                     }}
+                                    style={{ willChange: 'transform, opacity' }}
                                     className="relative group cursor-default"
                                 >
-                                    <img
+                                    <Image
                                         src={logo.src}
                                         alt={logo.name}
-                                        className="h-7 md:h-10 w-auto object-contain opacity-100 drop-shadow-sm transition-all duration-700"
+                                        width={120}
+                                        height={40}
+                                        className="h-7 md:h-10 w-auto object-contain opacity-100 drop-shadow-sm"
                                     />
                                     {/* Glass shimmer on logo */}
                                     <div

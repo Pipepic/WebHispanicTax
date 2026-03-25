@@ -122,20 +122,23 @@ export default function NewsFeed() {
                                 href={item.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
-                                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-50px' }}
                                 transition={{ delay: index * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                                 whileHover={{ y: -12 }}
-                                className="group relative flex flex-col bg-white rounded-[2.5rem] overflow-hidden border border-slate-100/80 shadow-sm hover:shadow-2xl hover:shadow-black/[0.08] transition-all duration-700 h-full"
+                                style={{ willChange: 'transform, opacity' }}
+                                className="group relative flex flex-col bg-white rounded-[2.5rem] overflow-hidden border border-slate-100/80 shadow-sm hover:shadow-2xl hover:shadow-black/[0.08] h-full"
                             >
                                 {/* Image Container */}
                                 <div className="relative h-56 overflow-hidden">
                                     {item.image ? (
-                                        <img
+                                        <Image
                                             src={item.image}
                                             alt={item.title}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                            className="object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out"
                                             loading="lazy"
                                         />
                                     ) : (

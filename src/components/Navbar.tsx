@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion, useScroll, useSpring, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
@@ -41,7 +41,7 @@ export default function Navbar() {
 
     return (
         <motion.nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${isScrolled
+            className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,box-shadow,padding] duration-500 ease-in-out ${isScrolled
                 ? 'bg-white/90 backdrop-blur-md shadow-sm py-2'
                 : 'bg-transparent py-5'
                 }`}
@@ -69,7 +69,6 @@ export default function Navbar() {
                     <motion.div
                         whileHover={{
                             scale: 1.05,
-                            filter: 'brightness(1.1) drop-shadow(0 0 8px rgba(213, 205, 39, 0.2))'
                         }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ type: "spring", stiffness: 400, damping: 17 }}

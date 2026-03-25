@@ -152,6 +152,7 @@ export default function FiscalCalendar() {
             clearTimeout(timer);
             window.removeEventListener('resize', updatePosition);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mounted, filteredEvents, filter]);
 
     const getGoogleCalendarUrl = (event: typeof events[0], title: string, desc: string) => {
@@ -203,7 +204,7 @@ export default function FiscalCalendar() {
                     ].map((btn) => (
                         <button
                             key={btn.id}
-                            onClick={() => setFilter(btn.id as any)}
+                            onClick={() => setFilter(btn.id as 'all' | 'business' | 'personal')}
                             className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${filter === btn.id
                                 ? 'bg-brand-dark text-white shadow-lg scale-105'
                                 : 'bg-white text-brand-dark/70 hover:bg-slate-100'
@@ -255,7 +256,8 @@ export default function FiscalCalendar() {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="relative flex flex-col md:flex-row items-center group hover:z-30 transition-all duration-300"
+                                style={{ willChange: 'transform, opacity', backfaceVisibility: 'hidden' }}
+                                className="relative flex flex-col md:flex-row items-center group hover:z-30"
                             >
                                 <div
                                     ref={(el) => { bubbleRefs.current[event.id] = el }}

@@ -3,6 +3,7 @@
 import { motion, useMotionValue, useTransform, animate, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import React, { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import IntroSequence from './IntroSequence';
 import { Building2, Calculator, Landmark, BarChart3, MessageCircle } from 'lucide-react';
 
@@ -125,14 +126,13 @@ export default function Hero() {
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
+        hidden: { opacity: 0, y: 40 },
         visible: {
             opacity: 1,
             y: 0,
-            filter: 'blur(0px)',
             transition: {
                 duration: 1.2,
-                ease: [0.16, 1, 0.3, 1] as any
+                ease: [0.16, 1, 0.3, 1] as const
             }
         }
     };
@@ -156,7 +156,7 @@ export default function Hero() {
             x: 0,
             transition: {
                 duration: 1,
-                ease: [0.16, 1, 0.3, 1] as any
+                ease: [0.16, 1, 0.3, 1] as const
             }
         }
     };
@@ -233,9 +233,11 @@ export default function Hero() {
                                 }}
                                 className="absolute top-[-20px] -right-4 md:top-14 md:left-[400px] z-20 w-24 md:w-52 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.2)] pointer-events-none"
                             >
-                                <img
+                                <Image
                                     src="/sello/sello20.webp"
                                     alt="20 Years Experience Seal"
+                                    width={208}
+                                    height={208}
                                     className="w-full h-auto object-contain"
                                 />
                                 {/* Impact pulse effect */}
@@ -267,7 +269,6 @@ export default function Hero() {
                             variants={itemVariants}
                             className="relative mb-12 max-w-xl group"
                         >
-                            <div className="absolute -inset-x-6 -inset-y-4 bg-white/[0.03] backdrop-blur-xl rounded-3xl -z-10 border border-white/5" />
                             <p className="text-lg md:text-xl text-brand-dark/75 leading-relaxed font-medium">
                                 {t('subtitle')}
                             </p>

@@ -127,8 +127,8 @@ export default function ContactForm() {
                     {/* Header */}
                     <div className="mb-20">
                         <motion.span
-                            initial={{ opacity: 0, y: 15, filter: 'blur(6px)' }}
-                            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             className="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-brand-blue/[0.04] text-brand-blue font-bold text-[10px] tracking-[0.3em] uppercase mb-8 border border-brand-blue/10"
                         >
@@ -136,8 +136,8 @@ export default function ContactForm() {
                             {t('title')}
                         </motion.span>
                         <motion.h2
-                            initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
-                            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                             className="text-4xl md:text-6xl xl:text-7xl font-black text-brand-dark tracking-tight leading-[1.05]"
@@ -172,12 +172,13 @@ export default function ContactForm() {
                                     const styles = getAccentStyles(item.accent);
                                     const Content = (
                                         <motion.div
-                                            initial={{ opacity: 0, x: -20, filter: 'blur(8px)' }}
-                                            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: 0.3 + idx * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                             whileHover={{ x: 8 }}
-                                            className={`p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm transition-all duration-500 group cursor-pointer ${styles.border} hover:shadow-2xl hover:shadow-black/[0.05] flex items-start gap-6`}
+                                            style={{ willChange: 'transform, opacity' }}
+                                            className={`p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm group cursor-pointer ${styles.border} hover:shadow-2xl hover:shadow-black/[0.05] flex items-start gap-6`}
                                         >
                                             <div className={`w-14 h-14 rounded-2xl ${styles.bg} ${styles.text} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-sm shadow-black/[0.02]`}>
                                                 {item.icon}
@@ -204,8 +205,8 @@ export default function ContactForm() {
 
                                 {/* Social Box (Bento Style) */}
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                                    whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.7, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                                     className="p-10 bg-brand-dark rounded-[2.5rem] text-white flex flex-col sm:flex-row justify-between items-center gap-8 relative overflow-hidden group shadow-2xl shadow-brand-dark/20"
@@ -244,10 +245,11 @@ export default function ContactForm() {
 
                         {/* Right Column: Premium Form Card */}
                         <motion.div
-                            initial={{ opacity: 0, x: 30, filter: 'blur(12px)' }}
-                            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                            style={{ willChange: 'transform, opacity' }}
                             className="bg-white p-10 md:p-14 rounded-[3rem] border border-slate-100 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.06)] relative flex flex-col gap-12"
                         >
                             {/* Decorative element background */}
@@ -319,7 +321,7 @@ export default function ContactForm() {
                                         disabled={status === 'loading' || status === 'success'}
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className={`w-full relative py-6 px-10 rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.3em] transition-all duration-700 overflow-hidden shadow-2xl flex items-center justify-center gap-4 group ${status === 'success' ? 'bg-brand-green shadow-brand-green/30 text-white' :
+                                        className={`w-full relative py-6 px-10 rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.3em] overflow-hidden shadow-2xl flex items-center justify-center gap-4 group ${status === 'success' ? 'bg-brand-green shadow-brand-green/30 text-white' :
                                             status === 'error' ? 'bg-red-500 shadow-red-200 text-white' :
                                                 'bg-brand-blue text-white shadow-brand-blue/25 hover:bg-brand-dark'
                                             }`}

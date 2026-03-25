@@ -45,7 +45,7 @@ export default function IntroSequence() {
         if (!isLoaded || images.length === 0) return;
 
         let frameId: number;
-        let startTime = Date.now();
+        const startTime = Date.now();
         const fps = 30;
         const sequenceLength = images.length;
 
