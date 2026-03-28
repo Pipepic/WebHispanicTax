@@ -7,6 +7,9 @@
     "home": "Home",
     "services": "Services",
     "about": "About Us",
+    "calendar": "Calendar",
+    "resources": "Resources",
+    "news": "News",
     "contact": "Contact",
     "contact_us": "Contact Us"
   },
@@ -28,7 +31,18 @@
     "service_3": "Accounting & QuickBooks",
     "service_4": "Real Estate Advisory",
     "right_label": "Comprehensive Solutions",
-    "whatsapp_message": "Hello, I am interested in Hispanic's services."
+    "whatsapp_message": "Hello, I am interested in Hispanic's services.",
+    "countries": {
+      "mexico": "Mexico",
+      "colombia": "Colombia",
+      "bolivia": "Bolivia",
+      "argentina": "Argentina",
+      "venezuela": "Venezuela",
+      "spain": "Spain",
+      "qatar": "Qatar",
+      "guatemala": "Guatemala",
+      "honduras": "Honduras"
+    }
   },
   "NewsFeed": {
     "loading": "Loading latest financial news...",
@@ -52,7 +66,11 @@
     "error_msg": "Try Again",
     "work_hours_label": "Business Hours",
     "work_hours_value": "Mon - Fri: 9:00 AM - 6:00 PM",
-    "social_label": "Follow Us"
+    "social_label": "Follow Us",
+    "build_future_prefix": "Let's Build Your",
+    "build_future_highlight": "Future",
+    "response_time": "24h Response",
+    "initial_consultation": "Initial Consultation"
   },
   "Services": {
     "label": "Our Solutions",
@@ -217,5 +235,17 @@
       "desc": "Bookkeeping, payroll, and corporate tax solutions for businesses of all sizes.",
       "cta": "For Businesses"
     }
+  },
+  "Footer": {
+    "description": "Expert tax preparation, accounting, and corporate services tailored for your success in the United States.",
+    "quick_links": "Quick Links",
+    "contact": "Contact Us",
+    "address": "7401 Wiles Rd. Suite 126, Coral Springs, FL 33067",
+    "phone": "+1 (954) 464-5458",
+    "email": "apatino@hispanictaxinc.com",
+    "disclaimer": "Disclaimer: The information on this website does not constitute legal, tax, or accounting advice. Using this site does not establish an accountant-client relationship with Hispanic Financial. Please consult a qualified professional for advice regarding your specific situation.",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_service": "Terms of Service",
+    "rights_reserved": "All rights reserved."
   }
 }

@@ -30,6 +30,9 @@ const ContactForm = dynamic(() => import('@/components/ContactForm'), {
 const NewsFeed = dynamic(() => import('@/components/NewsFeed'), {
   loading: () => <SectionSkeleton />,
 });
+const Footer = dynamic(() => import('@/components/Footer'), {
+  loading: () => <div className="h-64 bg-brand-dark" />,
+});
 
 export default function Home() {
   return (
@@ -43,6 +46,7 @@ export default function Home() {
       <About />
       <NewsFeed />
       <ContactForm />
+      <Footer />
       <MobileFAB />
     </main>
   );

@@ -47,7 +47,7 @@ export default function BrochureDownload() {
     }, [buttonControls]);
 
     return (
-        <section className="py-32 relative overflow-hidden bg-gradient-to-b from-white via-[#fafbfc] to-white">
+        <section id="resources" className="py-32 relative overflow-hidden bg-gradient-to-b from-white via-[#fafbfc] to-white">
             {/* Top separator line */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-dark/10 to-transparent" />
 

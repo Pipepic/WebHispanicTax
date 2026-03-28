@@ -7,6 +7,9 @@
         "home": "Inicio",
         "services": "Servicios",
         "about": "Nosotros",
+        "calendar": "Calendario",
+        "resources": "Recursos",
+        "news": "Noticias",
         "contact": "Contacto",
         "contact_us": "Contáctanos"
     },
@@ -28,7 +31,18 @@
         "service_3": "Contabilidad & QuickBooks",
         "service_4": "Asesoría en Real Estate",
         "right_label": "Soluciones Integrales",
-        "whatsapp_message": "Hola, tengo interés en los servicios de Hispanic."
+        "whatsapp_message": "Hola, tengo interés en los servicios de Hispanic.",
+        "countries": {
+            "mexico": "México",
+            "colombia": "Colombia",
+            "bolivia": "Bolivia",
+            "argentina": "Argentina",
+            "venezuela": "Venezuela",
+            "spain": "España",
+            "qatar": "Qatar",
+            "guatemala": "Guatemala",
+            "honduras": "Honduras"
+        }
     },
     "NewsFeed": {
         "loading": "Cargando noticias financieras...",
@@ -52,7 +66,11 @@
         "error_msg": "Intenta de Nuevo",
         "work_hours_label": "Horario de Atención",
         "work_hours_value": "Lun - Vie: 9:00 AM - 6:00 PM",
-        "social_label": "Síguenos"
+        "social_label": "Síguenos",
+        "build_future_prefix": "Construyamos tu",
+        "build_future_highlight": "Futuro",
+        "response_time": "Respuesta en 24h",
+        "initial_consultation": "Consulta Inicial"
     },
     "Services": {
         "label": "Nuestras Soluciones",
@@ -217,5 +235,17 @@
             "desc": "Contabilidad, nómina y soluciones corporativas para empresas de todos los tamaños.",
             "cta": "Para Empresas"
         }
+    },
+    "Footer": {
+        "description": "Preparación de impuestos, contabilidad y servicios corporativos expertos diseñados para tu éxito en los Estados Unidos.",
+        "quick_links": "Enlaces Rápidos",
+        "contact": "Contáctanos",
+        "address": "7401 Wiles Rd. Suite 126, Coral Springs, FL 33067",
+        "phone": "+1 (954) 464-5458",
+        "email": "apatino@hispanictaxinc.com",
+        "disclaimer": "Aviso Legal: La información en este sitio web no constituye asesoramiento legal, fiscal o contable. El uso de este sitio no establece una relación cliente-contador con Hispanic Financial. Consulte a un profesional calificado para obtener asesoramiento sobre su situación específica.",
+        "privacy_policy": "Política de Privacidad",
+        "terms_of_service": "Términos de Servicio",
+        "rights_reserved": "Todos los derechos reservados."
     }
 }

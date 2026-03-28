@@ -66,7 +66,7 @@ export default function ContactForm() {
         },
         {
             icon: <Mail className="w-5 h-5" />,
-            label: "Email",
+            label: t('email_label'),
             value: "apatino@hispanictaxinc.com",
             accent: "green",
             link: "mailto:apatino@hispanictaxinc.com"
@@ -142,7 +142,7 @@ export default function ContactForm() {
                             transition={{ delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                             className="text-4xl md:text-6xl xl:text-7xl font-black text-brand-dark tracking-tight leading-[1.05]"
                         >
-                            Construyamos tu <span className="text-brand-gold">Futuro</span>
+                            {t('build_future_prefix')} <span className="text-brand-gold">{t('build_future_highlight')}</span>
                         </motion.h2>
                         <motion.div
                             initial={{ scaleX: 0 }}
@@ -371,11 +371,11 @@ export default function ContactForm() {
                             <div className="pt-6 border-t border-slate-50 flex items-center justify-center gap-8 text-[10px] font-black tracking-widest text-slate-300 uppercase relative z-10">
                                 <span className="flex items-center gap-2">
                                     <CheckCircle size={14} className="text-brand-green" />
-                                    Respuesta en 24h
+                                    {t('response_time')}
                                 </span>
                                 <span className="flex items-center gap-2">
                                     <CheckCircle size={14} className="text-brand-gold" />
-                                    Consulta Inicial
+                                    {t('initial_consultation')}
                                 </span>
                             </div>
                         </motion.div>

@@ -163,7 +163,7 @@ export default function FiscalCalendar() {
     };
 
     return (
-        <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <section id="calendar" className="py-24 bg-slate-50 relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 

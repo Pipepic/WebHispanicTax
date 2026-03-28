@@ -7,17 +7,7 @@ import Image from 'next/image';
 import IntroSequence from './IntroSequence';
 import { Building2, Calculator, Landmark, BarChart3, MessageCircle } from 'lucide-react';
 
-const flagsData = [
-    { name: 'México', emoji: '🇲🇽' },
-    { name: 'Colombia', emoji: '🇨🇴' },
-    { name: 'Bolivia', emoji: '🇧🇴' },
-    { name: 'Argentina', emoji: '🇦🇷' },
-    { name: 'Venezuela', emoji: '🇻🇪' },
-    { name: 'España', emoji: '🇪🇸' },
-    { name: 'Qatar', emoji: '🇶🇦' },
-    { name: 'Guatemala', emoji: '🇬🇹' },
-    { name: 'Honduras', emoji: '🇭🇳' },
-];
+
 
 
 
@@ -27,14 +17,27 @@ const trustLogos = [
     { id: 3, name: 'AAA', src: '/images/logos/American_Accounting_Association.webp' },
 ];
 
-function FlagCarousel() {
+function FlagCarousel({ className = "" }: { className?: string }) {
+    const t = useTranslations('Hero.countries');
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+    const flagsData = [
+        { name: t('mexico'), emoji: '🇲🇽' },
+        { name: t('colombia'), emoji: '🇨🇴' },
+        { name: t('bolivia'), emoji: '🇧🇴' },
+        { name: t('argentina'), emoji: '🇦🇷' },
+        { name: t('venezuela'), emoji: '🇻🇪' },
+        { name: t('spain'), emoji: '🇪🇸' },
+        { name: t('qatar'), emoji: '🇶🇦' },
+        { name: t('guatemala'), emoji: '🇬🇹' },
+        { name: t('honduras'), emoji: '🇭🇳' },
+    ];
 
     // Quadruple the flags for extra long marquee to ensure smooth loop
     const extendedFlags = [...flagsData, ...flagsData, ...flagsData, ...flagsData];
 
     return (
-        <div className="absolute top-full left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 mt-8 w-[100vw] lg:w-[450px] overflow-hidden py-2 pointer-events-auto cursor-default group/marquee flex justify-center lg:justify-start">
+        <div className={`absolute top-full overflow-hidden py-2 pointer-events-auto cursor-default group/marquee flex ${className}`}>
             <div className="flex gap-8 items-center w-max animate-marquee group-hover/marquee:pause">
                 {extendedFlags.map((flag, idx) => (
                     <div
@@ -170,6 +173,7 @@ export default function Hero() {
 
     return (
         <div
+            id="hero"
             ref={containerRef}
             className="relative min-h-screen w-full overflow-hidden bg-white flex items-center pt-24 pb-12"
             onMouseMove={handleMouseMove}
@@ -231,13 +235,14 @@ export default function Hero() {
                                     damping: 20,
                                     delay: 6.5
                                 }}
-                                className="absolute top-[-20px] -right-4 md:top-14 md:left-[400px] z-20 w-24 md:w-52 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.2)] pointer-events-none"
+                                className="hidden lg:block absolute top-[-20px] -right-4 md:top-14 md:left-[400px] z-20 w-24 md:w-52 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.2)] pointer-events-none"
                             >
                                 <Image
                                     src="/sello/sello20.webp"
                                     alt="20 Years Experience Seal"
                                     width={208}
                                     height={208}
+                                    style={{ width: 'auto' }}
                                     className="w-full h-auto object-contain"
                                 />
                                 {/* Impact pulse effect */}
@@ -251,16 +256,20 @@ export default function Hero() {
 
                             {t.rich('title', {
                                 highlight: (chunks) => (
-                                    <span className="relative inline-block">
-                                        <span className="text-brand-blue">{chunks}</span>
-                                        <motion.span
-                                            className="absolute -bottom-2 left-0 w-full h-1.5 bg-brand-gold/40 rounded-full"
-                                            initial={{ scaleX: 0 }}
-                                            animate={{ scaleX: 1 }}
-                                            transition={{ delay: 2, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                                        />
-                                        <FlagCarousel />
-                                    </span>
+                                    <>
+                                        <span className="relative inline-block">
+                                            <span className="text-brand-blue">{chunks}</span>
+                                            <motion.span
+                                                className="absolute -bottom-2 left-0 w-full h-1.5 bg-brand-gold/40 rounded-full"
+                                                initial={{ scaleX: 0 }}
+                                                animate={{ scaleX: 1 }}
+                                                transition={{ delay: 2, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                                            />
+                                            <FlagCarousel className="hidden lg:flex left-0 w-[450px] justify-start mt-5" />
+                                        </span>
+                                        {/* Versión Móvil/Tablet: Centrada respecto al contenedor del H1 */}
+                                        <FlagCarousel className="flex lg:hidden left-0 w-full justify-center mt-5" />
+                                    </>
                                 )
                             })}
                         </motion.h1>
