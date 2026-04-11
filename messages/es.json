@@ -18,15 +18,17 @@
     },
     "Hero": {
         "badge_suffix": "Años de Experiencia",
-        "title": "Impulsamos Negocios <highlight>Exitosos</highlight>",
-        "subtitle": "Tu aliado estratégico en Estados Unidos. Impulsamos tu éxito con expertos en impuestos corporativos, contabilidad especializada, nómina y creación de empresas de primera calidad.",
+        "title": "Impulsamos Negocios <highlight>Exitosos</highlight><br></br><small>en los Estados Unidos <usflag></usflag></small><flags></flags>",
+        "subtitle": "Impulsamos tu éxito con expertos en impuestos corporativos y personales, contabilidad especializada, nómina y creación de empresas de primera calidad.",
         "cta_primary": "Transforma tu Empresa Hoy",
+        "cta_whatsapp": "WhatsApp",
+        "cta_call": "Llámanos",
         "strategic_partners": "Miembros de",
         "stat_clients": "Clientes",
         "stat_clients_number": "1,500+",
         "stat_satisfaction": "Satisfacción",
         "stat_satisfaction_number": "99%",
-        "service_1": "Impuestos Corporativos",
+        "service_1": "Impuestos Corporativos y Personales",
         "service_2": "Creación de Empresas",
         "service_3": "Contabilidad & QuickBooks",
         "service_4": "Asesoría en Real Estate",
@@ -93,7 +95,7 @@
                 ]
             },
             "taxes": {
-                "title": "Preparación de Impuestos\ny Planeación",
+                "title": "Preparación de Impuestos\ny Planeación Tributaria",
                 "desc": "Maximiza tus beneficios fiscales. Nos encargamos de preparar y presentar tus impuestos de forma eficiente.",
                 "details": [
                     "Preparación y presentación de impuestos personales (IRS)",
@@ -115,7 +117,7 @@
                 ]
             },
             "protection": {
-                "title": "Protección Patrimonial\ny Planeación",
+                "title": "Protección y Planeación\nPatrimonial",
                 "desc": "Diseñamos estrategias fiscales a medida para reducir impuestos, aumentar utilidades y proteger tu patrimonio.",
                 "details": [
                     "Modelo Holding",

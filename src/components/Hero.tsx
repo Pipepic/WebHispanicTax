@@ -22,27 +22,27 @@ function FlagCarousel({ className = "" }: { className?: string }) {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     const flagsData = [
-        { name: t('mexico'), emoji: '🇲🇽' },
-        { name: t('colombia'), emoji: '🇨🇴' },
-        { name: t('bolivia'), emoji: '🇧🇴' },
-        { name: t('argentina'), emoji: '🇦🇷' },
-        { name: t('venezuela'), emoji: '🇻🇪' },
-        { name: t('spain'), emoji: '🇪🇸' },
-        { name: t('qatar'), emoji: '🇶🇦' },
-        { name: t('guatemala'), emoji: '🇬🇹' },
-        { name: t('honduras'), emoji: '🇭🇳' },
+        { name: t('mexico'), src: '/images/flags/mexico.png' },
+        { name: t('colombia'), src: '/images/flags/colombia.png' },
+        { name: t('bolivia'), src: '/images/flags/bolivia.png' },
+        { name: t('argentina'), src: '/images/flags/argentina.png' },
+        { name: t('venezuela'), src: '/images/flags/venezuela.png' },
+        { name: t('spain'), src: '/images/flags/spain.png' },
+        { name: t('qatar'), src: '/images/flags/qatar.png' },
+        { name: t('guatemala'), src: '/images/flags/guatemala.png' },
+        { name: t('honduras'), src: '/images/flags/honduras.png' },
     ];
 
     // Quadruple the flags for extra long marquee to ensure smooth loop
     const extendedFlags = [...flagsData, ...flagsData, ...flagsData, ...flagsData];
 
     return (
-        <div className={`absolute top-full overflow-hidden py-2 pointer-events-auto cursor-default group/marquee flex ${className}`}>
-            <div className="flex gap-8 items-center w-max animate-marquee group-hover/marquee:pause">
+        <div className={`overflow-hidden py-4 pointer-events-auto cursor-default flex ${className}`}>
+            <div className="flex gap-10 items-center w-max animate-marquee">
                 {extendedFlags.map((flag, idx) => (
                     <div
                         key={idx}
-                        className="flex items-center gap-3 group/flag"
+                        className="flex items-center gap-4 group/flag"
                         onMouseEnter={() => {
                             setHoveredIndex(idx);
                         }}
@@ -50,9 +50,14 @@ function FlagCarousel({ className = "" }: { className?: string }) {
                             setHoveredIndex(null);
                         }}
                     >
-                        <span className="text-2xl md:text-3xl filter transition-transform duration-300 group-hover/flag:scale-125">
-                            {flag.emoji}
-                        </span>
+                        <div className="relative w-5 h-5 md:w-7 md:h-7 rounded-full overflow-hidden shadow-md border border-white/20 transition-transform duration-300 group-hover/flag:scale-125">
+                            <Image
+                                src={flag.src}
+                                alt={flag.name}
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
                         <AnimatePresence>
                             {hoveredIndex === idx && (
                                 <motion.span
@@ -175,7 +180,7 @@ export default function Hero() {
         <div
             id="hero"
             ref={containerRef}
-            className="relative min-h-screen w-full overflow-hidden bg-white flex items-center pt-24 pb-12"
+            className="relative min-h-screen w-full overflow-hidden bg-white flex items-center pt-32 md:pt-20 pb-12"
             onMouseMove={handleMouseMove}
         >
             {/* Cinematic Intro Animation Background */}
@@ -212,18 +217,18 @@ export default function Hero() {
             />
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-12">
 
                     {/* Left Column: Text Content */}
                     <motion.div
-                        className="lg:w-3/5 xl:w-1/2 text-left"
+                        className="w-full lg:w-3/5 xl:w-1/2 flex flex-col items-center text-center lg:items-start lg:text-left"
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
                     >
                         <motion.h1
                             variants={itemVariants}
-                            className="text-5xl md:text-7xl xl:text-8xl font-black text-brand-dark tracking-tight mb-20 leading-[1.05] drop-shadow-sm relative"
+                            className="text-5xl md:text-7xl xl:text-8xl font-black text-brand-dark tracking-tight mb-2 leading-[1.1] md:leading-[1.05] drop-shadow-sm relative max-w-[90%] mx-auto lg:max-w-none"
                         >
                             {/* Stamped Seal of Quality - Repositioned to overlap Impulsamos and Negocios */}
                             <motion.div
@@ -256,19 +261,37 @@ export default function Hero() {
 
                             {t.rich('title', {
                                 highlight: (chunks) => (
+                                    <span className="relative inline-block">
+                                        <span className="text-brand-blue">{chunks}</span>
+                                    </span>
+                                ),
+                                br: () => <br />,
+                                usflag: () => (
+                                    <span className="flag-cloth">
+                                        <Image
+                                            src="/images/flags/usa_flag.png"
+                                            alt="US Flag"
+                                            fill
+                                            className="object-cover"
+                                            priority
+                                        />
+                                    </span>
+                                ),
+                                small: (chunks) => (
+                                    <span className="block text-xl md:text-3xl xl:text-4xl text-brand-dark/60 font-medium tracking-normal mt-2 mb-4 leading-snug">
+                                        {chunks}
+                                    </span>
+                                ),
+                                flags: () => (
                                     <>
-                                        <span className="relative inline-block">
-                                            <span className="text-brand-blue">{chunks}</span>
-                                            <motion.span
-                                                className="absolute -bottom-2 left-0 w-full h-1.5 bg-brand-gold/40 rounded-full"
-                                                initial={{ scaleX: 0 }}
-                                                animate={{ scaleX: 1 }}
-                                                transition={{ delay: 2, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                                            />
-                                            <FlagCarousel className="hidden lg:flex left-0 w-[450px] justify-start mt-5" />
-                                        </span>
-                                        {/* Versión Móvil/Tablet: Centrada respecto al contenedor del H1 */}
-                                        <FlagCarousel className="flex lg:hidden left-0 w-full justify-center mt-5" />
+                                        {/* Desktop: Centered flags within the left column width */}
+                                        <div className="hidden lg:flex relative h-10 w-full max-w-[450px] justify-center py-1">
+                                            <FlagCarousel className="w-full justify-center" />
+                                        </div>
+                                        {/* Mobile: Fully centered flags */}
+                                        <div className="flex lg:hidden relative h-10 w-full justify-center mt-1">
+                                            <FlagCarousel className="w-full justify-center" />
+                                        </div>
                                     </>
                                 )
                             })}
@@ -276,7 +299,7 @@ export default function Hero() {
 
                         <motion.div
                             variants={itemVariants}
-                            className="relative mb-12 max-w-xl group"
+                            className="relative mb-8 max-w-xl group"
                         >
                             <p className="text-lg md:text-xl text-brand-dark/75 leading-relaxed font-medium">
                                 {t('subtitle')}
@@ -285,7 +308,7 @@ export default function Hero() {
 
                         <motion.div
                             variants={itemVariants}
-                            className="flex flex-col sm:flex-row gap-5 items-start flex-wrap"
+                            className="flex flex-col sm:flex-row gap-5 items-center justify-center lg:justify-start flex-wrap"
                         >
                             <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                 <a
@@ -305,7 +328,7 @@ export default function Hero() {
                                 >
                                     <span className="absolute inset-0 bg-white/20 rounded-full translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
                                     <MessageCircle className="w-5 h-5 relative z-10" />
-                                    <span className="relative z-10">WhatsApp</span>
+                                    <span className="relative z-10">{t('cta_whatsapp')}</span>
                                 </a>
                             </motion.div>
                         </motion.div>
@@ -431,22 +454,6 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
-            <motion.div
-                className="absolute bottom-12 left-12 hidden lg:flex items-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 3, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            >
-                <div className="flex flex-col items-center gap-2">
-                    <motion.div
-                        className="w-[1px] h-12 bg-gradient-to-b from-brand-blue/40 via-brand-blue/20 to-transparent"
-                        animate={{ scaleY: [0, 1, 0], opacity: [0, 1, 0] }}
-                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                    />
-                </div>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold rotate-[-90deg] origin-left">Scroll</span>
-            </motion.div>
         </div>
     );
 }

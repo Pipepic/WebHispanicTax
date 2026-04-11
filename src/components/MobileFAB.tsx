@@ -16,6 +16,7 @@ export default function MobileFAB() {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
+                setIsOpen(false);
             }
         };
 
@@ -36,7 +37,7 @@ export default function MobileFAB() {
                             href="tel:+19544645458"
                             className="bg-brand-green text-white p-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-brand-green/90 transition-all border border-white/20"
                         >
-                            <span className="text-xs font-bold px-2">Llámanos</span>
+                            <span className="text-xs font-bold px-2">{t('cta_call')}</span>
                             <Phone className="w-5 h-5" />
                         </motion.a>
                         <motion.a
@@ -49,7 +50,7 @@ export default function MobileFAB() {
                             rel="noopener noreferrer"
                             className="bg-brand-green text-white p-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-brand-green/90 transition-all border border-white/20"
                         >
-                            <span className="text-xs font-bold px-2">WhatsApp</span>
+                            <span className="text-xs font-bold px-2">{t('cta_whatsapp')}</span>
                             <MessageCircle className="w-5 h-5" />
                         </motion.a>
                     </>
