@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import {
@@ -14,7 +14,6 @@ import {
     Instagram,
     Facebook,
     Linkedin,
-    ArrowUpRight,
     Sparkles,
     Loader2
 } from 'lucide-react';
@@ -43,7 +42,7 @@ export default function ContactForm() {
                 setStatus('error');
                 setTimeout(() => setStatus('idle'), 4000);
             }
-        } catch (error) {
+        } catch {
             setStatus('error');
             setTimeout(() => setStatus('idle'), 4000);
         }

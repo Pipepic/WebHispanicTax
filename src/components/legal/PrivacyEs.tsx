@@ -6,7 +6,7 @@ export default function PrivacyEs() {
             <p className="font-bold text-slate-500">Última actualización: Marzo 2026</p>
 
             <p>
-                En Hispanic Financial ("nosotros" o "nuestro"), estamos dedicados a proteger la privacidad y seguridad de su información personal y financiera. Esta Política de Privacidad describe cómo recopilamos, utilizamos, salvaguardamos y divulgamos sus datos en conformidad con las leyes de los Estados Unidos, incluyendo la Ley Gramm-Leach-Bliley (GLBA) y las regulaciones estatales de privacidad.
+                En Hispanic Financial (&quot;nosotros&quot; o &quot;nuestro&quot;), estamos dedicados a proteger la privacidad y seguridad de su información personal y financiera. Esta Política de Privacidad describe cómo recopilamos, utilizamos, salvaguardamos y divulgamos sus datos en conformidad con las leyes de los Estados Unidos, incluyendo la Ley Gramm-Leach-Bliley (GLBA) y las regulaciones estatales de privacidad.
             </p>
 
             <h2 className="text-2xl font-black text-brand-dark mt-10 mb-4">1. Información que Recopilamos</h2>

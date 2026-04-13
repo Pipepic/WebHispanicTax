@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion, useScroll, useSpring, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
@@ -35,13 +35,13 @@ export default function Navbar() {
         router.push(newPath);
     };
 
-    const navLinks = [
+    const navLinks = useMemo(() => [
         { name: t('services'), href: isHomePage ? '#services' : `/${locale}#services` },
         { name: t('calendar'), href: isHomePage ? '#calendar' : `/${locale}#calendar` },
         { name: t('resources'), href: isHomePage ? '#resources' : `/${locale}#resources` },
         { name: t('about'), href: isHomePage ? '#about' : `/${locale}#about` },
         { name: t('news'), href: isHomePage ? '#news' : `/${locale}#news` },
-    ];
+    ], [t, isHomePage, locale]);
 
     useEffect(() => {
         const handleScroll = () => {

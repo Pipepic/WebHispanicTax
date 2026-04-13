@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, useMotionValue, useTransform, animate, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, useMotionValue, useTransform, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import IntroSequence from './IntroSequence';
 import { Building2, Calculator, Landmark, BarChart3, MessageCircle } from 'lucide-react';
@@ -366,9 +366,11 @@ export default function Hero() {
                                                     animationDelay: `${logo.id * 2}s`,
                                                 }}
                                             />
-                                            <img
+                                            <Image
                                                 src={logo.src}
                                                 alt={logo.name}
+                                                width={100}
+                                                height={44}
                                                 className="h-6 md:h-8 lg:h-11 w-auto object-contain transition-all duration-700 opacity-100 relative z-10"
                                             />
                                         </motion.div>

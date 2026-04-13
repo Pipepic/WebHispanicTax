@@ -6,7 +6,7 @@ export default function PrivacyEn() {
             <p className="font-bold text-slate-500">Last updated: March 2026</p>
 
             <p>
-                Hispanic Financial ("we," "our," or "us") is dedicated to protecting the privacy and security of your personal and financial information. This Privacy Policy outlines how we collect, use, safeguard, and disclose your data in compliance with United States laws, including the Gramm-Leach-Bliley Act (GLBA) and applicable state privacy regulations.
+                Hispanic Financial (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is dedicated to protecting the privacy and security of your personal and financial information. This Privacy Policy outlines how we collect, use, safeguard, and disclose your data in compliance with United States laws, including the Gramm-Leach-Bliley Act (GLBA) and applicable state privacy regulations.
             </p>
 
             <h2 className="text-2xl font-black text-brand-dark mt-10 mb-4">1. Information We Collect</h2>

@@ -7,11 +7,8 @@ import React from 'react';
 import {
     Home,
     Briefcase,
-    MessageSquare,
     ArrowRight,
-    Search,
-    ChevronRight,
-    HelpCircle
+    Search
 } from 'lucide-react';
 
 export default function NotFound() {
@@ -46,7 +43,7 @@ export default function NotFound() {
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }
+            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
         }
     };
 

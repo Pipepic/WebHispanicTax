@@ -97,8 +97,6 @@ export default function Brochure3D() {
     const leftZ = useTransform(scrollYProgress, [0, 0.35], [20, 0]);
     const rightZ = useTransform(scrollYProgress, [0, 0.45], [10, 0]);
 
-    // Opacidad para el texto de ayuda - desaparece muy rápido al empezar el scroll
-    const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.03], [1, 0]);
 
     const handleZoomIn = () => setZoom(z => Math.min(z + 0.2, 2.5));
     const handleZoomOut = () => setZoom(z => Math.max(z - 0.2, 0.5));

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { motion, useInView, animate, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Cpu, BrainCircuit, BarChart3, RefreshCw, ChevronRight } from 'lucide-react';
+import { Cpu, BrainCircuit, BarChart3, RefreshCw } from 'lucide-react';
 
 function Counter({ value, duration = 2 }: { value: number; duration?: number }) {
     const [count, setCount] = useState(0);

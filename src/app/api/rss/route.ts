@@ -89,7 +89,7 @@ async function fetchAndParseRSS(url: string): Promise<NewsItem[]> {
             const description = content.match(/<description>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/)?.[1] || '';
 
             // Try to extract image from media:content or description img tag
-            let image = content.match(/<media:content[^>]*url="([^"]*)"/)?.[1]
+            const image = content.match(/<media:content[^>]*url="([^"]*)"/)?.[1]
                 || content.match(/<enclosure[^>]*url="([^"]*)"/)?.[1]
                 || description.match(/<img[^>]*src="([^"]*)"/)?.[1];
 
@@ -129,7 +129,7 @@ export async function GET() {
                 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=600',
             }
         });
-    } catch (err) {
+    } catch {
         return NextResponse.json(shuffleArray(MOCK_NEWS).slice(0, 4));
     }
 }

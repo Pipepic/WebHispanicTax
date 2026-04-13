@@ -110,7 +110,9 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as any)) {
+  // We know routing.locales includes string types, but TypeScript might want a narrower literal or string type.
+  // Casting to string array to check includes.
+  if (!(routing.locales as readonly string[]).includes(locale)) {
     notFound();
   }
 
