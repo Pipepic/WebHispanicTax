@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
     const t = useTranslations('Footer');
@@ -18,11 +18,7 @@ export default function Footer() {
         { name: navT('news'), href: '#news' },
     ];
 
-    const socialLinks = [
-        { icon: <Instagram size={20} />, href: "https://instagram.com/hispanictaxinc" },
-        { icon: <Facebook size={20} />, href: "https://facebook.com/hispanictaxinc" },
-        { icon: <Linkedin size={20} />, href: "https://linkedin.com/company/hispanictaxinc" }
-    ];
+
 
     return (
         <footer id="footer" className="bg-brand-dark text-white pt-24 pb-10 relative overflow-hidden">
@@ -57,19 +53,7 @@ export default function Footer() {
                         <p className="text-white/60 leading-relaxed font-medium">
                             {t('description')}
                         </p>
-                        <div className="flex gap-4">
-                            {socialLinks.map((social, i) => (
-                                <a
-                                    key={i}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:text-brand-gold text-white/80"
-                                >
-                                    {social.icon}
-                                </a>
-                            ))}
-                        </div>
+
                     </div>
 
                     {/* Column 2: Quick Links */}

@@ -11,9 +11,6 @@ import {
     Phone,
     Mail,
     Clock,
-    Instagram,
-    Facebook,
-    Linkedin,
     Sparkles,
     Loader2
 } from 'lucide-react';
@@ -223,43 +220,7 @@ export default function ContactForm() {
                                     );
                                 })}
 
-                                {/* Social Box (Bento Style) */}
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.7, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                    className="p-10 bg-brand-dark rounded-[2.5rem] text-white flex flex-col sm:flex-row justify-between items-center gap-8 relative overflow-hidden group shadow-2xl shadow-brand-dark/20"
-                                >
-                                    {/* Subtle pattern background for social box */}
-                                    <div className="absolute inset-0 opacity-[0.05] pointer-events-none group-hover:scale-110 transition-transform duration-[3s]"
-                                        style={{ backgroundImage: 'radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)', backgroundSize: '16px 16px' }}
-                                    />
 
-                                    <h4 className="text-[10px] font-black text-white/40 uppercase tracking-[0.4em] relative z-10">
-                                        {t('social_label')}
-                                    </h4>
-
-                                    <div className="flex gap-4 relative z-10">
-                                        {[
-                                            { icon: <Instagram size={22} />, href: "https://instagram.com/hispanictaxinc" },
-                                            { icon: <Facebook size={22} />, href: "https://facebook.com/hispanictaxinc" },
-                                            { icon: <Linkedin size={22} />, href: "https://linkedin.com/company/hispanictaxinc" }
-                                        ].map((social, i) => (
-                                            <motion.a
-                                                key={i}
-                                                href={social.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                whileHover={{ y: -6, scale: 1.1 }}
-                                                whileTap={{ scale: 0.9 }}
-                                                className="w-14 h-14 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:bg-white/15 hover:border-white/20 hover:text-brand-gold shadow-lg"
-                                            >
-                                                {social.icon}
-                                            </motion.a>
-                                        ))}
-                                    </div>
-                                </motion.div>
                             </div>
                         </div>
 
