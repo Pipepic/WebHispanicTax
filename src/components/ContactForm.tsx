@@ -22,9 +22,30 @@ export default function ContactForm() {
     const t = useTranslations('ContactForm');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [emailError, setEmailError] = useState(false);
+
+    const validateEmail = (email: string) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+        setFormData({ ...formData, email: val });
+        if (val.length > 0) {
+            setEmailError(!validateEmail(val));
+        } else {
+            setEmailError(false);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!validateEmail(formData.email)) {
+            setEmailError(true);
+            return;
+        }
+
         setStatus('loading');
 
         try {
@@ -267,6 +288,7 @@ export default function ContactForm() {
                                                 id="name"
                                                 autoComplete="name"
                                                 required
+                                                maxLength={100}
                                                 placeholder={t('name_placeholder')}
                                                 className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-blue/30 focus:ring-4 focus:ring-brand-blue/[0.03] outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
                                                 value={formData.name}
@@ -277,19 +299,34 @@ export default function ContactForm() {
 
                                     {/* Email Input */}
                                     <div className="group relative flex flex-col gap-3">
-                                        <label htmlFor="email" className="text-[10px] font-black text-slate-400 group-focus-within:text-brand-blue uppercase tracking-[0.2em] px-1 transition-colors">
-                                            {t('email_label')}
-                                        </label>
+                                        <div className="flex justify-between items-center px-1">
+                                            <label htmlFor="email" className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors ${emailError ? 'text-red-500' : 'text-slate-400 group-focus-within:text-brand-blue'}`}>
+                                                {t('email_label')}
+                                            </label>
+                                            <AnimatePresence>
+                                                {emailError && (
+                                                    <motion.span 
+                                                        initial={{ opacity: 0, x: 10 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        exit={{ opacity: 0, x: 10 }}
+                                                        className="text-[9px] font-black text-red-500 uppercase tracking-wider"
+                                                    >
+                                                        {t('invalid_email') || 'Email Inválido'}
+                                                    </motion.span>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
                                         <div className="relative">
                                             <input
                                                 type="email"
                                                 id="email"
                                                 autoComplete="email"
                                                 required
+                                                maxLength={100}
                                                 placeholder={t('email_placeholder')}
-                                                className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-blue/30 focus:ring-4 focus:ring-brand-blue/[0.03] outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
+                                                className={`w-full bg-slate-50/80 border hover:bg-slate-100 focus:bg-white focus:ring-4 outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium ${emailError ? 'border-red-400 focus:border-red-500 focus:ring-red-100' : 'border-slate-100 focus:border-brand-blue/30 focus:ring-brand-blue/[0.03]'}`}
                                                 value={formData.email}
-                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                onChange={handleEmailChange}
                                             />
                                         </div>
                                     </div>
@@ -297,14 +334,20 @@ export default function ContactForm() {
 
                                 {/* Message Input */}
                                 <div className="group relative flex flex-col gap-3">
-                                    <label htmlFor="message" className="text-[10px] font-black text-slate-400 group-focus-within:text-brand-blue uppercase tracking-[0.2em] px-1 transition-colors">
-                                        {t('message_label')}
-                                    </label>
+                                    <div className="flex justify-between items-center px-1">
+                                        <label htmlFor="message" className="text-[10px] font-black text-slate-400 group-focus-within:text-brand-blue uppercase tracking-[0.2em] transition-colors">
+                                            {t('message_label')}
+                                        </label>
+                                        <span className={`text-[9px] font-black uppercase tracking-wider ${formData.message.length > 900 ? 'text-brand-gold' : 'text-slate-300'}`}>
+                                            {formData.message.length} / 1000
+                                        </span>
+                                    </div>
                                     <div className="relative">
                                         <textarea
                                             id="message"
                                             rows={5}
                                             required
+                                            maxLength={1000}
                                             placeholder={t('message_placeholder')}
                                             className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-blue/30 focus:ring-4 focus:ring-brand-blue/[0.03] outline-none px-8 py-5 rounded-[2rem] transition-all duration-500 resize-none font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
                                             value={formData.message}
@@ -317,13 +360,13 @@ export default function ContactForm() {
                                 <motion.div className="pt-2">
                                     <motion.button
                                         type="submit"
-                                        disabled={status === 'loading' || status === 'success'}
+                                        disabled={status === 'loading' || status === 'success' || emailError}
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         className={`w-full relative py-6 px-10 rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.3em] overflow-hidden shadow-2xl flex items-center justify-center gap-4 group ${status === 'success' ? 'bg-brand-green shadow-brand-green/30 text-white' :
                                             status === 'error' ? 'bg-red-500 shadow-red-200 text-white' :
                                                 'bg-brand-blue text-white shadow-brand-blue/25 hover:bg-brand-dark'
-                                            }`}
+                                            } ${emailError ? 'opacity-50 cursor-not-allowed' : ''}`}
                                     >
                                         {/* Button shimmer sweep */}
                                         <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />

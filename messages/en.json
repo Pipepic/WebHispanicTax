@@ -66,6 +66,7 @@
     "submit_btn": "Send Message",
     "success_msg": "Message Sent!",
     "error_msg": "Try Again",
+    "invalid_email": "Invalid Email",
     "work_hours_label": "Business Hours",
     "work_hours_value": "Mon - Fri: 9:00 AM - 6:00 PM",
     "social_label": "Follow Us",
