@@ -40,7 +40,7 @@ export default function ContactForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (!validateEmail(formData.email)) {
             setEmailError(true);
             return;
@@ -305,7 +305,7 @@ export default function ContactForm() {
                                             </label>
                                             <AnimatePresence>
                                                 {emailError && (
-                                                    <motion.span 
+                                                    <motion.span
                                                         initial={{ opacity: 0, x: 10 }}
                                                         animate={{ opacity: 1, x: 0 }}
                                                         exit={{ opacity: 0, x: 10 }}
@@ -338,8 +338,8 @@ export default function ContactForm() {
                                         <label htmlFor="message" className="text-[10px] font-black text-slate-400 group-focus-within:text-brand-blue uppercase tracking-[0.2em] transition-colors">
                                             {t('message_label')}
                                         </label>
-                                        <span className={`text-[9px] font-black uppercase tracking-wider ${formData.message.length > 550 ? 'text-brand-gold' : 'text-slate-300'}`}>
-                                            {formData.message.length} / 600
+                                        <span className={`text-[9px] font-black uppercase tracking-wider ${formData.message.length > 450 ? 'text-brand-gold' : 'text-slate-300'}`}>
+                                            {formData.message.length} / 500
                                         </span>
                                     </div>
                                     <div className="relative">
@@ -347,7 +347,7 @@ export default function ContactForm() {
                                             id="message"
                                             rows={5}
                                             required
-                                            maxLength={600}
+                                            maxLength={500}
                                             placeholder={t('message_placeholder')}
                                             className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-blue/30 focus:ring-4 focus:ring-brand-blue/[0.03] outline-none px-8 py-5 rounded-[2rem] transition-all duration-500 resize-none font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
                                             value={formData.message}
