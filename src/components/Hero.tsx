@@ -226,10 +226,7 @@ export default function Hero() {
                         initial="hidden"
                         animate="visible"
                     >
-                        <motion.h1
-                            variants={itemVariants}
-                            className="text-5xl md:text-7xl xl:text-8xl font-black text-brand-dark tracking-tight mb-2 leading-[1.1] md:leading-[1.05] drop-shadow-sm relative max-w-[90%] mx-auto lg:max-w-none"
-                        >
+                        <div className="relative w-full max-w-[90%] mx-auto lg:max-w-none mb-2 z-10 text-center lg:text-left">
                             {/* Stamped Seal of Quality - Repositioned to overlap Impulsamos and Negocios */}
                             <motion.div
                                 initial={{ scale: 3, opacity: 0, rotate: 0, filter: 'blur(20px)' }}
@@ -244,7 +241,8 @@ export default function Hero() {
                             >
                                 <Image
                                     src="/sello/sello20.webp"
-                                    alt="20 Years Experience Seal"
+                                    alt=""
+                                    aria-hidden="true"
                                     width={208}
                                     height={208}
                                     style={{ width: 'auto' }}
@@ -259,43 +257,45 @@ export default function Hero() {
                                 />
                             </motion.div>
 
-                            {t.rich('title', {
-                                highlight: (chunks) => (
-                                    <span className="relative inline-block">
-                                        <span className="text-brand-blue">{chunks}</span>
-                                    </span>
-                                ),
-                                br: () => <br />,
-                                usflag: () => (
-                                    <span className="flag-cloth">
-                                        <Image
-                                            src="/images/flags/usa_flag.png"
-                                            alt="US Flag"
-                                            fill
-                                            className="object-cover"
-                                            priority
-                                        />
-                                    </span>
-                                ),
-                                small: (chunks) => (
-                                    <span className="block text-xl md:text-3xl xl:text-4xl text-brand-dark/60 font-medium tracking-normal mt-2 mb-4 leading-snug">
-                                        {chunks}
-                                    </span>
-                                ),
-                                flags: () => (
-                                    <>
-                                        {/* Desktop: Centered flags within the left column width */}
-                                        <div className="hidden lg:flex relative h-10 w-full max-w-[450px] justify-center py-1">
-                                            <FlagCarousel className="w-full justify-center" />
-                                        </div>
-                                        {/* Mobile: Fully centered flags */}
-                                        <div className="flex lg:hidden relative h-10 w-full justify-center mt-1">
-                                            <FlagCarousel className="w-full justify-center" />
-                                        </div>
-                                    </>
-                                )
-                            })}
-                        </motion.h1>
+                            <motion.h1
+                                variants={itemVariants}
+                                className="text-5xl md:text-7xl xl:text-8xl font-black text-brand-dark tracking-tight leading-[1.1] md:leading-[1.05] drop-shadow-sm"
+                            >
+                                {t.rich('title', {
+                                    highlight: (chunks) => (
+                                        <span className="relative inline-block">
+                                            <span className="text-brand-blue">{chunks}</span>
+                                        </span>
+                                    ),
+                                    br: () => <br />,
+                                    usflag: () => (
+                                        <span className="flag-cloth">
+                                            <Image
+                                                src="/images/flags/usa_flag.png"
+                                                alt="US Flag"
+                                                fill
+                                                className="object-cover"
+                                                priority
+                                            />
+                                        </span>
+                                    ),
+                                    small: (chunks) => (
+                                        <span className="block text-xl md:text-3xl xl:text-4xl text-brand-dark/60 font-medium tracking-normal mt-2 mb-2 leading-snug">
+                                            {chunks}
+                                        </span>
+                                    )
+                                })}
+                            </motion.h1>
+
+                            {/* Desktop: Centered flags within the left column width */}
+                            <div className="hidden lg:flex relative h-10 w-full max-w-[450px] justify-center py-1">
+                                <FlagCarousel className="w-full justify-center" />
+                            </div>
+                            {/* Mobile: Fully centered flags */}
+                            <div className="flex lg:hidden relative h-10 w-full justify-center mt-1">
+                                <FlagCarousel className="w-full justify-center" />
+                            </div>
+                        </div>
 
                         <motion.div
                             variants={itemVariants}

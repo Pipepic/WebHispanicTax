@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
 
   const isEn = locale === 'en';
-  const title = isEn ? 'Hispanic Financial - Tax Preparation & Business Accounting Coral Springs' : 'Hispanic Financial - Asesoría Fiscal, IRS y Creación de Empresas en Florida';
+  const title = isEn ? 'Tax Prep & Business Accounting | Hispanic Financial' : 'Asesoría Fiscal y Creación de LLC | Hispanic Financial';
   const description = isEn
-    ? 'Expert tax preparation, corporate accounting, QuickBooks, and business incorporation for the Hispanic community in Coral Springs and Florida. Maximize your IRS returns.'
-    : 'Expertos en preparación de impuestos corporativos, contabilidad con QuickBooks y creación de LLC en Coral Springs, Florida. Maximiza tus devoluciones del IRS y protege tu patrimonio.';
+    ? 'Expert tax preparation, corporate accounting, and business incorporation in Coral Springs. Maximize your IRS returns with Hispanic Financial.'
+    : 'Expertos en impuestos, contabilidad y creación de LLC en Coral Springs. Maximiza tus devoluciones y protege tu patrimonio con Hispanic Financial.';
 
   return {
     title: {
