@@ -6,6 +6,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import StructuredData from "@/components/StructuredData";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -128,6 +129,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
