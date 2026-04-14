@@ -241,8 +241,7 @@ export default function Hero() {
                             >
                                 <Image
                                     src="/sello/sello20.webp"
-                                    alt=""
-                                    aria-hidden="true"
+                                    alt="20 Years Experience Seal"
                                     width={208}
                                     height={208}
                                     style={{ width: 'auto' }}
