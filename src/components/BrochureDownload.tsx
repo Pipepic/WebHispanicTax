@@ -191,7 +191,7 @@ export default function BrochureDownload() {
 
                                         <Link
                                             href="/brochure"
-                                            className="inline-flex items-center gap-2 px-8 py-5 bg-white/5 hover:bg-white/10 text-white rounded-full font-bold text-xs tracking-widest uppercase transition-all border border-brand-gold/20 hover:border-brand-gold/40 shadow-xl shadow-brand-gold/5 backdrop-blur-sm"
+                                            className="hidden lg:inline-flex items-center gap-2 px-8 py-5 bg-white/5 hover:bg-white/10 text-white rounded-full font-bold text-xs tracking-widest uppercase transition-all border border-brand-gold/20 hover:border-brand-gold/40 shadow-xl shadow-brand-gold/5 backdrop-blur-sm"
                                         >
                                             <ExternalLink className="w-4 h-4" />
                                             {t('online_btn')}
