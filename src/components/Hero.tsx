@@ -258,7 +258,7 @@ export default function Hero() {
 
                             <motion.span
                                 variants={itemVariants}
-                                className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-blue/5 text-brand-blue font-bold text-[10px] tracking-[0.3em] uppercase mb-8 border border-brand-blue/10"
+                                className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-blue/5 text-brand-blue font-bold text-[10px] tracking-[0.3em] uppercase mb-4 border border-brand-blue/10"
                             >
                                 <Landmark className="w-3 h-3" />
                                 {t('badge')}
