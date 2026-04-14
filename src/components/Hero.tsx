@@ -288,13 +288,19 @@ export default function Hero() {
                             </motion.h1>
 
                             {/* Desktop: Centered flags within the left column width */}
-                            <div className="hidden lg:flex relative h-10 w-full max-w-[450px] justify-center py-1">
+                            <motion.div 
+                                variants={itemVariants}
+                                className="hidden lg:flex relative h-10 w-full max-w-[450px] justify-center py-1"
+                            >
                                 <FlagCarousel className="w-full justify-center" />
-                            </div>
+                            </motion.div>
                             {/* Mobile: Fully centered flags */}
-                            <div className="flex lg:hidden relative h-10 w-full justify-center mt-1">
+                            <motion.div 
+                                variants={itemVariants}
+                                className="flex lg:hidden relative h-10 w-full justify-center mt-1"
+                            >
                                 <FlagCarousel className="w-full justify-center" />
-                            </div>
+                            </motion.div>
                         </div>
 
                         <motion.div
