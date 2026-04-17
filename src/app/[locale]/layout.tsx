@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Montserrat, Inter } from "next/font/google";
 import Script from 'next/script';
 import "../globals.css";
 import { NextIntlClientProvider } from 'next-intl';
@@ -9,8 +9,13 @@ import { routing } from '@/i18n/routing';
 import StructuredData from "@/components/StructuredData";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -134,7 +139,7 @@ export default async function RootLayout({
         </Script>
       </head>
       <body
-        className={`${outfit.variable} antialiased bg-background text-foreground overflow-x-hidden`}
+        className={`${inter.variable} ${montserrat.variable} antialiased bg-background text-foreground overflow-x-hidden`}
         suppressHydrationWarning
       >
         <noscript>
