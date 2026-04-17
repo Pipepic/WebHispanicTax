@@ -1,0 +1,463 @@
+'use client';
+
+import { motion, useMotionValue, useTransform, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import React, { useRef, useState } from 'react';
+import Image from 'next/image';
+import IntroSequence from './IntroSequence';
+import { Building2, Calculator, Landmark, BarChart3, MessageCircle } from 'lucide-react';
+
+
+
+
+
+const trustLogos = [
+    { id: 1, name: 'ACFE', src: '/images/logos/ACFE.webp' },
+    { id: 2, name: 'AICPA', src: '/images/logos/AICPA.webp' },
+    { id: 3, name: 'AAA', src: '/images/logos/American_Accounting_Association.webp' },
+];
+
+function FlagCarousel({ className = "" }: { className?: string }) {
+    const t = useTranslations('Hero.countries');
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+    const flagsData = [
+        { name: t('mexico'), src: '/images/flags/mexico.png' },
+        { name: t('colombia'), src: '/images/flags/colombia.png' },
+        { name: t('bolivia'), src: '/images/flags/bolivia.png' },
+        { name: t('argentina'), src: '/images/flags/argentina.png' },
+        { name: t('venezuela'), src: '/images/flags/venezuela.png' },
+        { name: t('spain'), src: '/images/flags/spain.png' },
+        { name: t('qatar'), src: '/images/flags/qatar.png' },
+        { name: t('guatemala'), src: '/images/flags/guatemala.png' },
+        { name: t('honduras'), src: '/images/flags/honduras.png' },
+    ];
+
+    // Quadruple the flags for extra long marquee to ensure smooth loop
+    const extendedFlags = [...flagsData, ...flagsData, ...flagsData, ...flagsData];
+
+    return (
+        <div className={`overflow-hidden py-4 pointer-events-auto cursor-default flex ${className}`}>
+            <div className="flex gap-10 items-center w-max animate-marquee">
+                {extendedFlags.map((flag, idx) => (
+                    <div
+                        key={idx}
+                        className="flex items-center gap-4 group/flag"
+                        onMouseEnter={() => {
+                            setHoveredIndex(idx);
+                        }}
+                        onMouseLeave={() => {
+                            setHoveredIndex(null);
+                        }}
+                    >
+                        <div className="relative w-5 h-5 md:w-7 md:h-7 rounded-full overflow-hidden shadow-md border border-white/20 transition-transform duration-300 group-hover/flag:scale-125">
+                            <Image
+                                src={flag.src}
+                                alt={flag.name}
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
+                        <AnimatePresence>
+                            {hoveredIndex === idx && (
+                                <motion.span
+                                    initial={{ opacity: 0, x: -10, width: 0 }}
+                                    animate={{ opacity: 1, x: 0, width: 'auto' }}
+                                    exit={{ opacity: 0, x: -10, width: 0 }}
+                                    className="text-[10px] font-black text-brand-blue uppercase tracking-[0.2em] whitespace-nowrap"
+                                >
+                                    {flag.name}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+export default function Hero() {
+    const t = useTranslations('Hero');
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    // Mouse Parallax Logic
+    const mouseX = useMotionValue(0.5);
+    const mouseY = useMotionValue(0.5);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        mouseX.set(clientX / innerWidth);
+        mouseY.set(clientY / innerHeight);
+    };
+
+    const moveX = useTransform(mouseX, [0, 1], [30, -30]);
+    const moveY = useTransform(mouseY, [0, 1], [30, -30]);
+
+    // Extracted from JSX to respect React hooks rules
+    const ambientX = useTransform(mouseX, [0, 1], [-40, 40]);
+    const ambientY = useTransform(mouseY, [0, 1], [-40, 40]);
+
+    // Multi-layered Parallax Scroll Logic for the right column (Desktop only)
+    const { scrollY } = useScroll();
+    const [isDesktop, setIsDesktop] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+        checkDesktop();
+        window.addEventListener('resize', checkDesktop);
+        return () => window.removeEventListener('resize', checkDesktop);
+    }, []);
+
+    // Precise Multi-layered Parallax (Desktop only)
+    // Speeds: Ultra-Fast (-550px), Very-Fast (-420px), Fast (-300px), Slow (-180px)
+    const y1 = useTransform(scrollY, [0, 1000], [0, isDesktop ? -550 : 0]);
+    const y2 = useTransform(scrollY, [0, 1000], [0, isDesktop ? -420 : 0]);
+    const y3 = useTransform(scrollY, [0, 1000], [0, isDesktop ? -300 : 0]);
+    const y4 = useTransform(scrollY, [0, 1000], [0, isDesktop ? -180 : 0]);
+
+    const rightY1 = useSpring(y1, { stiffness: 100, damping: 30 });
+    const rightY2 = useSpring(y2, { stiffness: 100, damping: 30 });
+    const rightY3 = useSpring(y3, { stiffness: 100, damping: 30 });
+    const rightY4 = useSpring(y4, { stiffness: 100, damping: 30 });
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.1,
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 40 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 1.2,
+                ease: [0.16, 1, 0.3, 1] as const
+            }
+        }
+    };
+
+    const logoContainerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.3,
+            }
+        }
+    };
+
+    const logoItemVariants = {
+        hidden: { opacity: 0, y: 30, scale: 0.95 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+                duration: 1.2,
+                ease: [0.16, 1, 0.3, 1] as const
+            }
+        }
+    };
+
+    const serviceIcons = [
+        { icon: Calculator, label: t('service_1'), color: '#D5CD27', textColor: '#263A69' },
+        { icon: Building2, label: t('service_2'), color: '#72BF44', textColor: '#ffffff' },
+        { icon: BarChart3, label: t('service_3'), color: '#22689B', textColor: '#ffffff' },
+        { icon: Landmark, label: t('service_4'), color: '#263A69', textColor: '#ffffff' },
+    ];
+
+    return (
+        <div
+            id="hero"
+            ref={containerRef}
+            className="relative min-h-screen w-full overflow-hidden bg-white flex items-center pt-32 md:pt-20 pb-12"
+            onMouseMove={handleMouseMove}
+        >
+            {/* Cinematic Intro Animation Background */}
+            <IntroSequence />
+
+            {/* Ambient circles - unified blue tones */}
+            <motion.div
+                style={{ x: moveX, y: moveY }}
+                animate={{
+                    scale: [1, 1.08, 1],
+                    opacity: [0.2, 0.35, 0.2]
+                }}
+                transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+                className="absolute top-[-10%] left-[-5%] w-[50vw] h-[50vw] bg-brand-blue/4 rounded-full blur-[150px] pointer-events-none z-[1]"
+            />
+
+            <motion.div
+                style={{ x: ambientX, y: ambientY }}
+                animate={{
+                    scale: [1.1, 1, 1.1],
+                    opacity: [0.15, 0.25, 0.15]
+                }}
+                transition={{
+                    duration: 14,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 2
+                }}
+                className="absolute bottom-[-10%] right-[-5%] w-[35vw] h-[35vw] bg-brand-blue/3 rounded-full blur-[150px] pointer-events-none z-[1]"
+            />
+
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-12">
+
+                    {/* Left Column: Text Content */}
+                    <motion.div
+                        className="w-full lg:w-3/5 xl:w-1/2 flex flex-col items-center text-center lg:items-start lg:text-left"
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                    >
+                        <div className="relative w-full max-w-[90%] mx-auto lg:max-w-none mb-2 z-10 text-center lg:text-left">
+                            {/* Stamped Seal of Quality - Repositioned to overlap Impulsamos and Negocios */}
+                            <motion.div
+                                initial={{ scale: 3, opacity: 0, rotate: 0, filter: 'blur(20px)' }}
+                                animate={{ scale: 0.9, opacity: 1, rotate: 21, filter: 'blur(0px)' }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 260,
+                                    damping: 20,
+                                    delay: 0.4
+                                }}
+                                className="hidden lg:block absolute top-[10px] md:top-[205px] md:left-[420px] z-20 w-20 md:w-40 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] pointer-events-none"
+                            >
+                                <Image
+                                    src="/sello/sello20.webp"
+                                    alt="20 Years Experience Seal"
+                                    width={160}
+                                    height={160}
+                                    style={{ width: 'auto' }}
+                                    className="w-full h-auto object-contain"
+                                    priority={true}
+                                />
+                                {/* Impact pulse effect */}
+                                <motion.div
+                                    initial={{ scale: 1, opacity: 0 }}
+                                    animate={{ scale: 1.4, opacity: 0 }}
+                                    transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+                                    className="absolute inset-0 rounded-full border-4 border-brand-gold/30"
+                                />
+                            </motion.div>
+
+                            <motion.span
+                                variants={itemVariants}
+                                className="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-brand-blue/5 text-brand-blue font-bold text-[10px] md:text-[11px] tracking-[0.25em] uppercase mb-6 border border-brand-blue/10"
+                            >
+                                <Landmark className="w-3.5 h-3.5" />
+                                {t('badge')}
+                            </motion.span>
+
+                            <motion.h1
+                                variants={itemVariants}
+                                className="text-4xl md:text-6xl xl:text-7xl font-black text-brand-dark tracking-tight leading-[1.1] md:leading-[1.05] drop-shadow-sm mb-6"
+                            >
+                                {t.rich('title', {
+                                    highlight: (chunks) => (
+                                        <span className="relative inline-block">
+                                            <span className="text-brand-blue">{chunks}</span>
+                                        </span>
+                                    ),
+                                    br: () => <br />,
+                                    usflag: () => (
+                                        <span className="flag-cloth">
+                                            <Image
+                                                src="/images/flags/usa_flag.png"
+                                                alt="US Flag"
+                                                fill
+                                                className="object-cover"
+                                                priority
+                                            />
+                                        </span>
+                                    ),
+                                    small: (chunks) => (
+                                        <span className="block text-xl md:text-2xl xl:text-3xl text-brand-dark/50 font-semibold tracking-normal mt-3 mb-3 leading-tight">
+                                            {chunks}
+                                        </span>
+                                    )
+                                })}
+                            </motion.h1>
+
+                            {/* Desktop: Centered flags within the left column width */}
+                            <motion.div 
+                                variants={itemVariants}
+                                className="hidden lg:flex relative h-10 w-full max-w-[450px] py-1"
+                            >
+                                <FlagCarousel className="w-full justify-start pl-2" />
+                            </motion.div>
+                            {/* Mobile: Fully centered flags */}
+                            <motion.div 
+                                variants={itemVariants}
+                                className="flex lg:hidden relative h-10 w-full justify-center mt-2"
+                            >
+                                <FlagCarousel className="w-full justify-center" />
+                            </motion.div>
+                        </div>
+
+                        <motion.div
+                            variants={itemVariants}
+                            className="relative mt-4 mb-10 max-lg group"
+                        >
+                            <p className="text-base md:text-[1.125rem] xl:text-xl text-slate-500 leading-relaxed font-medium">
+                                {t('subtitle')}
+                            </p>
+                        </motion.div>
+
+                        <motion.div
+                            variants={itemVariants}
+                            className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start flex-wrap w-full"
+                        >
+                            <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
+                                <a
+                                    href="#contact"
+                                    className="group relative overflow-hidden flex justify-center items-center px-10 py-3.5 md:px-12 md:py-4.5 bg-brand-dark text-white rounded-full font-bold text-[11px] md:text-xs tracking-widest uppercase shadow-xl shadow-brand-dark/20 hover:shadow-brand-dark/40 transition-all duration-300 w-full"
+                                >
+                                    <span className="absolute inset-0 bg-white/20 rounded-full translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                                    <span className="relative z-10">{t('cta_primary')}</span>
+                                </a>
+                            </motion.div>
+                            <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
+                                <a
+                                    href={`https://wa.me/19544645458?text=${encodeURIComponent(t('whatsapp_message'))}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative overflow-hidden flex justify-center items-center gap-2 px-10 py-3.5 md:px-12 md:py-4.5 bg-brand-green text-white rounded-full font-bold text-[11px] md:text-xs tracking-widest uppercase shadow-xl shadow-brand-green/20 hover:shadow-brand-green/40 transition-all duration-300 w-full"
+                                >
+                                    <span className="absolute inset-0 bg-white/20 rounded-full translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                                    <MessageCircle className="w-4 h-4 relative z-10" />
+                                    <span className="relative z-10">{t('cta_whatsapp')}</span>
+                                </a>
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Right Column - Balanced with logos, stats, and service highlights */}
+                    <motion.div
+                        className="lg:w-2/5 flex flex-col items-center lg:items-end gap-6 mt-12 lg:mt-0"
+                        variants={logoContainerVariants}
+                        initial="hidden"
+                        animate="visible"
+                    >
+                        {/* Trust Logos Column */}
+                        <div className="hidden md:block w-full max-w-2xl lg:max-w-[280px]">
+                            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-5">
+                                {trustLogos.map((logo, index) => {
+                                    // Assign different parallax speeds based on index
+                                    const parallaxes = [rightY1, rightY2, rightY3];
+                                    const yValue = parallaxes[index % 3];
+
+                                    return (
+                                        <motion.div
+                                            key={logo.id}
+                                            variants={logoItemVariants}
+                                            style={{ y: yValue }}
+                                            className="relative p-4 lg:p-7 bg-brand-blue/[0.06] backdrop-blur-md border border-brand-blue/10 rounded-2xl lg:rounded-[2.5rem] flex items-center justify-center group transition-all duration-700 ease-out hover:bg-white hover:border-brand-gold/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 overflow-hidden"
+                                        >
+                                            {/* Glass shimmer reflection */}
+                                            <div
+                                                className="absolute inset-0 rounded-2xl lg:rounded-[2.5rem] pointer-events-none"
+                                                style={{
+                                                    background: 'linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.2) 38%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.2) 62%, transparent 70%)',
+                                                    backgroundSize: '200% 100%',
+                                                    animation: 'glass-shimmer 10s ease-in-out infinite',
+                                                    animationDelay: `${logo.id * 2}s`,
+                                                }}
+                                            />
+                                            <Image
+                                                src={logo.src}
+                                                alt={logo.name}
+                                                width={100}
+                                                height={44}
+                                                className="h-6 md:h-8 lg:h-11 w-auto object-contain transition-all duration-700 opacity-100 relative z-10"
+                                            />
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+
+
+                        {/* Mini Stats Row (desktop only) */}
+                        <motion.div
+                            variants={logoItemVariants}
+                            style={{ y: rightY4 }}
+                            className="hidden lg:flex items-center gap-6 mt-2 w-full max-w-[280px]"
+                        >
+                            <div className="flex-1 text-right pr-6 border-r border-brand-dark/10">
+                                <p className="text-2xl font-black text-brand-dark">
+                                    {t('stat_clients_number')}
+                                </p>
+                                <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold mt-0.5">
+                                    {t('stat_clients')}
+                                </p>
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-2xl font-black text-brand-green">
+                                    {t('stat_satisfaction_number')}
+                                </p>
+                                <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold mt-0.5">
+                                    {t('stat_satisfaction')}
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        {/* Service Highlights (desktop only) */}
+                        <motion.div
+                            variants={logoItemVariants}
+                            style={{ y: rightY4 }}
+                            className="hidden lg:block w-full max-w-[280px] mt-2"
+                        >
+                            <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-bold mb-3 text-center">
+                                {t('right_label')}
+                            </p>
+                            <div className="grid grid-cols-2 gap-2">
+                                {serviceIcons.map((service, index) => (
+                                    <motion.a
+                                        key={service.label}
+                                        href="#services"
+                                        variants={logoItemVariants}
+                                        style={{
+                                            backgroundColor: service.color,
+                                        }}
+                                        className="flex items-center gap-2 py-2.5 px-4 rounded-xl shadow-lg border-0 group transition-all duration-300 hover:-translate-y-1 hover:brightness-110 active:scale-95"
+                                    >
+                                        <service.icon
+                                            className="w-4 h-4 shrink-0"
+                                            style={{ color: service.textColor }}
+                                        />
+                                        <span
+                                            className="text-[10px] font-bold uppercase tracking-[0.05em] leading-tight"
+                                            style={{ color: service.textColor }}
+                                        >
+                                            {service.label}
+                                        </span>
+                                    </motion.a>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </motion.div>
+
+                </div>
+            </div>
+
+        </div>
+    );
+}

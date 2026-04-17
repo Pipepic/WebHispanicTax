@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-gold: #D5CD27;
+  --color-brand-green: #72BF44;
+  --color-brand-blue: #22689B;
+  --color-brand-dark: #263A69;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: var(--font-montserrat), sans-serif;
+
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #263A69;
+}
+
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--color-brand-blue);
+  color: white;
+}
+
+/* Premium Utilities */
+@layer utilities {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31_38_135_/_0.07)];
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .antigravity-layer {
+    @apply pointer-events-none transition-transform duration-700 ease-out will-change-transform;
+  }
+
+  .premium-gradient {
+    background: linear-gradient(135deg, var(--color-brand-dark) 0%, #1a2a4e 100%);
+  }
+
+  .gold-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(213, 205, 39, 0.2), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glass-shimmer {
+
+  0%,
+  75% {
+    background-position: -200% 0;
+    opacity: 0;
+  }
+
+  82% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    background-position: 200% 0;
+    opacity: 0;
+  }
+}
+
+@keyframes glass-shimmer-rtl {
+
+  0%,
+  70% {
+    background-position: 200% 0;
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    background-position: -200% 0;
+    opacity: 0;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-dark);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-gold);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 46s linear infinite;
+}
+
+.pause {
+  animation-play-state: paused;
+}
+
+@keyframes flag-wave {
+  0% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skewY(0deg); }
+  15% { transform: perspective(1000px) rotateX(1.5deg) rotateY(-8deg) rotateZ(0.2deg) skewY(1.5deg); }
+  33% { transform: perspective(1000px) rotateX(-1deg) rotateY(-18deg) rotateZ(-0.1deg) skewY(-1deg); }
+  50% { transform: perspective(1000px) rotateX(2.2deg) rotateY(-10deg) rotateZ(0.3deg) skewY(1.8deg); }
+  66% { transform: perspective(1000px) rotateX(-1.8deg) rotateY(-22deg) rotateZ(-0.2deg) skewY(-2.2deg); }
+  85% { transform: perspective(1000px) rotateX(1.2deg) rotateY(-12deg) rotateZ(0.1deg) skewY(1.2deg); }
+  100% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skewY(0deg); }
+}
+
+.flag-cloth {
+  display: inline-block;
+  position: relative;
+  width: 2.2rem;
+  height: 1.4rem;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+  top: -0.15rem;
+  border-radius: 0 !important;
+  overflow: visible;
+  filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.25));
+  transform-style: preserve-3d;
+}
+
+@media (max-width: 640px) {
+  .flag-cloth {
+    width: 1.8rem;
+    height: 1.1rem;
+    margin-left: 0.4rem;
+    top: -0.1rem;
+  }
+}
+
+.flag-cloth img {
+  border-radius: 0 !important;
+  animation: flag-wave 5s cubic-bezier(0.44, 0.05, 0.55, 0.95) infinite;
+  transform-origin: left center;
+  box-shadow: inset 3px 0 10px rgba(0,0,0,0.08);
+  /* Agregamos una máscara de gradiente que se mueve para simular sombras de pliegues */
+  mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 50%, rgba(0,0,0,1) 100%);
+  mask-size: 200% 100%;
+  animation: flag-wave 5s cubic-bezier(0.44, 0.05, 0.55, 0.95) infinite, flag-shimmer 5s linear infinite;
+}
+
+@keyframes flag-shimmer {
+  0% { mask-position: 0% 0; }
+  100% { mask-position: 200% 0; }
+}
+
+.pause {
+  animation-play-state: paused;
+}
