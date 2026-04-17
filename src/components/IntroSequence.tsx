@@ -22,6 +22,8 @@ export default function IntroSequence() {
         const preloadFrames = async () => {
             for (let i = START_FRAME; i <= LAST_FRAME; i++) {
                 const img = new Image();
+                img.decoding = 'async';
+                img.fetchPriority = 'low';
                 img.src = `${FRAME_PREFIX}${pad(i)}${FRAME_SUFFIX}`;
                 img.onload = () => {
                     loadedCount++;

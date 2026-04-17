@@ -127,8 +127,8 @@ export default function Hero() {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.8,
+                staggerChildren: 0.1,
+                delayChildren: 0.1,
             }
         }
     };
@@ -150,8 +150,8 @@ export default function Hero() {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.15,
-                delayChildren: 1.8,
+                staggerChildren: 0.1,
+                delayChildren: 0.3,
             }
         }
     };
@@ -230,43 +230,45 @@ export default function Hero() {
                             {/* Stamped Seal of Quality - Repositioned to overlap Impulsamos and Negocios */}
                             <motion.div
                                 initial={{ scale: 3, opacity: 0, rotate: 0, filter: 'blur(20px)' }}
-                                animate={{ scale: 0.95, opacity: 1, rotate: 21, filter: 'blur(0px)' }}
+                                animate={{ scale: 0.9, opacity: 1, rotate: 21, filter: 'blur(0px)' }}
                                 transition={{
                                     type: "spring",
                                     stiffness: 260,
                                     damping: 20,
-                                    delay: 6.5
+                                    delay: 0.4
                                 }}
-                                className="hidden lg:block absolute top-[-20px] -right-4 md:top-14 md:left-[400px] z-20 w-24 md:w-52 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.2)] pointer-events-none"
+                                className="hidden lg:block absolute top-[10px] md:top-[220px] md:left-[420px] z-20 w-20 md:w-40 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] pointer-events-none"
                             >
                                 <Image
                                     src="/sello/sello20.webp"
                                     alt="20 Years Experience Seal"
-                                    width={208}
-                                    height={208}
+                                    width={160}
+                                    height={160}
                                     style={{ width: 'auto' }}
                                     className="w-full h-auto object-contain"
+                                    priority={true}
+                                    fetchPriority="high"
                                 />
                                 {/* Impact pulse effect */}
                                 <motion.div
                                     initial={{ scale: 1, opacity: 0 }}
                                     animate={{ scale: 1.4, opacity: 0 }}
-                                    transition={{ delay: 6.9, duration: 0.8, ease: "easeOut" }}
+                                    transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
                                     className="absolute inset-0 rounded-full border-4 border-brand-gold/30"
                                 />
                             </motion.div>
 
                             <motion.span
                                 variants={itemVariants}
-                                className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-blue/5 text-brand-blue font-bold text-[10px] tracking-[0.3em] uppercase mb-4 border border-brand-blue/10"
+                                className="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-brand-blue/5 text-brand-blue font-bold text-[10px] md:text-[11px] tracking-[0.25em] uppercase mb-6 border border-brand-blue/10"
                             >
-                                <Landmark className="w-3 h-3" />
+                                <Landmark className="w-3.5 h-3.5" />
                                 {t('badge')}
                             </motion.span>
 
                             <motion.h1
                                 variants={itemVariants}
-                                className="text-5xl md:text-7xl xl:text-8xl font-black text-brand-dark tracking-tight leading-[1.1] md:leading-[1.05] drop-shadow-sm"
+                                className="text-4xl md:text-6xl xl:text-7xl font-black text-brand-dark tracking-tight leading-[1.1] md:leading-[1.05] drop-shadow-sm mb-6"
                             >
                                 {t.rich('title', {
                                     highlight: (chunks) => (
@@ -287,7 +289,7 @@ export default function Hero() {
                                         </span>
                                     ),
                                     small: (chunks) => (
-                                        <span className="block text-xl md:text-3xl xl:text-4xl text-brand-dark/60 font-medium tracking-normal mt-2 mb-2 leading-snug">
+                                        <span className="block text-xl md:text-2xl xl:text-3xl text-brand-dark/50 font-semibold tracking-normal mt-3 mb-3 leading-tight">
                                             {chunks}
                                         </span>
                                     )
@@ -297,14 +299,14 @@ export default function Hero() {
                             {/* Desktop: Centered flags within the left column width */}
                             <motion.div 
                                 variants={itemVariants}
-                                className="hidden lg:flex relative h-10 w-full max-w-[450px] justify-center py-1"
+                                className="hidden lg:flex relative h-10 w-full max-w-[450px] py-1"
                             >
-                                <FlagCarousel className="w-full justify-center" />
+                                <FlagCarousel className="w-full justify-start pl-2" />
                             </motion.div>
                             {/* Mobile: Fully centered flags */}
                             <motion.div 
                                 variants={itemVariants}
-                                className="flex lg:hidden relative h-10 w-full justify-center mt-1"
+                                className="flex lg:hidden relative h-10 w-full justify-center mt-2"
                             >
                                 <FlagCarousel className="w-full justify-center" />
                             </motion.div>
@@ -312,35 +314,35 @@ export default function Hero() {
 
                         <motion.div
                             variants={itemVariants}
-                            className="relative mb-8 max-w-xl group"
+                            className="relative mt-4 mb-10 max-w-lg group"
                         >
-                            <p className="text-lg md:text-xl text-brand-dark/75 leading-relaxed font-medium">
+                            <p className="text-base md:text-[1.125rem] xl:text-xl text-slate-500 leading-relaxed font-medium">
                                 {t('subtitle')}
                             </p>
                         </motion.div>
 
                         <motion.div
                             variants={itemVariants}
-                            className="flex flex-col sm:flex-row gap-5 items-center justify-center lg:justify-start flex-wrap"
+                            className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start flex-wrap w-full"
                         >
-                            <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
                                 <a
                                     href="#contact"
-                                    className="group relative overflow-hidden inline-flex items-center px-10 py-5 bg-brand-dark text-white rounded-full font-bold text-xs tracking-widest uppercase shadow-xl shadow-brand-dark/20 hover:shadow-brand-dark/40 transition-all duration-300"
+                                    className="group relative overflow-hidden flex justify-center items-center px-10 py-3.5 md:px-12 md:py-4.5 bg-brand-dark text-white rounded-full font-bold text-[11px] md:text-xs tracking-widest uppercase shadow-xl shadow-brand-dark/20 hover:shadow-brand-dark/40 transition-all duration-300 w-full"
                                 >
                                     <span className="absolute inset-0 bg-white/20 rounded-full translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
                                     <span className="relative z-10">{t('cta_primary')}</span>
                                 </a>
                             </motion.div>
-                            <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
                                 <a
                                     href={`https://wa.me/19544645458?text=${encodeURIComponent(t('whatsapp_message'))}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group relative overflow-hidden inline-flex items-center gap-2 px-10 py-5 bg-brand-green text-white rounded-full font-bold text-xs tracking-widest uppercase shadow-xl shadow-brand-green/20 hover:shadow-brand-green/40 transition-all duration-300"
+                                    className="group relative overflow-hidden flex justify-center items-center gap-2 px-10 py-3.5 md:px-12 md:py-4.5 bg-brand-green text-white rounded-full font-bold text-[11px] md:text-xs tracking-widest uppercase shadow-xl shadow-brand-green/20 hover:shadow-brand-green/40 transition-all duration-300 w-full"
                                 >
                                     <span className="absolute inset-0 bg-white/20 rounded-full translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
-                                    <MessageCircle className="w-5 h-5 relative z-10" />
+                                    <MessageCircle className="w-4 h-4 relative z-10" />
                                     <span className="relative z-10">{t('cta_whatsapp')}</span>
                                 </a>
                             </motion.div>
