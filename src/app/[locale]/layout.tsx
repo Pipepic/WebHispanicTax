@@ -123,6 +123,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning data-scroll-behavior="smooth" className="relative">
       <head>
+        <link rel="preload" href="/sello/sello20.webp" as="image" type="image/webp" fetchpriority="high" />
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

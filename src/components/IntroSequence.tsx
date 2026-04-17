@@ -27,8 +27,8 @@ export default function IntroSequence() {
                 img.src = `${FRAME_PREFIX}${pad(i)}${FRAME_SUFFIX}`;
                 img.onload = () => {
                     loadedCount++;
-                    // Start displaying when we have a good buffer (e.g., 30 frames)
-                    if (loadedCount === Math.min(30, totalToLoad)) {
+                    // Start displaying when we have a good buffer (e.g., 20 frames)
+                    if (loadedCount === Math.min(20, totalToLoad)) {
                         setIsLoaded(true);
                     }
                 };
@@ -40,7 +40,9 @@ export default function IntroSequence() {
             setImages(loadedImages);
         };
 
-        preloadFrames();
+        // Delay preloading by 2s to clear the LCP path
+        const timer = setTimeout(preloadFrames, 2000);
+        return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
