@@ -247,7 +247,6 @@ export default function Hero() {
                                     style={{ width: 'auto' }}
                                     className="w-full h-auto object-contain"
                                     priority={true}
-                                    fetchPriority="high"
                                 />
                                 {/* Impact pulse effect */}
                                 <motion.div
