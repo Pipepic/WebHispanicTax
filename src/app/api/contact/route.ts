@@ -1,12 +1,19 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+// Debug: Check if API Key exists (only prints at build/startup in Node logs)
+if (!process.env.RESEND_API_KEY) {
+    console.warn("WARNING: RESEND_API_KEY is not defined in environment variables");
+}
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
     try {
         const body = await request.json();
         const { name, email, message } = body;
+
+        console.log("Contact API received request:", { name, email });
 
         if (!name || !email || !message) {
             return NextResponse.json(
@@ -37,9 +44,13 @@ export async function POST(request: Request) {
         });
 
         if (error) {
-            console.error('Resend Error:', error);
+            console.error('Resend detail error:', error);
             return NextResponse.json(
-                { message: 'Error sending message', error },
+                { 
+                    message: 'Error from Resend service', 
+                    error,
+                    hint: 'Check if you verified your domain and if you are sending to an authorized recipient' 
+                },
                 { status: 500 }
             );
         }
@@ -48,10 +59,13 @@ export async function POST(request: Request) {
             { message: 'Message sent successfully', id: data?.id },
             { status: 200 }
         );
-    } catch (error) {
+    } catch (error: any) {
         console.error('Contact Form Exception:', error);
         return NextResponse.json(
-            { message: 'Internal server error' },
+            { 
+                message: 'Internal server error', 
+                details: error?.message || String(error) 
+            },
             { status: 500 }
         );
     }
