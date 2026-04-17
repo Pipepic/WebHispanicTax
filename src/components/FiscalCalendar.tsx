@@ -300,14 +300,14 @@ export default function FiscalCalendar() {
                                                     "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
                                                     "location": {
                                                         "@type": "VirtualLocation",
-                                                        "url": "https://www.hispanictaxinc.com"
+                                                        "url": "https://hispanic.financial"
                                                     },
                                                     "description": desc,
                                                     "organizer": {
                                                         "@type": "Organization",
-                                                        "@id": "https://www.hispanictaxinc.com/#organization",
+                                                        "@id": "https://hispanic.financial/#organization",
                                                         "name": "Hispanic Financial",
-                                                        "url": "https://www.hispanictaxinc.com"
+                                                        "url": "https://hispanic.financial"
                                                     }
                                                 })
                                             }}

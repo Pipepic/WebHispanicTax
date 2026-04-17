@@ -3,18 +3,18 @@ export default function StructuredData({ locale }: { locale: string }) {
 
     const organization = {
         "@type": ["FinancialService", "Organization", "LocalBusiness"],
-        "@id": "https://www.hispanictaxinc.com/#organization",
+        "@id": "https://hispanic.financial/#organization",
         "name": "Hispanic Financial",
         "alternateName": "Hispanic Financial",
         "description": isEn
             ? "Professional tax preparation, accounting, payroll, business incorporation, and real estate advisory services for the Hispanic community in Coral Springs, FL."
             : "Servicios profesionales de preparación de impuestos, contabilidad, nómina, creación de empresas y asesoría en bienes raíces para la comunidad hispana en Coral Springs, FL.",
-        "url": "https://www.hispanictaxinc.com",
+        "url": "https://hispanic.financial",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://www.hispanictaxinc.com/logo.png"
+            "url": "https://hispanic.financial/logo.png"
         },
-        "image": "https://www.hispanictaxinc.com/og-image.jpg",
+        "image": "https://hispanic.financial/og-image.jpg",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "7401 Wiles Rd. Suite 126",
@@ -40,7 +40,6 @@ export default function StructuredData({ locale }: { locale: string }) {
             }
         ],
         "sameAs": [
-            "https://hispanic.financial",
             "https://www.hispanictaxinc.com",
             "https://hispanictaxinc.com",
             "https://www.facebook.com/hispanictaxinc",

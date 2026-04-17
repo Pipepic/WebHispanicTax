@@ -37,6 +37,6 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
             },
         ],
-        sitemap: 'https://www.hispanictaxinc.com/sitemap.xml',
+        sitemap: 'https://hispanic.financial/sitemap.xml',
     };
 }

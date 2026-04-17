@@ -42,21 +42,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'coral springs', 'florida', 'USA', 'estados unidos',
     ],
     alternates: {
-      canonical: `https://www.hispanictaxinc.com/${locale}`,
+      canonical: `https://hispanic.financial/${locale}`,
       languages: {
-        'en': 'https://www.hispanictaxinc.com/en',
-        'es': 'https://www.hispanictaxinc.com/es',
-        'x-default': 'https://www.hispanictaxinc.com/en',
+        'en': 'https://hispanic.financial/en',
+        'es': 'https://hispanic.financial/es',
+        'x-default': 'https://hispanic.financial/en',
       },
     },
     openGraph: {
       title: 'Hispanic Financial',
       description: description,
-      url: `https://www.hispanictaxinc.com/${locale}`,
+      url: `https://hispanic.financial/${locale}`,
       siteName: 'Hispanic Financial',
       images: [
         {
-          url: 'https://www.hispanictaxinc.com/og-image.jpg',
+          url: 'https://hispanic.financial/og-image.jpg',
           width: 1200,
           height: 630,
         },
@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title: 'Hispanic Financial',
       description: description,
-      images: ['https://www.hispanictaxinc.com/og-image.jpg'],
+      images: ['https://hispanic.financial/og-image.jpg'],
     },
     robots: {
       index: true,

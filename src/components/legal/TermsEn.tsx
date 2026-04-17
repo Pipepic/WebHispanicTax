@@ -6,7 +6,7 @@ export default function TermsEn() {
             <p className="font-bold text-slate-500">Last updated: March 2026</p>
 
             <p>
-                Welcome to Hispanic Financial. By accessing and using our website (hispanictaxinc.com), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree with these Terms of Service, please refrain from using our website.
+                Welcome to Hispanic Financial. By accessing and using our website (hispanic.financial), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree with these Terms of Service, please refrain from using our website.
             </p>
 
             <h2 className="text-2xl font-black text-brand-dark mt-10 mb-4">1. No Professional-Client Relationship</h2>
