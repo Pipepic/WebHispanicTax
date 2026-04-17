@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'protección patrimonial', 'wealth protection', 'trust', 'holding',
       'IRS taxes', 'tax planning', 'planeación fiscal', 'asesoría fiscal hispana',
       'hispanic', 'hispano', 'latino',
-      'hispanic financial',
+      'hispanic financial', 'hispanic.financial',
       'coral springs', 'florida', 'USA', 'estados unidos',
     ],
     alternates: {

@@ -40,6 +40,9 @@ export default function StructuredData({ locale }: { locale: string }) {
             }
         ],
         "sameAs": [
+            "https://hispanic.financial",
+            "https://www.hispanictaxinc.com",
+            "https://hispanictaxinc.com",
             "https://www.facebook.com/hispanictaxinc",
             "https://www.instagram.com/hispanictaxinc",
             "https://www.linkedin.com/company/hispanictaxinc"
