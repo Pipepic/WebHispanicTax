@@ -43,7 +43,10 @@ html {
 /* Premium Utilities */
 @layer utilities {
   .glass-card {
-    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31_38_135_/_0.07)];
+    background-color: rgb(255 255 255 / 0.7);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   }
 
   .text-balance {
@@ -51,7 +54,11 @@ html {
   }
 
   .antigravity-layer {
-    @apply pointer-events-none transition-transform duration-700 ease-out will-change-transform;
+    pointer-events: none;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transition-duration: 700ms;
+    will-change: transform;
   }
 
   .premium-gradient {
