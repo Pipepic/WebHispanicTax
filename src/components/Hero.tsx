@@ -157,13 +157,13 @@ export default function Hero() {
     };
 
     const logoItemVariants = {
-        hidden: { opacity: 0, scale: 0.8, x: 20 },
+        hidden: { opacity: 0, y: 30, scale: 0.95 },
         visible: {
             opacity: 1,
+            y: 0,
             scale: 1,
-            x: 0,
             transition: {
-                duration: 1,
+                duration: 1.2,
                 ease: [0.16, 1, 0.3, 1] as const
             }
         }
@@ -237,7 +237,7 @@ export default function Hero() {
                                     damping: 20,
                                     delay: 0.4
                                 }}
-                                className="hidden lg:block absolute top-[10px] md:top-[220px] md:left-[420px] z-20 w-20 md:w-40 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] pointer-events-none"
+                                className="hidden lg:block absolute top-[10px] md:top-[205px] md:left-[420px] z-20 w-20 md:w-40 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] pointer-events-none"
                             >
                                 <Image
                                     src="/sello/sello20.webp"
@@ -314,7 +314,7 @@ export default function Hero() {
 
                         <motion.div
                             variants={itemVariants}
-                            className="relative mt-4 mb-10 max-w-lg group"
+                            className="relative mt-4 mb-10 max-lg group"
                         >
                             <p className="text-base md:text-[1.125rem] xl:text-xl text-slate-500 leading-relaxed font-medium">
                                 {t('subtitle')}
@@ -403,27 +403,17 @@ export default function Hero() {
                             className="hidden lg:flex items-center gap-6 mt-2 w-full max-w-[280px]"
                         >
                             <div className="flex-1 text-right pr-6 border-r border-brand-dark/10">
-                                <motion.p
-                                    className="text-2xl font-black text-brand-dark"
-                                    initial={{ opacity: 0, scale: 0.5 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 2.8, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                >
+                                <p className="text-2xl font-black text-brand-dark">
                                     {t('stat_clients_number')}
-                                </motion.p>
+                                </p>
                                 <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold mt-0.5">
                                     {t('stat_clients')}
                                 </p>
                             </div>
                             <div className="flex-1">
-                                <motion.p
-                                    className="text-2xl font-black text-brand-green"
-                                    initial={{ opacity: 0, scale: 0.5 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                >
+                                <p className="text-2xl font-black text-brand-green">
                                     {t('stat_satisfaction_number')}
-                                </motion.p>
+                                </p>
                                 <p className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold mt-0.5">
                                     {t('stat_satisfaction')}
                                 </p>
@@ -444,9 +434,7 @@ export default function Hero() {
                                     <motion.a
                                         key={service.label}
                                         href="#services"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 3.2 + index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                        variants={logoItemVariants}
                                         style={{
                                             backgroundColor: service.color,
                                         }}
