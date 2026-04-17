@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         const { data, error } = await resend.emails.send({
             from: 'Hispanic Financial <contacto@hispanic.financial>',
             to: [process.env.CONTACT_EMAIL || 'apatino@hispanictaxinc.com'],
-            subject: `Nuevo mensaje de contacto de ${name}`,
+            subject: `Mensaje de ${name} desde el formulario de la Web`,
             replyTo: email,
             text: `Nombre: ${name}\nEmail: ${email}\nMensaje:\n${message}`,
             html: `
