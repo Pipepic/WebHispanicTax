@@ -4,7 +4,7 @@ import { motion, useMotionValue, useTransform, useScroll, useSpring, AnimatePres
 import { useTranslations } from 'next-intl';
 import React, { useRef, useState } from 'react';
 import Image from 'next/image';
-import IntroSequence from './IntroSequence';
+
 import { Building2, Calculator, Landmark, BarChart3, MessageCircle } from 'lucide-react';
 
 
@@ -180,11 +180,9 @@ export default function Hero() {
         <div
             id="hero"
             ref={containerRef}
-            className="relative min-h-screen w-full overflow-hidden bg-white flex items-center pt-32 md:pt-20 pb-12"
+            className="relative min-h-screen w-full overflow-hidden bg-white flex items-center pt-32 md:pt-20 pb-12 bg-[radial-gradient(circle_at_top_right,rgba(34,104,155,0.03),transparent_50%),radial-gradient(circle_at_bottom_left,rgba(114,191,68,0.02),transparent_50%)]"
             onMouseMove={handleMouseMove}
         >
-            {/* Cinematic Intro Animation Background */}
-            <IntroSequence />
 
             {/* Ambient circles - unified blue tones */}
             <motion.div
@@ -214,6 +212,14 @@ export default function Hero() {
                     delay: 2
                 }}
                 className="absolute bottom-[-10%] right-[-5%] w-[35vw] h-[35vw] bg-brand-blue/3 rounded-full blur-[150px] pointer-events-none z-[1]"
+            />
+
+            <motion.div
+                animate={{
+                    opacity: [0.1, 0.2, 0.1],
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-[20%] right-[15%] w-[20vw] h-[20vw] bg-brand-gold/5 rounded-full blur-[120px] pointer-events-none z-[1]"
             />
 
             <div className="container mx-auto px-6 relative z-10">
