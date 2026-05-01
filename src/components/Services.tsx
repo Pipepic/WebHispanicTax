@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import {
@@ -87,22 +87,8 @@ function ServiceCard({
     const Icon = icons[id as keyof typeof icons] || Building2;
     const colors = accentColors[id] || accentColors.incorporation;
 
-    // Mouse tilt effect
-    const mouseX = useMotionValue(0.5);
-    const mouseY = useMotionValue(0.5);
-    const rotateX = useTransform(mouseY, [0, 1], [4, -4]);
-    const rotateY = useTransform(mouseX, [0, 1], [-4, 4]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        mouseX.set((e.clientX - rect.left) / rect.width);
-        mouseY.set((e.clientY - rect.top) / rect.height);
-    };
-
-    const handleMouseLeave = () => {
-        mouseX.set(0.5);
-        mouseY.set(0.5);
-        setIsOpen(false);
+    const toggleOpen = () => {
+        setIsOpen(!isOpen);
     };
 
     return (
@@ -111,22 +97,13 @@ function ServiceCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ delay: index * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={{
-                scale: 1.02,
-                transition: { type: 'spring', stiffness: 300, damping: 25 }
-            }}
             style={{
-                rotateX,
-                rotateY,
-                transformPerspective: 1200,
                 willChange: 'transform, opacity, filter'
             }}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={handleMouseLeave}
-            className={`relative group rounded-[2rem] border min-h-[440px] flex flex-col p-8 md:p-10 overflow-hidden cursor-default bg-white ${isOpen
+            onClick={toggleOpen}
+            className={`relative group rounded-[2rem] border min-h-[440px] flex flex-col p-8 md:p-10 overflow-hidden cursor-pointer bg-white transition-all duration-500 ${isOpen
                 ? `ring-4 ring-brand-blue/5 shadow-2xl border-brand-blue/20`
-                : `border-slate-100/80`
+                : `border-slate-100/80 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-brand-blue/30`
                 }`}
         >
             {/* Color tint background on hover */}
@@ -300,13 +277,19 @@ function ServiceCard({
 
                 {/* Footer Section */}
                 <div className="mt-auto pt-4 flex items-center justify-between">
-                    <motion.span
-                        animate={{ color: isOpen ? 'rgb(34,104,155)' : 'rgb(38,58,105)' }}
-                        className="text-[12px] font-black uppercase tracking-[0.2em] flex items-center gap-3"
+                    <motion.div
+                        whileHover={{ scale: 1.05, x: 5 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`flex items-center gap-3 px-5 py-2.5 -ml-2 rounded-xl transition-all duration-300 border ${isOpen 
+                            ? 'bg-brand-blue text-white border-brand-blue shadow-md' 
+                            : 'bg-transparent text-brand-dark border-transparent group-hover:border-brand-blue/30 group-hover:bg-brand-blue/5 group-hover:text-brand-blue group-hover:shadow-sm'
+                        }`}
                     >
-                        {isOpen ? closeLabel : viewLabel}
-                        <ArrowRight className={`w-4 h-4 transition-transform duration-500 ${isOpen ? 'rotate-[-90deg]' : 'group-hover:translate-x-2'}`} />
-                    </motion.span>
+                        <span className="text-[12px] font-black uppercase tracking-[0.2em]">
+                            {isOpen ? closeLabel : viewLabel}
+                        </span>
+                        <ArrowRight className={`w-4 h-4 transition-transform duration-500 ${isOpen ? 'rotate-[-90deg]' : 'group-hover:translate-x-1'}`} />
+                    </motion.div>
 
                     <div className={`text-[11px] font-black px-3 py-1.5 rounded-lg transition-all duration-500 ${isOpen
                         ? 'bg-brand-blue text-white shadow-lg shadow-brand-blue/20'
