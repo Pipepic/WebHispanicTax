@@ -51,7 +51,11 @@
     "loading": "Loading latest financial news...",
     "section_label": "Financial Updates",
     "title": "Latest News & Insights",
-    "view_all": "View All News"
+    "view_all": "View All News",
+    "featured_title": "National Small Business Week",
+    "featured_date": "May 3-9, 2026",
+    "featured_summary": "During National Small Business Week, May 3-9, 2026, the IRS is highlighting tools and resources to help small business owners, employers and self-employed individuals succeed and stay protected.",
+    "featured_link_text": "Read More on IRS.gov"
   },
   "ContactForm": {
     "title": "Get in Touch",

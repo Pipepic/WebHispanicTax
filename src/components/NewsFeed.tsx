@@ -113,6 +113,59 @@ export default function NewsFeed() {
                     </div>
                 </div>
 
+                {/* Featured News */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="mb-16"
+                >
+                    <a
+                        href="https://www.irs.gov/newsroom/small-business-week"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative flex flex-col lg:flex-row bg-white rounded-[2.5rem] overflow-hidden border border-brand-blue/20 shadow-xl hover:shadow-2xl hover:shadow-brand-blue/10 transition-all duration-500"
+                    >
+                        <div className="lg:w-2/5 bg-brand-blue/5 p-8 lg:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-brand-blue/10 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 to-transparent z-0" />
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-2 text-brand-blue mb-4">
+                                    <Calendar size={14} />
+                                    <span className="text-xs font-bold uppercase tracking-widest">{t('featured_date')}</span>
+                                </div>
+                                <h3 className="text-2xl md:text-3xl font-black text-brand-dark leading-tight group-hover:text-brand-blue transition-colors duration-500">
+                                    {t('featured_title')}
+                                </h3>
+                            </div>
+                            {/* Decorative blur */}
+                            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-gold/20 rounded-full blur-3xl z-0 pointer-events-none" />
+                        </div>
+                        <div className="lg:w-3/5 p-8 lg:p-12 flex flex-col justify-center relative">
+                            <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed mb-8 relative z-10">
+                                {t('featured_summary')}
+                            </p>
+                            <div className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.2em] text-brand-blue group-hover:text-brand-gold transition-colors duration-500 relative z-10">
+                                {t('featured_link_text')}
+                                <div className="p-2 rounded-full bg-brand-blue/10 group-hover:bg-brand-gold/20 transition-colors">
+                                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-500" />
+                                </div>
+                            </div>
+                            <ExternalLink size={120} className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-50 opacity-50 pointer-events-none group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-1000 ease-out" />
+                        </div>
+                        
+                        {/* Glass Shimmer Effect */}
+                        <div
+                            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-20"
+                            style={{
+                                background: 'linear-gradient(285deg, transparent 30%, rgba(255,255,255,0.4) 38%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 62%, transparent 70%)',
+                                backgroundSize: '200% 100%',
+                                animation: `glass-shimmer-rtl 6s ease-in-out infinite`,
+                            }}
+                        />
+                    </a>
+                </motion.div>
+
                 {/* News Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <AnimatePresence mode="popLayout">
