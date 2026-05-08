@@ -55,7 +55,8 @@
         "featured_title": "Semana Nacional de la Pequeña Empresa",
         "featured_date": "3-9 de Mayo, 2026",
         "featured_summary": "Durante la Semana Nacional de la Pequeña Empresa, del 3 al 9 de mayo de 2026, el IRS destaca herramientas y recursos para ayudar a los propietarios de pequeñas empresas, empleadores y trabajadores independientes a tener éxito y mantenerse protegidos.",
-        "featured_link_text": "Leer Más en IRS.gov"
+        "featured_link_text": "Leer Más en IRS.gov",
+        "read_more": "Leer Más"
     },
     "ContactForm": {
         "title": "Contáctanos",

@@ -241,7 +241,7 @@ export default function NewsFeed() {
                                     {/* Spacer to push "Read More" to bottom */}
                                     <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between group-hover:border-brand-blue/10 transition-colors duration-500">
                                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue/50 group-hover:text-brand-blue transition-colors duration-500 flex items-center gap-2">
-                                            Read More
+                                            {t('read_more')}
                                             <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                                         </span>
 
