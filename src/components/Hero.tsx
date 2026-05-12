@@ -133,6 +133,21 @@ export default function Hero() {
         }
     };
 
+    const sealVariants = {
+        hidden: { scale: 3, opacity: 0, rotate: 0, filter: 'blur(20px)' },
+        visible: {
+            scale: 0.9,
+            opacity: 1,
+            rotate: 21,
+            filter: 'blur(0px)',
+            transition: {
+                type: "spring" as const,
+                stiffness: 260,
+                damping: 20,
+            }
+        }
+    };
+
     const itemVariants = {
         hidden: { opacity: 0, y: 40 },
         visible: {
@@ -235,14 +250,7 @@ export default function Hero() {
                         <div className="relative w-full max-w-[90%] mx-auto lg:max-w-none mb-2 z-10 text-center lg:text-left">
                             {/* Stamped Seal of Quality - Repositioned to overlap Impulsamos and Negocios */}
                             <motion.div
-                                initial={{ scale: 3, opacity: 0, rotate: 0, filter: 'blur(20px)' }}
-                                animate={{ scale: 0.9, opacity: 1, rotate: 21, filter: 'blur(0px)' }}
-                                transition={{
-                                    type: "spring",
-                                    stiffness: 260,
-                                    damping: 20,
-                                    delay: 0.4
-                                }}
+                                variants={sealVariants}
                                 className="hidden lg:block absolute top-[10px] md:top-[205px] md:left-[420px] z-20 w-20 md:w-40 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] pointer-events-none"
                             >
                                 <Image
@@ -253,6 +261,7 @@ export default function Hero() {
                                     style={{ width: 'auto' }}
                                     className="w-full h-auto object-contain"
                                     priority={true}
+                                    fetchPriority="high"
                                 />
                                 {/* Impact pulse effect */}
                                 <motion.div
@@ -290,6 +299,7 @@ export default function Hero() {
                                                 fill
                                                 className="object-cover"
                                                 priority
+                                                fetchPriority="high"
                                             />
                                         </span>
                                     ),
