@@ -116,7 +116,7 @@ export default function Navbar() {
                 ? 'bg-white/90 backdrop-blur-md shadow-sm py-2'
                 : 'bg-transparent py-5'
                 }`}
-            initial={{ y: -100, opacity: 0 }}
+            initial={false}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >

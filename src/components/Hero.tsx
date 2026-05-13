@@ -241,17 +241,14 @@ export default function Hero() {
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-12">
 
                     {/* Left Column: Text Content */}
-                    <motion.div
+                    <div
                         className="w-full lg:w-3/5 xl:w-1/2 flex flex-col items-center text-center lg:items-start lg:text-left"
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
                     >
                         <div className="relative w-full max-w-[90%] mx-auto lg:max-w-none mb-2 z-10 text-center lg:text-left">
                             {/* Stamped Seal of Quality - Repositioned to overlap Impulsamos and Negocios */}
-                            <motion.div
-                                variants={sealVariants}
+                            <div
                                 className="hidden lg:block absolute top-[10px] md:top-[205px] md:left-[420px] z-20 w-20 md:w-40 h-auto drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] pointer-events-none"
+                                style={{ transform: 'rotate(21deg) scale(0.9)' }}
                             >
                                 <Image
                                     src="/sello/sello20.webp"
@@ -270,18 +267,16 @@ export default function Hero() {
                                     transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
                                     className="absolute inset-0 rounded-full border-4 border-brand-gold/30"
                                 />
-                            </motion.div>
+                            </div>
 
-                            <motion.span
-                                variants={itemVariants}
+                            <span
                                 className="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-brand-blue/5 text-brand-blue font-bold text-[10px] md:text-[11px] tracking-[0.25em] uppercase mb-6 border border-brand-blue/10"
                             >
                                 <Landmark className="w-3.5 h-3.5" />
                                 {t('badge')}
-                            </motion.span>
+                            </span>
 
-                            <motion.h1
-                                variants={itemVariants}
+                            <h1
                                 className="text-4xl md:text-6xl xl:text-7xl font-black text-brand-dark tracking-tight leading-[1.1] md:leading-[1.05] drop-shadow-sm mb-6"
                             >
                                 {t.rich('title', {
@@ -309,35 +304,31 @@ export default function Hero() {
                                         </span>
                                     )
                                 })}
-                            </motion.h1>
+                            </h1>
 
                             {/* Desktop: Centered flags within the left column width */}
-                            <motion.div 
-                                variants={itemVariants}
+                            <div 
                                 className="hidden lg:flex relative h-10 w-full max-w-[450px] py-1"
                             >
                                 <FlagCarousel className="w-full justify-start pl-2" />
-                            </motion.div>
+                            </div>
                             {/* Mobile: Fully centered flags */}
-                            <motion.div 
-                                variants={itemVariants}
+                            <div 
                                 className="flex lg:hidden relative h-10 w-full justify-center mt-2"
                             >
                                 <FlagCarousel className="w-full justify-center" />
-                            </motion.div>
+                            </div>
                         </div>
 
-                        <motion.div
-                            variants={itemVariants}
+                        <div
                             className="relative mt-4 mb-10 max-lg group"
                         >
                             <p className="text-base md:text-[1.125rem] xl:text-xl text-slate-500 leading-relaxed font-medium">
                                 {t('subtitle')}
                             </p>
-                        </motion.div>
+                        </div>
 
-                        <motion.div
-                            variants={itemVariants}
+                        <div
                             className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start flex-wrap w-full"
                         >
                             <motion.div whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
@@ -361,8 +352,8 @@ export default function Hero() {
                                     <span className="relative z-10">{t('cta_whatsapp')}</span>
                                 </a>
                             </motion.div>
-                        </motion.div>
-                    </motion.div>
+                        </div>
+                    </div>
 
                     {/* Right Column - Balanced with logos, stats, and service highlights */}
                     <motion.div
