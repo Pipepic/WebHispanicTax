@@ -7,36 +7,6 @@ import { useState, useEffect, useRef } from 'react';
 
 const events = [
     {
-        id: 'jan_15',
-        date: '2026-01-15',
-        type: 'both', // Both Personal & Business (Estimated Tax)
-        googleDate: '20260115/20260116'
-    },
-    {
-        id: 'jan_31',
-        date: '2026-01-31',
-        type: 'business',
-        googleDate: '20260131/20260201'
-    },
-    {
-        id: 'mar_16',
-        date: '2026-03-16', // Mar 15 is Sunday
-        type: 'business',
-        googleDate: '20260316/20260317'
-    },
-    {
-        id: 'apr_15',
-        date: '2026-04-15',
-        type: 'both',
-        googleDate: '20260415/20260416'
-    },
-    {
-        id: 'may_15',
-        date: '2026-05-15',
-        type: 'business',
-        googleDate: '20260515/20260516'
-    },
-    {
         id: 'jun_15',
         date: '2026-06-15',
         type: 'both',
