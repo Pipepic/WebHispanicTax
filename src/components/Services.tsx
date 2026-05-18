@@ -130,6 +130,7 @@ function ServiceCard({
 
             {/* Background Icon Watermark */}
             <motion.div
+                initial={{ opacity: 0.12 }}
                 animate={{ opacity: isOpen ? 0.03 : 0.12 }}
                 transition={{ duration: 0.7 }}
                 className="absolute -bottom-10 -left-10 pointer-events-none"
@@ -149,6 +150,7 @@ function ServiceCard({
                         <motion.img
                             src={image}
                             alt={title}
+                            initial={{ scale: 1.15 }}
                             animate={{ scale: isOpen ? 1 : 1.15 }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                             className="w-full h-full object-cover"
@@ -173,6 +175,7 @@ function ServiceCard({
                     )}
 
                     <motion.div
+                        initial={{ opacity: 0.5 }}
                         animate={{ opacity: isOpen ? 0.2 : 0.5 }}
                         className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent pointer-events-none"
                     />
@@ -181,7 +184,7 @@ function ServiceCard({
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-1500 ease-in-out" />
                     </div>
 
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence mode="wait" initial={false}>
                         {!isOpen && (
                             <motion.div
                                 initial={{ opacity: 0, y: 15, scale: 0.95 }}
@@ -206,6 +209,7 @@ function ServiceCard({
                     </AnimatePresence>
 
                     <motion.div
+                        initial={false}
                         animate={{
                             rotate: isOpen ? 180 : 0,
                             backgroundColor: isOpen ? 'rgba(34,104,155,1)' : 'rgba(255,255,255,0.15)'
