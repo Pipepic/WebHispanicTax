@@ -97,13 +97,11 @@ function ServiceCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ delay: index * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-                willChange: 'transform, opacity, filter'
-            }}
             onClick={toggleOpen}
-            className={`relative group rounded-[2rem] border min-h-[440px] flex flex-col p-8 md:p-10 overflow-hidden cursor-pointer bg-white transition-all duration-500 ${isOpen
+            whileHover={isOpen ? undefined : { y: -8 }}
+            className={`relative group rounded-[2rem] border min-h-[440px] flex flex-col p-8 md:p-10 overflow-hidden cursor-pointer bg-white transition-[border-color,box-shadow] duration-500 ${isOpen
                 ? `ring-4 ring-brand-blue/5 shadow-2xl border-brand-blue/20`
-                : `border-slate-100/80 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-brand-blue/30`
+                : `border-slate-100/80 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-brand-blue/30`
                 }`}
         >
             {/* Color tint background on hover */}
@@ -284,7 +282,7 @@ function ServiceCard({
                     <motion.div
                         whileHover={{ scale: 1.05, x: 5 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`flex items-center gap-3 px-5 py-2.5 -ml-2 rounded-xl transition-all duration-300 border ${isOpen 
+                        className={`flex items-center gap-3 px-5 py-2.5 -ml-2 rounded-xl transition-[color,background-color,border-color,box-shadow] duration-300 border ${isOpen 
                             ? 'bg-brand-blue text-white border-brand-blue shadow-md' 
                             : 'bg-transparent text-brand-dark border-transparent group-hover:border-brand-blue/30 group-hover:bg-brand-blue/5 group-hover:text-brand-blue group-hover:shadow-sm'
                         }`}
