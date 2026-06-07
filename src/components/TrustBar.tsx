@@ -126,6 +126,7 @@ export default function TrustBar() {
                                         alt={logo.name}
                                         width={120}
                                         height={40}
+                                        style={{ width: 'auto' }}
                                         className="h-7 md:h-10 w-auto object-contain opacity-100 drop-shadow-sm"
                                     />
                                     {/* Glass shimmer on logo */}

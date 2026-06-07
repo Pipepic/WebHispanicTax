@@ -7,8 +7,10 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import StructuredData from "@/components/StructuredData";
+import AIAssistant from "@/components/AIAssistant";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -154,7 +156,9 @@ export default async function RootLayout({
         <StructuredData locale={locale} />
         <NextIntlClientProvider messages={messages}>
           {children}
+          <AIAssistant />
         </NextIntlClientProvider>
+
         <SpeedInsights />
         <Analytics />
       </body>

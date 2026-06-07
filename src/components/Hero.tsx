@@ -56,6 +56,7 @@ function FlagCarousel({ className = "" }: { className?: string }) {
                                 alt={flag.name}
                                 fill
                                 className="object-cover"
+                                sizes="(max-width: 768px) 20px, 28px"
                             />
                         </div>
                         <AnimatePresence>
@@ -295,6 +296,7 @@ export default function Hero() {
                                                 className="object-cover"
                                                 priority
                                                 fetchPriority="high"
+                                                sizes="(max-width: 640px) 29px, 35px"
                                             />
                                         </span>
                                     ),
@@ -392,6 +394,7 @@ export default function Hero() {
                                                 alt={logo.name}
                                                 width={100}
                                                 height={44}
+                                                style={{ width: 'auto' }}
                                                 className="h-6 md:h-8 lg:h-11 w-auto object-contain transition-all duration-700 opacity-100 relative z-10"
                                             />
                                         </motion.div>

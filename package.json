@@ -9,10 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.80",
+    "@ai-sdk/react": "^3.0.196",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "ai": "^6.0.194",
     "framer-motion": "^12.31.0",
     "lucide-react": "^0.563.0",
     "maath": "^0.10.8",
