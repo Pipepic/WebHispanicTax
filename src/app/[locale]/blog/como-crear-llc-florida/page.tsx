@@ -6,8 +6,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEn = locale === 'en';
   return {
     title: isEn
-      ? 'How to Form an LLC in Florida: Complete Guide for Hispanics (2026) | Hispanic Financial'
-      : 'Cómo Crear una LLC en Florida: Guía Completa para Hispanos (2026) | Hispanic Financial',
+      ? 'How to Form an LLC in Florida: Complete Guide for Hispanics (2026)'
+      : 'Cómo Crear una LLC en Florida: Guía Completa para Hispanos (2026)',
     description: isEn
       ? 'Step-by-step guide to forming an LLC in Florida in 2026. Requirements, costs, EIN, Operating Agreement, and tips for Hispanic entrepreneurs. Expert advice from Coral Springs.'
       : 'Guía paso a paso para crear una LLC en Florida en 2026. Requisitos, costos, EIN, Acuerdo de Operación y consejos para emprendedores hispanos. Asesoría experta desde Coral Springs.',
@@ -76,8 +76,8 @@ export default async function BlogLLCPage({ params }: { params: Promise<{ locale
           {/* Header */}
           <div className="premium-gradient text-white pt-28 pb-16 px-6">
             <div className="max-w-3xl mx-auto">
-              <Link href={`/${locale}`} className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors">
-                ← Back to Home
+              <Link href={`/${locale}/blog`} className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors">
+                ← Back to Blog
               </Link>
               <span className="inline-block bg-white/10 text-white/90 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
                 LLC Guide · January 2026
@@ -185,8 +185,8 @@ export default async function BlogLLCPage({ params }: { params: Promise<{ locale
         {/* Header */}
         <div className="premium-gradient text-white pt-28 pb-16 px-6">
           <div className="max-w-3xl mx-auto">
-            <Link href={`/${locale}`} className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors">
-              ← Volver al Inicio
+            <Link href={`/${locale}/blog`} className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors">
+              ← Volver al Blog
             </Link>
             <span className="inline-block bg-white/10 text-white/90 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
               Guía de LLC · Enero 2026

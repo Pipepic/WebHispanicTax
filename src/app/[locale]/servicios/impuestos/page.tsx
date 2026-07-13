@@ -6,8 +6,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEn = locale === 'en';
   return {
     title: isEn
-      ? 'Tax Preparation & Planning in Coral Springs, FL | Hispanic Financial'
-      : 'Preparación de Impuestos en Coral Springs, FL | Hispanic Financial',
+      ? 'Tax Preparation & Planning in Coral Springs, FL'
+      : 'Preparación de Impuestos en Coral Springs, FL',
     description: isEn
       ? 'Expert personal and corporate tax preparation in Coral Springs, FL. Bilingual CPA services for the Hispanic community. Maximize your IRS refund. Call (954) 464-5458.'
       : 'Expertos en preparación de impuestos personales y corporativos en Coral Springs, FL. Maximiza tu devolución del IRS. Servicio en español. Llama (954) 464-5458.',

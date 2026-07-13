@@ -6,8 +6,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEn = locale === 'en';
   return {
     title: isEn
-      ? 'LLC Formation in Florida | Hispanic Financial Coral Springs'
-      : 'Creación de LLC en Florida | Hispanic Financial Coral Springs',
+      ? 'LLC Formation in Florida | Coral Springs'
+      : 'Creación de LLC en Florida | Coral Springs',
     description: isEn
       ? 'Form your LLC in Florida with expert bilingual guidance. EIN, Operating Agreement, Corporate Kit. Fast, affordable, stress-free. Call (954) 464-5458.'
       : 'Crea tu LLC en Florida con guía experta bilingüe. EIN, Acuerdo de Operación, Corporate Kit. Rápido, asequible y sin estrés. Llama (954) 464-5458.',

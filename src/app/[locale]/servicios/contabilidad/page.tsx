@@ -6,8 +6,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEn = locale === 'en';
   return {
     title: isEn
-      ? 'QuickBooks Accounting in Coral Springs, FL | Hispanic Financial'
-      : 'Contabilidad QuickBooks en Coral Springs, FL | Hispanic Financial',
+      ? 'QuickBooks Accounting in Coral Springs, FL'
+      : 'Contabilidad QuickBooks en Coral Springs, FL',
     description: isEn
       ? 'Professional bookkeeping and QuickBooks accounting services for businesses in Coral Springs, FL. Bank reconciliations, P&L, Balance Sheet. Bilingual service. (954) 464-5458.'
       : 'Servicios profesionales de contabilidad y QuickBooks para empresas en Coral Springs, FL. Conciliaciones, Estado de Resultados, Balance General. Servicio en español. (954) 464-5458.',

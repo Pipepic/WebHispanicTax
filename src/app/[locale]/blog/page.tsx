@@ -6,8 +6,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEn = locale === 'en';
   return {
     title: isEn
-      ? 'Financial & Tax Blog for Hispanics in Florida | Hispanic Financial'
-      : 'Blog Financiero y Fiscal para Hispanos en Florida | Hispanic Financial',
+      ? 'Financial & Tax Blog for Hispanics in Florida'
+      : 'Blog Financiero y Fiscal para Hispanos en Florida',
     description: isEn
       ? 'Expert articles on taxes, LLC formation, accounting, and financial planning for the Hispanic community in Florida. Bilingual guides from Coral Springs.'
       : 'Artículos expertos sobre impuestos, creación de LLC, contabilidad y planificación financiera para la comunidad hispana en Florida. Guías bilingües desde Coral Springs.',

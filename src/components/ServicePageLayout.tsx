@@ -34,6 +34,29 @@ export default function ServicePageLayout({
 }: ServicePageLayoutProps) {
   const isEn = locale === 'en';
 
+  // Derive page URL from serviceSchema for breadcrumb
+  const pageUrl = (serviceSchema as { url?: string }).url ?? `https://hispanic.financial/${locale}`;
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `https://hispanic.financial/${locale}` },
+      { "@type": "ListItem", "position": 2, "name": isEn ? "Services" : "Servicios", "item": `https://hispanic.financial/${locale}#services` },
+      { "@type": "ListItem", "position": 3, "name": badge, "item": pageUrl },
+    ],
+  };
+
+  const faqSchema = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": { "@type": "Answer", "text": faq.a },
+    })),
+  } : null;
+
   return (
     <>
       {/* JSON-LD Service Schema */}
@@ -41,6 +64,18 @@ export default function ServicePageLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {/* JSON-LD Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {/* JSON-LD FAQPage Schema */}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <div className="min-h-screen bg-white">
         {/* ── Header ── */}

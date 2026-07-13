@@ -6,8 +6,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEn = locale === 'en';
   return {
     title: isEn
-      ? 'How to File Taxes as an Immigrant in the USA: 2026 Guide | Hispanic Financial'
-      : 'Cómo Declarar Impuestos en USA si Eres Inmigrante: Guía 2026 | Hispanic Financial',
+      ? 'How to File Taxes as an Immigrant in the USA: 2026 Guide'
+      : 'Cómo Declarar Impuestos en USA si Eres Inmigrante: Guía 2026',
     description: isEn
       ? 'Complete guide to filing taxes in the USA as an immigrant or non-resident. ITIN, W-2, 1099, FBAR, and which income to report. Bilingual expert advice from Coral Springs, FL.'
       : 'Guía completa para declarar impuestos en USA siendo inmigrante o no residente. ITIN, W-2, 1099, FBAR y qué ingresos reportar. Asesoría experta bilingüe en Coral Springs, FL.',

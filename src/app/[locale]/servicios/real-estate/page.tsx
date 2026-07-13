@@ -6,8 +6,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEn = locale === 'en';
   return {
     title: isEn
-      ? 'Real Estate Tax Advisory & FIRPTA Florida | Hispanic Financial'
-      : 'Asesoría Fiscal Real Estate y FIRPTA Florida | Hispanic Financial',
+      ? 'Real Estate Tax Advisory & FIRPTA Florida'
+      : 'Asesoría Fiscal Real Estate y FIRPTA Florida',
     description: isEn
       ? 'Real estate tax advisory for foreign investors in Florida. FIRPTA withholding claims, property sale tax analysis, investment property guidance. Bilingual. (954) 464-5458.'
       : 'Asesoría fiscal en bienes raíces para inversionistas extranjeros en Florida. Reclamos FIRPTA, análisis de impacto en venta de propiedades. Servicio en español. (954) 464-5458.',

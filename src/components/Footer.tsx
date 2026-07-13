@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Mail, Phone, MapPin } from 'lucide-react';
@@ -8,6 +8,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 export default function Footer() {
     const t = useTranslations('Footer');
     const navT = useTranslations('Navbar');
+    const locale = useLocale();
     const currentYear = new Date().getFullYear();
 
     const quickLinks = [
@@ -17,6 +18,24 @@ export default function Footer() {
         { name: navT('about'), href: '#about' },
         { name: navT('news'), href: '#news' },
     ];
+
+    const serviceLinks = locale === 'es'
+        ? [
+            { name: 'Preparación de Impuestos', href: `/${locale}/servicios/impuestos` },
+            { name: 'Creación de LLC',           href: `/${locale}/servicios/creacion-de-llc` },
+            { name: 'Contabilidad QuickBooks',   href: `/${locale}/servicios/contabilidad` },
+            { name: 'Real Estate / FIRPTA',      href: `/${locale}/servicios/real-estate` },
+            { name: 'Protección Patrimonial',    href: `/${locale}/servicios/proteccion-patrimonial` },
+            { name: 'Blog Financiero',           href: `/${locale}/blog` },
+          ]
+        : [
+            { name: 'Tax Preparation',   href: `/${locale}/servicios/impuestos` },
+            { name: 'LLC Formation',     href: `/${locale}/servicios/creacion-de-llc` },
+            { name: 'QuickBooks Accounting', href: `/${locale}/servicios/contabilidad` },
+            { name: 'Real Estate / FIRPTA',  href: `/${locale}/servicios/real-estate` },
+            { name: 'Wealth Protection', href: `/${locale}/servicios/proteccion-patrimonial` },
+            { name: 'Financial Blog',    href: `/${locale}/blog` },
+          ];
 
 
 
@@ -34,9 +53,9 @@ export default function Footer() {
 
             <div className="container mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 xl:gap-16 mb-20">
-                    
+
                     {/* Column 1: Brand & Description */}
-                    <div className="lg:col-span-4 lg:col-start-1 flex flex-col gap-8">
+                    <div className="lg:col-span-3 lg:col-start-1 flex flex-col gap-8">
                         <Link href="#" className="inline-block group" onClick={(e) => {
                             e.preventDefault();
                             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -53,20 +72,19 @@ export default function Footer() {
                         <p className="text-white/60 leading-relaxed font-medium">
                             {t('description')}
                         </p>
-
                     </div>
 
                     {/* Column 2: Quick Links */}
-                    <div className="lg:col-span-3 lg:col-start-6 flex flex-col gap-6">
+                    <div className="lg:col-span-2 lg:col-start-5 flex flex-col gap-6">
                         <h4 className="text-[11px] font-black text-white/40 uppercase tracking-[0.3em]">
                             {t('quick_links')}
                         </h4>
                         <nav className="flex flex-col gap-4">
                             {quickLinks.map((link) => (
-                                <a 
-                                    key={link.name} 
+                                <a
+                                    key={link.name}
                                     href={link.href}
-                                    className="text-white/70 hover:text-brand-gold hover:translate-x-1 transition-all duration-300 font-medium w-fit"
+                                    className="text-white/70 hover:text-brand-gold hover:translate-x-1 transition-all duration-300 font-medium w-fit text-sm"
                                 >
                                     {link.name}
                                 </a>
@@ -74,8 +92,26 @@ export default function Footer() {
                         </nav>
                     </div>
 
-                    {/* Column 3: Contact Details */}
-                    <div className="lg:col-span-4 lg:col-start-9 flex flex-col gap-6">
+                    {/* Column 3: Services */}
+                    <div className="lg:col-span-3 lg:col-start-7 flex flex-col gap-6">
+                        <h4 className="text-[11px] font-black text-white/40 uppercase tracking-[0.3em]">
+                            {locale === 'es' ? 'Servicios' : 'Services'}
+                        </h4>
+                        <nav className="flex flex-col gap-4">
+                            {serviceLinks.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="text-white/70 hover:text-brand-gold hover:translate-x-1 transition-all duration-300 font-medium w-fit text-sm"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </nav>
+                    </div>
+
+                    {/* Column 4: Contact Details */}
+                    <div className="lg:col-span-3 lg:col-start-10 flex flex-col gap-6">
                         <h4 className="text-[11px] font-black text-white/40 uppercase tracking-[0.3em]">
                             {t('contact')}
                         </h4>

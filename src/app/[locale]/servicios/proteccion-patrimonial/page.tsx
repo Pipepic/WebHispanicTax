@@ -6,8 +6,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEn = locale === 'en';
   return {
     title: isEn
-      ? 'Wealth Protection — LLC, Trust & Holding Florida | Hispanic Financial'
-      : 'Protección Patrimonial — LLC, Trust y Holding Florida | Hispanic Financial',
+      ? 'Wealth Protection — LLC, Trust & Holding Florida'
+      : 'Protección Patrimonial — LLC, Trust y Holding Florida',
     description: isEn
       ? 'Protect your wealth with LLCs, Trusts, and Holding structures in Florida. Bilingual asset protection and tax planning experts. Call (954) 464-5458.'
       : 'Protege tu patrimonio con LLC, Trust y estructuras Holding en Florida. Expertos bilingües en protección patrimonial y planeación fiscal. Llama (954) 464-5458.',

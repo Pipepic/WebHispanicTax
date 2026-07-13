@@ -81,7 +81,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Hispanic Financial',
+      title: {
+        template: '%s | Hispanic Financial',
+        default: 'Hispanic Financial',
+      },
       description: description,
       images: ['https://hispanic.financial/og-image.jpg'],
     },
