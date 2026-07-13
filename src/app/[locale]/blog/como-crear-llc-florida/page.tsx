@@ -32,6 +32,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: isEn ? 'en_US' : 'es_US',
       type: 'article',
     },
+    twitter: {
+      title: isEn
+        ? 'How to Form an LLC in Florida: Complete Guide for Hispanics (2026)'
+        : 'Cómo Crear una LLC en Florida: Guía Completa para Hispanos (2026)',
+    },
   };
 }
 

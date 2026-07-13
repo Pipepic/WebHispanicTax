@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: isEn ? 'en_US' : 'es_US',
       type: 'website',
     },
+    twitter: {
+      title: isEn ? 'Real Estate Tax Advisory & FIRPTA Florida' : 'Asesoría Fiscal Real Estate y FIRPTA Florida',
+    },
   };
 }
 

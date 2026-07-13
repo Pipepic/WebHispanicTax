@@ -27,6 +27,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: isEn ? 'en_US' : 'es_US',
       type: 'website',
     },
+    twitter: {
+      title: isEn ? 'Financial & Tax Blog for Hispanics in Florida' : 'Blog Financiero y Fiscal para Hispanos en Florida',
+    },
   };
 }
 

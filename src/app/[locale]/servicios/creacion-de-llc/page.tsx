@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: isEn ? 'en_US' : 'es_US',
       type: 'website',
     },
+    twitter: {
+      title: isEn ? 'LLC Formation in Florida | Coral Springs' : 'Creación de LLC en Florida | Coral Springs',
+    },
   };
 }
 

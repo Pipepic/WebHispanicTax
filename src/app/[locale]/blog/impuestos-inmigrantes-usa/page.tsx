@@ -32,6 +32,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: isEn ? 'en_US' : 'es_US',
       type: 'article',
     },
+    twitter: {
+      title: isEn
+        ? 'How to File Taxes as an Immigrant in the USA: 2026 Guide'
+        : 'Cómo Declarar Impuestos en USA si Eres Inmigrante: Guía 2026',
+    },
   };
 }
 

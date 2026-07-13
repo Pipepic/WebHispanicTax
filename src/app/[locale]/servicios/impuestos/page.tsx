@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: isEn ? 'en_US' : 'es_US',
       type: 'website',
     },
+    twitter: {
+      title: isEn ? 'Tax Preparation & Planning in Coral Springs, FL' : 'Preparación de Impuestos en Coral Springs, FL',
+    },
   };
 }
 
