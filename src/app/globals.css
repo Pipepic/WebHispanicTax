@@ -42,6 +42,10 @@ html {
 
 /* Premium Utilities */
 @layer utilities {
+  .brand-color-bar {
+    background: linear-gradient(to right, var(--color-brand-dark) 0%, var(--color-brand-blue) 33%, var(--color-brand-green) 66%, var(--color-brand-gold) 100%);
+  }
+
   .glass-card {
     background-color: rgb(255 255 255 / 0.7);
     backdrop-filter: blur(24px);

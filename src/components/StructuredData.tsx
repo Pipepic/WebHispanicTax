@@ -2,7 +2,7 @@ export default function StructuredData({ locale }: { locale: string }) {
     const isEn = locale === 'en';
 
     const organization = {
-        "@type": ["FinancialService", "Organization", "LocalBusiness"],
+        "@type": ["AccountingService", "FinancialService", "LocalBusiness"],
         "@id": "https://hispanic.financial/#organization",
         "name": "Hispanic Financial",
         "alternateName": "Hispanic Financial",
@@ -42,12 +42,28 @@ export default function StructuredData({ locale }: { locale: string }) {
         "sameAs": [
             "https://www.hispanictaxinc.com",
             "https://hispanictaxinc.com",
-
+            "https://maps.app.goo.gl/TEyhaFLDw37udX4n9",
+            "https://www.yelp.com/biz/hispanic-financial-tax-coral-springs",
+            "https://www.facebook.com/hispanictaxconsulting/"
         ],
-        "areaServed": {
-            "@type": "State",
-            "name": "Florida"
+        "hasMap": "https://maps.app.goo.gl/TEyhaFLDw37udX4n9",
+        "currenciesAccepted": "USD",
+        "paymentAccepted": "Cash, Credit Card, Debit Card, Check",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "bestRating": "5",
+            "worstRating": "1",
+            "ratingCount": "47"
         },
+        "areaServed": [
+            { "@type": "City", "name": "Coral Springs", "sameAs": "https://en.wikipedia.org/wiki/Coral_Springs,_Florida" },
+            { "@type": "City", "name": "Fort Lauderdale" },
+            { "@type": "City", "name": "Boca Raton" },
+            { "@type": "City", "name": "Pompano Beach" },
+            { "@type": "City", "name": "Deerfield Beach" },
+            { "@type": "State", "name": "Florida" }
+        ],
         "founder": {
             "@type": "Person",
             "name": "Alvaro Patino"

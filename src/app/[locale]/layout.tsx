@@ -8,6 +8,9 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import StructuredData from "@/components/StructuredData";
 import AIAssistant from "@/components/AIAssistant";
+import Navbar from "@/components/Navbar";
+import MobileFAB from "@/components/MobileFAB";
+import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -26,10 +29,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
 
   const isEn = locale === 'en';
-  const title = isEn ? 'Tax Prep & Business Accounting | Hispanic Financial' : 'Asesoría Fiscal y Creación de LLC | Hispanic Financial';
+  const title = isEn
+    ? 'Tax Prep, Accounting & LLC in Coral Springs, FL | Hispanic Financial'
+    : 'Impuestos, Contabilidad y LLC en Coral Springs, FL | Hispanic Financial';
   const description = isEn
-    ? 'Expert tax preparation, corporate accounting, and business incorporation in Coral Springs. Maximize your IRS returns with Hispanic Financial.'
-    : 'Expertos en impuestos, contabilidad y creación de LLC en Coral Springs. Maximiza tus devoluciones y protege tu patrimonio con Hispanic Financial.';
+    ? 'Expert tax preparation, business accounting, LLC formation, and wealth protection in Coral Springs, FL. Bilingual CPA services for the Hispanic community. Call (954) 464-5458.'
+    : 'Expertos en impuestos, contabilidad, creación de LLC y protección patrimonial en Coral Springs, FL. Servicios bilingües para la comunidad hispana. Llama (954) 464-5458.';
 
   return {
     title: {
@@ -58,7 +63,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
-      title: 'Hispanic Financial',
+      title: isEn
+        ? 'Tax Prep, Accounting & LLC in Coral Springs, FL | Hispanic Financial'
+        : 'Impuestos, Contabilidad y LLC en Coral Springs, FL | Hispanic Financial',
       description: description,
       url: `https://hispanic.financial/${locale}`,
       siteName: 'Hispanic Financial',
@@ -155,8 +162,14 @@ export default async function RootLayout({
         </noscript>
         <StructuredData locale={locale} />
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <div className="h-1.5 w-full brand-color-bar relative z-[100]" />
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
           <AIAssistant />
+          <MobileFAB />
+          <Footer />
         </NextIntlClientProvider>
 
         <SpeedInsights />

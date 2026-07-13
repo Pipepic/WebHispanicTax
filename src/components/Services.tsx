@@ -1,7 +1,8 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import {
     Building2,
@@ -73,6 +74,7 @@ function ServiceCard({
     viewLabel,
     closeLabel,
     image,
+    pageUrl,
 }: {
     id: string;
     title: string;
@@ -82,6 +84,7 @@ function ServiceCard({
     viewLabel: string;
     closeLabel: string;
     image?: string;
+    pageUrl: string;
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const Icon = icons[id as keyof typeof icons] || Building2;
@@ -279,19 +282,41 @@ function ServiceCard({
 
                 {/* Footer Section */}
                 <div className="mt-auto pt-4 flex items-center justify-between">
-                    <motion.div
-                        whileHover={{ scale: 1.05, x: 5 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`flex items-center gap-3 px-5 py-2.5 -ml-2 rounded-xl transition-[color,background-color,border-color,box-shadow] duration-300 border ${isOpen 
-                            ? 'bg-brand-blue text-white border-brand-blue shadow-md' 
-                            : 'bg-transparent text-brand-dark border-transparent group-hover:border-brand-blue/30 group-hover:bg-brand-blue/5 group-hover:text-brand-blue group-hover:shadow-sm'
-                        }`}
-                    >
-                        <span className="text-[12px] font-black uppercase tracking-[0.2em]">
-                            {isOpen ? closeLabel : viewLabel}
-                        </span>
-                        <ArrowRight className={`w-4 h-4 transition-transform duration-500 ${isOpen ? 'rotate-[-90deg]' : 'group-hover:translate-x-1'}`} />
-                    </motion.div>
+                    <div className="flex items-center gap-3">
+                        <motion.div
+                            whileHover={{ scale: 1.05, x: 5 }}
+                            whileTap={{ scale: 0.95 }}
+                            className={`flex items-center gap-3 px-5 py-2.5 -ml-2 rounded-xl transition-[color,background-color,border-color,box-shadow] duration-300 border ${isOpen
+                                ? 'bg-brand-blue text-white border-brand-blue shadow-md'
+                                : 'bg-transparent text-brand-dark border-transparent group-hover:border-brand-blue/30 group-hover:bg-brand-blue/5 group-hover:text-brand-blue group-hover:shadow-sm'
+                            }`}
+                        >
+                            <span className="text-[12px] font-black uppercase tracking-[0.2em]">
+                                {isOpen ? closeLabel : viewLabel}
+                            </span>
+                            <ArrowRight className={`w-4 h-4 transition-transform duration-500 ${isOpen ? 'rotate-[-90deg]' : 'group-hover:translate-x-1'}`} />
+                        </motion.div>
+
+                        <AnimatePresence>
+                            {isOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -8 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -8 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <Link
+                                        href={pageUrl}
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.15em] text-brand-green hover:text-brand-blue transition-colors px-2 py-1"
+                                    >
+                                        Ver más
+                                        <ArrowRight className="w-3 h-3" />
+                                    </Link>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
 
                     <div className={`text-[11px] font-black px-3 py-1.5 rounded-lg transition-all duration-500 ${isOpen
                         ? 'bg-brand-blue text-white shadow-lg shadow-brand-blue/20'
@@ -307,7 +332,16 @@ function ServiceCard({
 
 export default function Services() {
     const t = useTranslations('Services');
+    const locale = useLocale();
     const serviceKeys = ['incorporation', 'taxes', 'real_estate', 'protection', 'accounting'];
+
+    const serviceRoutes: Record<string, string> = {
+        incorporation: 'creacion-de-llc',
+        taxes: 'impuestos',
+        real_estate: 'real-estate',
+        protection: 'proteccion-patrimonial',
+        accounting: 'contabilidad',
+    };
 
     return (
         <section id="services" className="py-32 bg-gradient-to-b from-white via-[#fafbfc] to-white relative overflow-hidden">
@@ -388,6 +422,7 @@ export default function Services() {
                             index={index}
                             viewLabel={t('view_details')}
                             closeLabel={t('close')}
+                            pageUrl={`/${locale}/servicios/${serviceRoutes[key]}`}
                             image={
                                 key === 'incorporation' ? '/images/services/incorporation.webp' :
                                     key === 'taxes' ? '/images/services/taxes.webp' :

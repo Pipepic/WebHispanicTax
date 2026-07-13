@@ -1,7 +1,5 @@
-import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import TrustBar from '@/components/TrustBar';
-import MobileFAB from '@/components/MobileFAB';
 import dynamic from 'next/dynamic';
 
 const SectionSkeleton = () => (
@@ -30,14 +28,10 @@ const ContactForm = dynamic(() => import('@/components/ContactForm'), {
 const NewsFeed = dynamic(() => import('@/components/NewsFeed'), {
   loading: () => <SectionSkeleton />,
 });
-const Footer = dynamic(() => import('@/components/Footer'), {
-  loading: () => <div className="h-64 bg-brand-dark" />,
-});
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white selection:bg-brand-gold/30">
-      <Navbar />
+    <div className="min-h-screen bg-white selection:bg-brand-gold/30">
       <Hero />
       <TrustBar />
       <Services />
@@ -46,8 +40,6 @@ export default function Home() {
       <About />
       <NewsFeed />
       <ContactForm />
-      <Footer />
-      <MobileFAB />
-    </main>
+    </div>
   );
 }
