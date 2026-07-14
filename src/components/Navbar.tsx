@@ -133,7 +133,7 @@ export default function Navbar() {
         >
             {/* Scroll Progress Bar */}
             <motion.div
-                className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand-gold origin-left z-50"
+                className="absolute bottom-0 left-0 right-0 h-[2px] brand-color-bar origin-left z-50"
                 style={{ scaleX }}
             />
 

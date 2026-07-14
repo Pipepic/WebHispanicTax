@@ -165,7 +165,6 @@ export default async function RootLayout({
         </noscript>
         <StructuredData locale={locale} />
         <NextIntlClientProvider messages={messages}>
-          <div className="h-1.5 w-full brand-color-bar relative z-[100]" />
           <Navbar />
           <main className="flex-1">
             {children}
