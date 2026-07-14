@@ -242,7 +242,7 @@ export async function generateMetadata({
   return {
     title: isEn ? c.titleEn : c.titleEs,
     description: isEn ? c.descEn : c.descEs,
-    keywords: isEn ? c.kwEn : c.kwEs,
+    keywords: isEn ? [...c.kwEn] : [...c.kwEs],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/internacional/${pais}`,
       languages: {

@@ -149,7 +149,7 @@ export async function generateMetadata({
   return {
     title: isEn ? city.titleEn : city.titleEs,
     description: isEn ? city.descEn : city.descEs,
-    keywords: isEn ? city.kwEn : city.kwEs,
+    keywords: isEn ? [...city.kwEn] : [...city.kwEs],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/ciudades/${ciudad}`,
       languages: {
