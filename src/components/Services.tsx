@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import {
@@ -148,14 +149,21 @@ function ServiceCard({
                     className="relative -mx-8 md:-mx-10 -mt-8 md:-mt-10 mb-8 overflow-hidden group/img rounded-t-[1.5rem]"
                 >
                     {image ? (
-                        <motion.img
-                            src={image}
-                            alt={title}
+                        <motion.div
                             initial={{ scale: 1.15 }}
                             animate={{ scale: isOpen ? 1 : 1.15 }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="w-full h-full object-cover"
-                        />
+                            className="absolute inset-0"
+                        >
+                            <Image
+                                src={image}
+                                alt={title}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 420px"
+                                loading="lazy"
+                            />
+                        </motion.div>
                     ) : (
                         <div className={`w-full h-full bg-gradient-to-br transition-all duration-700 ${id === 'taxes' ? 'from-brand-green/20 via-brand-green/5 to-white' :
                             id === 'real_estate' ? 'from-brand-dark/20 via-brand-dark/5 to-white' :

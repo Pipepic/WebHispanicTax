@@ -216,7 +216,7 @@ export default function About() {
                                     className="absolute inset-0"
                                 >
                                     <Image
-                                        src="/images/ceo/ceo-bg.png"
+                                        src="/images/ceo/ceo-bg.webp"
                                         alt="Background"
                                         fill
                                         sizes="(max-width: 1024px) 100vw, 50vw"
@@ -230,7 +230,7 @@ export default function About() {
                                     className="absolute inset-0"
                                 >
                                     <Image
-                                        src="/images/ceo/ceo-fg.png"
+                                        src="/images/ceo/ceo-fg.webp"
                                         alt="Alvaro Patino - CEO Hispanic Financial"
                                         fill
                                         sizes="(max-width: 1024px) 100vw, 50vw"
