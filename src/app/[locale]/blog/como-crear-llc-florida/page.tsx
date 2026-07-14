@@ -11,6 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Step-by-step guide to forming an LLC in Florida in 2026. Requirements, costs, EIN, Operating Agreement, and tips for Hispanic entrepreneurs. Expert advice from Coral Springs.'
       : 'Guía paso a paso para crear una LLC en Florida en 2026. Requisitos, costos, EIN, Acuerdo de Operación y consejos para emprendedores hispanos. Asesoría experta desde Coral Springs.',
+    keywords: isEn
+      ? ['how to form LLC florida 2026', 'LLC formation guide florida', 'LLC for hispanics florida',
+         'EIN LLC florida', 'articles of organization florida', 'operating agreement florida',
+         'LLC costs florida 2026', 'start business florida']
+      : ['cómo crear LLC florida 2026', 'crear LLC florida guía', 'LLC para hispanos florida',
+         'EIN LLC florida', 'artículos organización florida', 'acuerdo operación florida',
+         'costos LLC florida 2026', 'abrir empresa estados unidos'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/blog/como-crear-llc-florida`,
       languages: {
@@ -97,7 +104,7 @@ export default async function BlogLLCPage({ params }: { params: Promise<{ locale
           {/* Article body */}
           <article className="max-w-3xl mx-auto px-6 py-16 prose prose-lg prose-slate max-w-none">
             <p className="lead text-xl text-slate-600 mb-8">
-              Forming an LLC in Florida is one of the most important steps a Hispanic entrepreneur can take to protect their personal assets and formalize their business in the United States. In this guide, we explain the complete process step by step, the real costs, and the most common mistakes to avoid.
+              <Link href={`/${locale}/servicios/creacion-de-llc`} className="text-brand-blue hover:underline font-bold">Forming an LLC in Florida</Link> is one of the most important steps a Hispanic entrepreneur can take to protect their personal assets and formalize their business in the United States. In this guide, we explain the complete process step by step, the real costs, and the most common mistakes to avoid.
             </p>
 
             <h2 className="text-2xl font-black text-brand-dark mt-12 mb-4">What is an LLC and Why Should You Form One?</h2>
@@ -160,6 +167,24 @@ export default async function BlogLLCPage({ params }: { params: Promise<{ locale
               </div>
             ))}
 
+            {/* Related Services */}
+            <div className="mt-12 mb-8">
+              <p className="text-xs font-black uppercase tracking-widest text-brand-blue mb-4">Related Services</p>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {([
+                  { href: `/${locale}/servicios/creacion-de-llc`, icon: '🏛️', title: 'LLC Formation', desc: 'Full Florida LLC setup: Articles, EIN, Operating Agreement, and bank account.' },
+                  { href: `/${locale}/servicios/contabilidad`, icon: '📊', title: 'Accounting & QuickBooks', desc: 'Monthly bookkeeping and financial reporting once your business is up and running.' },
+                  { href: `/${locale}/servicios/proteccion-patrimonial`, icon: '🛡️', title: 'Wealth Protection', desc: 'Protect your assets with LLC, Trust, and Holding structures.' },
+                ]).map(s => (
+                  <Link key={s.href} href={s.href} className="flex flex-col gap-2 p-4 rounded-xl border border-slate-200 hover:border-brand-blue/40 hover:shadow-md transition-all group">
+                    <span className="text-xl">{s.icon}</span>
+                    <span className="font-black text-brand-dark text-sm group-hover:text-brand-blue transition-colors">{s.title} →</span>
+                    <span className="text-xs text-slate-500 leading-relaxed">{s.desc}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             <div className="bg-brand-dark text-white rounded-2xl p-8 mt-12">
               <h2 className="text-2xl font-black mb-3">Need help forming your LLC in Florida?</h2>
               <p className="text-white/80 mb-6">At Hispanic Financial, we handle the complete LLC formation process for you — in English or Spanish. From the Articles of Organization to the business bank account, we guide you every step of the way.</p>
@@ -206,7 +231,7 @@ export default async function BlogLLCPage({ params }: { params: Promise<{ locale
         {/* Article body */}
         <article className="max-w-3xl mx-auto px-6 py-16">
           <p className="text-xl text-slate-600 mb-8 leading-relaxed">
-            Crear una LLC en Florida es uno de los pasos más importantes que puede dar un emprendedor hispano para proteger su patrimonio personal y formalizar su negocio en Estados Unidos. En esta guía, te explicamos el proceso completo paso a paso, los costos reales y los errores más comunes que debes evitar.
+            <Link href={`/${locale}/servicios/creacion-de-llc`} className="text-brand-blue hover:underline font-bold">Crear una LLC en Florida</Link> es uno de los pasos más importantes que puede dar un emprendedor hispano para proteger su patrimonio personal y formalizar su negocio en Estados Unidos. En esta guía, te explicamos el proceso completo paso a paso, los costos reales y los errores más comunes que debes evitar.
           </p>
 
           <h2 className="text-2xl font-black text-brand-dark mt-12 mb-4">¿Qué es una LLC y por qué deberías crear una?</h2>
@@ -268,6 +293,24 @@ export default async function BlogLLCPage({ params }: { params: Promise<{ locale
               <p className="text-slate-600"><strong>Error {i + 1}:</strong> {item}</p>
             </div>
           ))}
+
+          {/* Servicios Relacionados */}
+          <div className="mt-12 mb-8">
+            <p className="text-xs font-black uppercase tracking-widest text-brand-blue mb-4">Servicios Relacionados</p>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {([
+                { href: `/${locale}/servicios/creacion-de-llc`, icon: '🏛️', title: 'Creación de LLC', desc: 'Constitución completa de LLC en Florida: Artículos, EIN, Operating Agreement y cuenta bancaria.' },
+                { href: `/${locale}/servicios/contabilidad`, icon: '📊', title: 'Contabilidad y QuickBooks', desc: 'Contabilidad mensual e informes financieros para tu negocio una vez que esté en marcha.' },
+                { href: `/${locale}/servicios/proteccion-patrimonial`, icon: '🛡️', title: 'Protección Patrimonial', desc: 'Protege tus activos con estructuras LLC, Trust y Holding.' },
+              ]).map(s => (
+                <Link key={s.href} href={s.href} className="flex flex-col gap-2 p-4 rounded-xl border border-slate-200 hover:border-brand-blue/40 hover:shadow-md transition-all group">
+                  <span className="text-xl">{s.icon}</span>
+                  <span className="font-black text-brand-dark text-sm group-hover:text-brand-blue transition-colors">{s.title} →</span>
+                  <span className="text-xs text-slate-500 leading-relaxed">{s.desc}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
 
           <div className="bg-brand-dark text-white rounded-2xl p-8 mt-12">
             <h2 className="text-2xl font-black mb-3">¿Necesitas ayuda para crear tu LLC en Florida?</h2>

@@ -271,10 +271,10 @@ export default function AIAssistant() {
               y: { repeat: Infinity, duration: 3, ease: 'easeInOut', delay: 0.3 }
             }}
             onClick={() => setIsOpen(true)}
-            className="absolute bottom-20 left-2 bg-white text-brand-dark px-4 py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.12)] border border-slate-100/90 whitespace-nowrap text-xs font-bold flex items-center gap-2.5 z-30 select-none cursor-pointer hover:scale-105 transition-transform duration-300"
+            className="absolute bottom-20 left-2 w-[260px] sm:w-[300px] bg-white text-brand-dark px-4 py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.12)] border border-slate-100/90 whitespace-normal text-xs font-bold flex items-center gap-2.5 z-30 select-none cursor-pointer hover:scale-105 transition-transform duration-300"
           >
             {/* Tiny speech bubble pointer pointing down at the button */}
-            <div className="absolute top-full left-6 w-3 h-3 bg-white border-r border-b border-slate-100/90 rotate-45 -translate-y-1.5" />
+            <div className="absolute top-full left-[42px] w-3 h-3 bg-white border-r border-b border-slate-100/90 rotate-45 -translate-y-1.5" />
             
             <Sparkles size={14} className="text-brand-blue animate-pulse" />
             <span>{t.tooltip}</span>

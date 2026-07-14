@@ -11,6 +11,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Expert articles on taxes, LLC formation, accounting, and financial planning for the Hispanic community in Florida. Bilingual guides from Coral Springs.'
       : 'Artículos expertos sobre impuestos, creación de LLC, contabilidad y planificación financiera para la comunidad hispana en Florida. Guías bilingües desde Coral Springs.',
+    keywords: isEn
+      ? ['hispanic financial blog', 'tax tips florida hispanic', 'LLC guide florida',
+         'accounting articles florida', 'financial resources hispanic community']
+      : ['blog impuestos florida', 'guías LLC florida', 'artículos contabilidad hispano',
+         'recursos financieros hispanos florida', 'blog fiscal coral springs'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/blog`,
       languages: {
@@ -47,11 +52,21 @@ interface Post {
 
 const posts: Post[] = [
   {
+    slug: 'como-obtener-itin-2026',
+    category: 'Impuestos',
+    date: 'Marzo 2026',
+    readTime: '9 min',
+    featured: true,
+    titleEs: 'Cómo Obtener el ITIN en 2026: Guía Completa Paso a Paso',
+    titleEn: 'How to Get Your ITIN in 2026: Complete Step-by-Step Guide',
+    excerptEs: 'Quién lo necesita, documentos requeridos, Formulario W-7, tiempos de procesamiento, renovación y los 5 errores más comunes al solicitar el ITIN.',
+    excerptEn: 'Who needs it, required documents, Form W-7, processing times, renewal, and the 5 most common mistakes when applying for an ITIN.',
+  },
+  {
     slug: 'impuestos-inmigrantes-usa',
     category: 'Impuestos',
     date: 'Febrero 2026',
     readTime: '10 min',
-    featured: true,
     titleEs: 'Cómo Declarar Impuestos en USA si Eres Inmigrante: Guía Completa 2026',
     titleEn: 'How to File Taxes as an Immigrant in the USA: Complete 2026 Guide',
     excerptEs: 'Todo lo que necesitas saber: ITIN vs SSN, qué ingresos reportar, fechas límite, formularios clave y los 5 errores más comunes que debes evitar.',

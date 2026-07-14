@@ -11,6 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Complete guide to filing taxes in the USA as an immigrant or non-resident. ITIN, W-2, 1099, FBAR, and which income to report. Bilingual expert advice from Coral Springs, FL.'
       : 'Guía completa para declarar impuestos en USA siendo inmigrante o no residente. ITIN, W-2, 1099, FBAR y qué ingresos reportar. Asesoría experta bilingüe en Coral Springs, FL.',
+    keywords: isEn
+      ? ['immigrant taxes USA 2026', 'how to file taxes USA immigrant', 'ITIN tax filing USA',
+         'non-resident tax USA', 'form 1040NR florida', 'undocumented immigrant taxes USA',
+         'FBAR foreign accounts USA', 'tax credits immigrants USA']
+      : ['impuestos inmigrante USA 2026', 'cómo declarar impuestos USA inmigrante',
+         'ITIN declaración impuestos', 'impuestos no residente USA', 'formulario 1040NR florida',
+         'impuestos indocumentado USA', 'FBAR cuentas extranjeras USA', 'créditos fiscales inmigrantes'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/blog/impuestos-inmigrantes-usa`,
       languages: {
@@ -135,7 +142,7 @@ export default async function BlogImmigrantTaxesPage({ params }: { params: Promi
                 </div>
               ))}
             </div>
-            <p className="text-slate-600 leading-relaxed mb-4">We help you apply for your ITIN as part of our tax preparation service. The process takes 6-10 weeks when submitting along with your tax return.</p>
+            <p className="text-slate-600 leading-relaxed mb-4">We help you apply for your ITIN as part of our <Link href={`/${locale}/servicios/impuestos`} className="text-brand-blue hover:underline font-bold">tax preparation service</Link>. The process takes 6-10 weeks when submitting along with your tax return.</p>
 
             <h2 className="text-2xl font-black text-brand-dark mt-12 mb-4">What Income Do You Need to Report?</h2>
             <p className="text-slate-600 leading-relaxed mb-4">All income earned in the United States must be reported, including:</p>
@@ -172,8 +179,8 @@ export default async function BlogImmigrantTaxesPage({ params }: { params: Promi
                     ['June 15, 2026', 'Automatic deadline for non-residents living abroad'],
                     ['October 15, 2026', 'Deadline with extension (you must request by April 15)'],
                     ['April 15, 2026', 'FBAR — Foreign bank accounts over $10,000 (FinCEN 114)'],
-                  ].map(([date, desc]) => (
-                    <tr key={date} className="border-b border-slate-100">
+                  ].map(([date, desc], i) => (
+                    <tr key={i} className="border-b border-slate-100">
                       <td className="px-5 py-3 font-bold text-brand-dark whitespace-nowrap">{date}</td>
                       <td className="px-5 py-3">{desc}</td>
                     </tr>
@@ -214,6 +221,24 @@ export default async function BlogImmigrantTaxesPage({ params }: { params: Promi
                   <span className="text-slate-600 text-sm">{item.desc}</span>
                 </div>
               ))}
+            </div>
+
+            {/* Related Services */}
+            <div className="mt-12 mb-8">
+              <p className="text-xs font-black uppercase tracking-widest text-brand-blue mb-4">Related Services</p>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {([
+                  { href: `/${locale}/servicios/impuestos`, icon: '🧾', title: 'Tax Preparation', desc: 'Personal and business returns, ITIN filings, and IRS representation.' },
+                  { href: `/${locale}/servicios/creacion-de-llc`, icon: '🏛️', title: 'LLC Formation', desc: 'Formalize your business with a Florida LLC — even if you\'re a non-resident.' },
+                  { href: `/${locale}/servicios/contabilidad`, icon: '📊', title: 'Accounting', desc: 'Monthly bookkeeping and P&L statements for self-employed and business owners.' },
+                ]).map(s => (
+                  <Link key={s.href} href={s.href} className="flex flex-col gap-2 p-4 rounded-xl border border-slate-200 hover:border-brand-blue/40 hover:shadow-md transition-all group">
+                    <span className="text-xl">{s.icon}</span>
+                    <span className="font-black text-brand-dark text-sm group-hover:text-brand-blue transition-colors">{s.title} →</span>
+                    <span className="text-xs text-slate-500 leading-relaxed">{s.desc}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <div className="bg-brand-dark text-white rounded-2xl p-8 mt-12">
@@ -300,7 +325,7 @@ export default async function BlogImmigrantTaxesPage({ params }: { params: Promi
               </div>
             ))}
           </div>
-          <p className="text-slate-600 leading-relaxed mb-4">Te ayudamos a solicitar tu ITIN como parte de nuestro servicio de preparación de impuestos. El proceso tarda 6-10 semanas al enviarlo junto con tu declaración.</p>
+          <p className="text-slate-600 leading-relaxed mb-4">Te ayudamos a solicitar tu ITIN como parte de nuestro <Link href={`/${locale}/servicios/impuestos`} className="text-brand-blue hover:underline font-bold">servicio de preparación de impuestos</Link>. El proceso tarda 6-10 semanas al enviarlo junto con tu declaración.</p>
 
           <h2 className="text-2xl font-black text-brand-dark mt-12 mb-4">¿Qué ingresos debes reportar?</h2>
           <p className="text-slate-600 leading-relaxed mb-4">Todos los ingresos obtenidos en Estados Unidos deben ser reportados, incluyendo:</p>
@@ -337,8 +362,8 @@ export default async function BlogImmigrantTaxesPage({ params }: { params: Promi
                   ['15 junio 2026', 'Plazo automático para no residentes viviendo en el exterior'],
                   ['15 octubre 2026', 'Plazo con extensión (debes solicitarla antes del 15 de abril)'],
                   ['15 abril 2026', 'FBAR — Cuentas bancarias extranjeras superiores a $10,000 (FinCEN 114)'],
-                ].map(([date, desc]) => (
-                  <tr key={date} className="border-b border-slate-100">
+                ].map(([date, desc], i) => (
+                  <tr key={i} className="border-b border-slate-100">
                     <td className="px-5 py-3 font-bold text-brand-dark whitespace-nowrap">{date}</td>
                     <td className="px-5 py-3">{desc}</td>
                   </tr>
@@ -379,6 +404,24 @@ export default async function BlogImmigrantTaxesPage({ params }: { params: Promi
                 <span className="text-slate-600 text-sm">{item.desc}</span>
               </div>
             ))}
+          </div>
+
+          {/* Servicios Relacionados */}
+          <div className="mt-12 mb-8">
+            <p className="text-xs font-black uppercase tracking-widest text-brand-blue mb-4">Servicios Relacionados</p>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {([
+                { href: `/${locale}/servicios/impuestos`, icon: '🧾', title: 'Preparación de Impuestos', desc: 'Declaraciones personales y corporativas, trámite de ITIN y representación ante el IRS.' },
+                { href: `/${locale}/servicios/creacion-de-llc`, icon: '🏛️', title: 'Creación de LLC', desc: 'Formaliza tu negocio con una LLC en Florida, incluso si eres no residente.' },
+                { href: `/${locale}/servicios/contabilidad`, icon: '📊', title: 'Contabilidad', desc: 'Contabilidad mensual y estado de resultados para trabajadores independientes y negocios.' },
+              ]).map(s => (
+                <Link key={s.href} href={s.href} className="flex flex-col gap-2 p-4 rounded-xl border border-slate-200 hover:border-brand-blue/40 hover:shadow-md transition-all group">
+                  <span className="text-xl">{s.icon}</span>
+                  <span className="font-black text-brand-dark text-sm group-hover:text-brand-blue transition-colors">{s.title} →</span>
+                  <span className="text-xs text-slate-500 leading-relaxed">{s.desc}</span>
+                </Link>
+              ))}
+            </div>
           </div>
 
           <div className="bg-brand-dark text-white rounded-2xl p-8 mt-12">

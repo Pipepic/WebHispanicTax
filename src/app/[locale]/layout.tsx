@@ -42,18 +42,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       default: title,
     },
     description,
-    keywords: [
-      'impuestos', 'taxes', 'tax preparation', 'preparación de impuestos',
-      'contabilidad', 'accounting', 'QuickBooks bookkeeping florida',
-      'creación de empresas', 'business incorporation', 'LLC', 'EIN',
-      'real estate', 'bienes raíces', 'FIRPTA',
-      'payroll', 'nómina',
-      'protección patrimonial', 'wealth protection', 'trust', 'holding',
-      'IRS taxes', 'tax planning', 'planeación fiscal', 'asesoría fiscal hispana',
-      'hispanic', 'hispano', 'latino',
-      'hispanic financial', 'hispanic.financial',
-      'coral springs', 'florida', 'USA', 'estados unidos',
-    ],
+    keywords: isEn
+      ? ['tax preparation coral springs', 'bilingual accountant florida', 'hispanic cpa coral springs',
+         'LLC formation florida', 'accounting coral springs', 'FIRPTA florida',
+         'wealth protection florida', 'tax planning south florida', 'hispanic financial']
+      : ['impuestos coral springs', 'contador hispano florida', 'preparación impuestos florida',
+         'crear LLC florida', 'contabilidad coral springs', 'asesoría fiscal hispana',
+         'protección patrimonial florida', 'FIRPTA florida', 'hispanic financial'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}`,
       languages: {

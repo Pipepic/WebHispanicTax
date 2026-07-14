@@ -11,6 +11,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Protect your wealth with LLCs, Trusts, and Holding structures in Florida. Bilingual asset protection and tax planning experts. Call (954) 464-5458.'
       : 'Protege tu patrimonio con LLC, Trust y estructuras Holding en Florida. Expertos bilingües en protección patrimonial y planeación fiscal. Llama (954) 464-5458.',
+    keywords: isEn
+      ? ['wealth protection florida', 'asset protection LLC florida', 'trust florida hispanic',
+         'holding company florida', 'LLC asset protection florida', 'estate planning florida bilingual']
+      : ['protección patrimonial florida', 'LLC protección activos florida', 'trust florida hispano',
+         'holding company florida', 'proteger patrimonio florida', 'planeación patrimonial florida'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/servicios/proteccion-patrimonial`,
       languages: {

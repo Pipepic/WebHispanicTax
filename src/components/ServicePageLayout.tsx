@@ -82,10 +82,10 @@ export default function ServicePageLayout({
         <div className="premium-gradient text-white pt-28 pb-20 px-6">
           <div className="max-w-4xl mx-auto">
             <Link
-              href={`/${locale}`}
+              href={`/${locale}#services`}
               className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors"
             >
-              ← {isEn ? 'Back to Home' : 'Volver al Inicio'}
+              ← {isEn ? 'Back to Services' : 'Volver a Servicios'}
             </Link>
             <span className="inline-block bg-white/10 text-white/90 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
               {badge}

@@ -11,6 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Professional bookkeeping and QuickBooks accounting services for businesses in Coral Springs, FL. Bank reconciliations, P&L, Balance Sheet. Bilingual service. (954) 464-5458.'
       : 'Servicios profesionales de contabilidad y QuickBooks para empresas en Coral Springs, FL. Conciliaciones, Estado de Resultados, Balance General. Servicio en español. (954) 464-5458.',
+    keywords: isEn
+      ? ['QuickBooks accounting coral springs', 'bookkeeping florida small business',
+         'financial statements florida', 'bank reconciliation florida',
+         'bilingual bookkeeper florida', 'monthly accounting florida']
+      : ['contabilidad QuickBooks coral springs', 'contabilidad empresas pequeñas florida',
+         'estados financieros florida', 'conciliaciones bancarias florida',
+         'contador bilingüe florida', 'contabilidad mensual florida'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/servicios/contabilidad`,
       languages: {

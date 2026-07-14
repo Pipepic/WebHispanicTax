@@ -11,6 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Expert personal and corporate tax preparation in Coral Springs, FL. Bilingual CPA services for the Hispanic community. Maximize your IRS refund. Call (954) 464-5458.'
       : 'Expertos en preparación de impuestos personales y corporativos en Coral Springs, FL. Maximiza tu devolución del IRS. Servicio en español. Llama (954) 464-5458.',
+    keywords: isEn
+      ? ['tax preparation coral springs fl', 'personal tax filing florida', 'corporate tax florida',
+         'IRS tax return florida', 'back taxes florida', 'bilingual tax preparer florida',
+         'tax planning small business florida', 'sales tax florida']
+      : ['preparación impuestos coral springs', 'impuestos personales florida',
+         'impuestos corporativos florida', 'declaración IRS florida', 'back taxes florida',
+         'preparación impuestos en español', 'planeación fiscal florida', 'impuesto ventas florida'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/servicios/impuestos`,
       languages: {

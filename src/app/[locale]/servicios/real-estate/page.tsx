@@ -11,6 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Real estate tax advisory for foreign investors in Florida. FIRPTA withholding claims, property sale tax analysis, investment property guidance. Bilingual. (954) 464-5458.'
       : 'Asesoría fiscal en bienes raíces para inversionistas extranjeros en Florida. Reclamos FIRPTA, análisis de impacto en venta de propiedades. Servicio en español. (954) 464-5458.',
+    keywords: isEn
+      ? ['FIRPTA florida', 'real estate tax advisor florida', 'foreign investor tax florida',
+         'FIRPTA withholding claim florida', 'investment property tax florida',
+         'non-resident tax florida', 'real estate tax planning florida']
+      : ['FIRPTA florida', 'asesoría fiscal bienes raíces florida', 'impuestos inversionista extranjero florida',
+         'reclamo FIRPTA florida', 'impuestos propiedad inversión florida',
+         'declaración no residente florida', 'planeación fiscal real estate florida'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/servicios/real-estate`,
       languages: {

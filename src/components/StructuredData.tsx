@@ -66,7 +66,7 @@ export default function StructuredData({ locale }: { locale: string }) {
         ],
         "founder": {
             "@type": "Person",
-            "name": "Alvaro Patino"
+            "@id": "https://hispanic.financial/#alvaro-patino"
         },
         "foundingDate": "2006",
         "numberOfEmployees": {
@@ -133,6 +133,42 @@ export default function StructuredData({ locale }: { locale: string }) {
                 }
             ]
         }
+    };
+
+    const person = {
+        "@type": "Person",
+        "@id": "https://hispanic.financial/#alvaro-patino",
+        "name": "Alvaro Patino",
+        "givenName": "Alvaro",
+        "familyName": "Patino",
+        "jobTitle": isEn ? "Founder & CEO" : "Fundador y CEO",
+        "description": isEn
+            ? "Founder and CEO of Hispanic Financial with 20+ years of experience in tax preparation, accounting, and financial advisory for the Hispanic community in South Florida."
+            : "Fundador y CEO de Hispanic Financial con más de 20 años de experiencia en preparación de impuestos, contabilidad y asesoría financiera para la comunidad hispana en el sur de Florida.",
+        "url": "https://hispanic.financial",
+        "email": "apatino@hispanictaxinc.com",
+        "telephone": "+19544645458",
+        "image": "https://hispanic.financial/images/ceo/ceo-fg.webp",
+        "worksFor": {
+            "@type": "Organization",
+            "@id": "https://hispanic.financial/#organization"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "7401 Wiles Rd. Suite 126",
+            "addressLocality": "Coral Springs",
+            "addressRegion": "FL",
+            "postalCode": "33067",
+            "addressCountry": "US"
+        },
+        "knowsLanguage": ["en", "es"],
+        "knowsAbout": isEn
+            ? ["Tax Preparation", "LLC Formation", "Accounting", "FIRPTA", "Wealth Protection", "QuickBooks", "IRS Representation"]
+            : ["Preparación de Impuestos", "Creación de LLC", "Contabilidad", "FIRPTA", "Protección Patrimonial", "QuickBooks", "Representación ante el IRS"],
+        "sameAs": [
+            "https://www.facebook.com/hispanictaxconsulting/",
+            "https://www.yelp.com/biz/hispanic-financial-tax-coral-springs"
+        ]
     };
 
     const faqPage = {
@@ -224,7 +260,7 @@ export default function StructuredData({ locale }: { locale: string }) {
 
     const schema = {
         "@context": "https://schema.org",
-        "@graph": [organization, faqPage]
+        "@graph": [organization, person, faqPage]
     };
 
     return (

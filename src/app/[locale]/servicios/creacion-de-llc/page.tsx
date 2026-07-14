@@ -11,6 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Form your LLC in Florida with expert bilingual guidance. EIN, Operating Agreement, Corporate Kit. Fast, affordable, stress-free. Call (954) 464-5458.'
       : 'Crea tu LLC en Florida con guía experta bilingüe. EIN, Acuerdo de Operación, Corporate Kit. Rápido, asequible y sin estrés. Llama (954) 464-5458.',
+    keywords: isEn
+      ? ['LLC formation florida', 'how to form LLC florida', 'business incorporation florida',
+         'EIN registration florida', 'operating agreement florida', 'LLC for immigrants florida',
+         'start business florida hispanic', 'LLC coral springs']
+      : ['crear LLC florida', 'cómo crear LLC florida 2026', 'incorporación empresa florida',
+         'EIN florida', 'acuerdo operación florida', 'LLC para inmigrantes florida',
+         'abrir empresa florida hispano', 'LLC coral springs'],
     alternates: {
       canonical: `https://hispanic.financial/${locale}/servicios/creacion-de-llc`,
       languages: {
