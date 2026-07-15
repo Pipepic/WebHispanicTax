@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría SEO — hispanic.financial · Julio 2026</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f5f4f1;
+    --surface-1: #fcfcfb;
+    --surface-2: #f0efec;
+    --border: #e2e1dc;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #8a8984;
+    --series-1: #2a78d6;
+    --seq-250: #86b6ef;
+    --seq-400: #3987e5;
+    --seq-550: #1c5cab;
+    --good: #0ca30c;
+    --warning: #fab219;
+    --serious: #ec835a;
+    --critical: #d03b3b;
+    --good-bg: #e3f5e3;
+    --warning-bg: #fdf3d9;
+    --serious-bg: #fcebe3;
+    --critical-bg: #fae3e3;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 14px rgba(0,0,0,.05);
+  }
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #121211;
+    --surface-1: #1a1a19;
+    --surface-2: #262624;
+    --border: #383835;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #8a8984;
+    --series-1: #3987e5;
+    --seq-250: #1c5cab;
+    --seq-400: #2a78d6;
+    --seq-550: #6da7ec;
+    --good-bg: #123a12;
+    --warning-bg: #3d3110;
+    --serious-bg: #3d2114;
+    --critical-bg: #3d1414;
+    --shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    line-height: 1.55;
+    padding-bottom: 80px;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  header.hero {
+    background: var(--surface-1);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0 22px;
+    margin-bottom: 24px;
+  }
+  .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .hero h1 { font-size: 1.45rem; font-weight: 800; letter-spacing: -.01em; }
+  .hero .sub { color: var(--text-secondary); font-size: .92rem; margin-top: 4px; }
+  .hero .sub a { color: var(--series-1); text-decoration: none; }
+  .theme-btn {
+    background: var(--surface-2); border: 1px solid var(--border); color: var(--text-primary);
+    border-radius: 8px; padding: 7px 14px; cursor: pointer; font-size: .85rem; font-weight: 600;
+  }
+
+  /* Score tiles */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+  .tile {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; box-shadow: var(--shadow);
+  }
+  .tile .t-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+  .tile .t-value { font-size: 1.9rem; font-weight: 800; letter-spacing: -.02em; margin: 2px 0 8px; font-variant-numeric: tabular-nums; }
+  .tile .t-value small { font-size: 1rem; font-weight: 600; color: var(--text-muted); }
+  .meter { height: 6px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+  .meter > i { display: block; height: 100%; border-radius: 4px; background: var(--seq-400); }
+  .tile .t-note { font-size: .74rem; color: var(--text-muted); margin-top: 7px; }
+
+  /* Tabs */
+  nav.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 22px 0 18px; }
+  nav.tabs button {
+    background: var(--surface-1); border: 1px solid var(--border); color: var(--text-secondary);
+    padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: .88rem; font-weight: 600;
+  }
+  nav.tabs button.active { background: var(--seq-550); border-color: var(--seq-550); color: #fff; }
+  nav.tabs button .cnt { opacity: .7; font-weight: 500; }
+  section.panel { display: none; }
+  section.panel.active { display: block; }
+
+  h2.sec { font-size: 1.05rem; font-weight: 800; margin: 26px 0 12px; }
+  h2.sec:first-child { margin-top: 0; }
+  p.lead { color: var(--text-secondary); font-size: .93rem; max-width: 70ch; margin-bottom: 14px; }
+
+  /* Severity badges */
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 800; letter-spacing: .04em; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; }
+  .badge.critical { background: var(--critical-bg); color: var(--critical); }
+  .badge.serious  { background: var(--serious-bg); color: #b35427; }
+  [data-theme="dark"] .badge.serious { color: var(--serious); }
+  .badge.warning  { background: var(--warning-bg); color: #8a6206; }
+  [data-theme="dark"] .badge.warning { color: var(--warning); }
+  .badge.good     { background: var(--good-bg); color: var(--good); }
+  .badge.info     { background: var(--surface-2); color: var(--text-secondary); }
+
+  /* Filter row */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .filters button {
+    background: var(--surface-1); border: 1px solid var(--border); color: var(--text-secondary);
+    padding: 5px 13px; border-radius: 16px; cursor: pointer; font-size: .8rem; font-weight: 600;
+  }
+  .filters button.on { border-color: var(--seq-550); color: var(--seq-550); background: transparent; box-shadow: inset 0 0 0 1px var(--seq-550); }
+  [data-theme="dark"] .filters button.on { color: var(--seq-550); }
+
+  /* Finding cards */
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    margin-bottom: 10px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  .card-head { display: flex; align-items: center; gap: 12px; padding: 13px 16px; cursor: pointer; user-select: none; }
+  .card-head:hover { background: var(--surface-2); }
+  .card-head .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dot.critical { background: var(--critical); } .dot.serious { background: var(--serious); }
+  .dot.warning { background: var(--warning); } .dot.good { background: var(--good); } .dot.info { background: var(--text-muted); }
+  .card-head .c-title { font-weight: 700; font-size: .93rem; flex: 1; }
+  .card-head .c-cat { font-size: .72rem; color: var(--text-muted); white-space: nowrap; }
+  .card-head .chev { color: var(--text-muted); transition: transform .18s; font-size: .8rem; }
+  .card.open .chev { transform: rotate(90deg); }
+  .card-body { display: none; padding: 2px 16px 16px 38px; font-size: .9rem; color: var(--text-secondary); }
+  .card.open .card-body { display: block; }
+  .card-body h4 { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin: 13px 0 4px; }
+  .card-body code { background: var(--surface-2); border-radius: 4px; padding: 1px 6px; font-size: .82em; color: var(--text-primary); word-break: break-all; }
+  .card-body ul { margin: 4px 0 4px 18px; }
+  .card-body li { margin-bottom: 4px; }
+  .impact-row { display: flex; gap: 18px; margin-top: 12px; flex-wrap: wrap; }
+  .impact-row .kv { font-size: .78rem; color: var(--text-muted); }
+  .impact-row .kv b { color: var(--text-primary); font-weight: 700; }
+
+  /* Priority chart */
+  .prio-chart { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: var(--shadow); margin-bottom: 20px; }
+  .prio-row { display: grid; grid-template-columns: 240px 1fr 52px; gap: 10px; align-items: center; margin-bottom: 9px; font-size: .84rem; }
+  .prio-row .p-label { text-align: right; color: var(--text-secondary); font-weight: 600; line-height: 1.25; }
+  .prio-bar { height: 16px; border-radius: 0 4px 4px 0; background: var(--seq-400); min-width: 3px; position: relative; }
+  .prio-row .p-val { color: var(--text-muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
+  .prio-note { font-size: .75rem; color: var(--text-muted); margin-top: 10px; }
+  @media (max-width: 640px) { .prio-row { grid-template-columns: 130px 1fr 46px; } }
+
+  /* Checklist */
+  .chk-group { margin-bottom: 22px; }
+  .chk-item { display: flex; gap: 11px; align-items: flex-start; background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; margin-bottom: 7px; cursor: pointer; }
+  .chk-item input { margin-top: 3px; accent-color: var(--seq-550); width: 16px; height: 16px; flex-shrink: 0; }
+  .chk-item .c-txt { font-size: .89rem; }
+  .chk-item .c-txt small { display: block; color: var(--text-muted); font-size: .78rem; margin-top: 1px; }
+  .chk-item.done .c-txt { text-decoration: line-through; color: var(--text-muted); }
+  .progress-pill { font-size: .8rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 12px; }
+
+  /* Keyword table */
+  table.kw { width: 100%; border-collapse: collapse; background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; font-size: .87rem; box-shadow: var(--shadow); }
+  table.kw th { text-align: left; font-size: .73rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+  table.kw td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+  table.kw tr:last-child td { border-bottom: none; }
+  table.kw td:first-child { font-weight: 600; color: var(--text-primary); }
+
+  .strength { display: flex; gap: 10px; align-items: flex-start; background: var(--surface-1); border: 1px solid var(--border); border-left: 3px solid var(--good); border-radius: 10px; padding: 12px 15px; margin-bottom: 8px; font-size: .89rem; color: var(--text-secondary); }
+  .strength b { color: var(--text-primary); }
+
+  .note-box { background: var(--surface-2); border-radius: 10px; padding: 12px 16px; font-size: .82rem; color: var(--text-secondary); margin-top: 20px; }
+  footer { margin-top: 34px; font-size: .76rem; color: var(--text-muted); text-align: center; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div>
+        <h1>Auditoría SEO profunda — Hispanic Financial</h1>
+        <div class="sub"><a href="https://hispanic.financial" target="_blank" rel="noopener">hispanic.financial</a> · Coral Springs, FL · Auditado el 15 de julio de 2026 · Código fuente + sitio en vivo verificados</div>
+      </div>
+      <button class="theme-btn" id="themeBtn">🌙 Modo oscuro</button>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="tabs" id="tabs"></nav>
+
+  <section class="panel" id="panel-resumen">
+    <h2 class="sec">Dónde está la mayor oportunidad de captar clientes</h2>
+    <p class="lead">La base técnica del sitio es sólida (metadatos, hreflang, schema, sitemap). Los frenos reales son tres: <b>páginas clave huérfanas</b> que Google apenas puede descubrir, <b>presencia local (Google Business Profile, reseñas y citas) desalineada con la marca nueva</b>, y <b>autoridad de dominio casi nula</b> por ser un dominio reciente sin enlaces. Estimación de impacto relativo en captación de clientes:</p>
+    <div class="prio-chart" id="prioChart"></div>
+    <h2 class="sec">Los 5 arreglos de esta semana</h2>
+    <div id="quickWins"></div>
+  </section>
+
+  <section class="panel" id="panel-hallazgos">
+    <p class="lead">Cada hallazgo fue verificado contra el código fuente del proyecto y el HTML servido en producción. Haz clic para ver el detalle y cómo corregirlo.</p>
+    <div class="filters" id="sevFilters"></div>
+    <div id="findings"></div>
+  </section>
+
+  <section class="panel" id="panel-checklist">
+    <p class="lead">Plan de acción ordenado por prioridad. Las casillas son de esta sesión (no se guardan al cerrar).</p>
+    <div class="progress-pill" id="chkProgress"></div>
+    <div id="checklist"></div>
+  </section>
+
+  <section class="panel" id="panel-keywords">
+    <h2 class="sec">Oportunidades de keywords y contenido</h2>
+    <p class="lead">El buscador hispano usa consultas en español muy específicas donde la competencia local es baja y la intención de compra es alta. El blog actual (3 artículos de calidad) es una buena base: esta es la expansión recomendada.</p>
+    <div id="kwTables"></div>
+  </section>
+
+  <section class="panel" id="panel-fortalezas">
+    <h2 class="sec">Lo que ya está bien hecho (no tocar)</h2>
+    <div id="strengths"></div>
+  </section>
+</div>
+
+<footer class="wrap">Auditoría generada con verificación en vivo del HTML servido y del código Next.js del repositorio · Julio 2026</footer>
+
+<script>
+/* ============ DATA ============ */
+const SCORES = [
+  { label: 'SEO técnico', val: 7.5, note: 'Metadatos y schema muy completos; errores puntuales' },
+  { label: 'Contenido', val: 6.5, note: '3 artículos excelentes; volumen aún bajo' },
+  { label: 'Arquitectura interna', val: 4, note: '16+ páginas huérfanas sin enlaces internos' },
+  { label: 'SEO local', val: 4, note: 'GBP/citas con marca antigua; reseñas sin mostrar' },
+  { label: 'Autoridad (enlaces)', val: 2, note: 'Dominio joven, sin backlinks relevantes' },
+  { label: 'Rendimiento', val: 6, note: '1.26 MB de JS en home; TTFB excelente (36 ms)' },
+];
+
+const PRIO = [
+  { label: 'Google Business Profile + reseñas', val: 9.5 },
+  { label: 'Enlazar páginas huérfanas (ITIN, payroll, ciudades, países)', val: 9 },
+  { label: 'Indexación: GSC + sitemap + solicitar rastreo', val: 8.5 },
+  { label: 'Citas locales y NAP coherente (marca nueva)', val: 7.5 },
+  { label: 'Calendario de contenido en español', val: 7 },
+  { label: 'Backlinks locales (cámaras, directorios CPA, IRS CAA)', val: 7 },
+  { label: 'Corregir schema (FAQ duplicado, rating, eventos)', val: 5.5 },
+  { label: 'Rendimiento móvil (three.js, JS diferido)', val: 5 },
+  { label: 'Títulos duplicados y redirección 301', val: 4.5 },
+];
+
+const FINDINGS = [
+  {
+    sev: 'critical', cat: 'Arquitectura / Enlazado interno',
+    title: '16+ páginas de dinero están huérfanas: no hay ningún enlace interno hacia ellas',
+    body: `<p>Verificado en el DOM de la home y en el código de <code>Navbar.tsx</code> y <code>Footer.tsx</code>: no existe ni un solo enlace hacia <code>/servicios/itin</code>, <code>/servicios/payroll</code>, <code>/servicios</code> (índice), las 5 páginas de <code>/ciudades/*</code> (Miami, Fort Lauderdale, Boca Ratón, Pompano Beach, Deerfield Beach), ni el hub <code>/internacional</code> con sus 8 páginas de países. Solo existen en el sitemap.</p>
+    <h4>Por qué importa</h4><p>Google trata las páginas sin enlaces internos como contenido de baja prioridad: las rastrea tarde, las indexa mal y no les transfiere autoridad. Son precisamente las páginas con mayor intención de compra (ITIN, LLC desde Colombia/México, contador en Miami).</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Añadir ITIN y Payroll al menú "Servicios" del Navbar y del Footer (hoy solo hay 5 servicios).</li>
+    <li>Añadir en el Footer una columna "Áreas que servimos" con las 5 ciudades y un enlace a "LLC desde tu país" → <code>/internacional</code>.</li>
+    <li>Añadir en la home una sección corta "Servimos a todo el sur de Florida" con enlaces a ciudades, y un banner "¿Estás fuera de USA?" → hub internacional.</li>
+    <li>Enlazar los servicios ITIN/payroll desde los artículos del blog (ya enlazan impuestos, LLC y real estate).</li></ul>`,
+    impact: 'Muy alto', effort: 'Bajo (1–2 h)', where: 'Navbar.tsx · Footer.tsx · page.tsx (home)'
+  },
+  {
+    sev: 'critical', cat: 'SEO local',
+    title: 'Presencia local desalineada: marca antigua en directorios y reseñas invisibles',
+    body: `<p>Los directorios encontrados (Yelp, Manta, dotax, bisprofiles, PTIN) listan la empresa como <b>"Hispanic Financial Tax Services Inc"</b>, algunos con la dirección de Pompano Beach y sin referencia al dominio nuevo <code>hispanic.financial</code>. Para búsquedas tipo "impuestos coral springs" o "contador hispano cerca de mí", el paquete local de Google Maps genera más llamadas que el ranking orgánico.</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Actualizar el Google Business Profile: nombre comercial coherente, URL <code>hispanic.financial</code>, categorías ("Servicio de preparación de impuestos", "Contador"), horarios, fotos del equipo/oficina, atributo "Se habla español".</li>
+    <li>Campaña de reseñas: enlace directo de reseña de Google enviado por WhatsApp al cerrar cada servicio (el sitio ya es "WhatsApp-first"). Meta: 5–10 reseñas/mes con palabras clave naturales.</li>
+    <li>Unificar NAP (nombre, dirección, teléfono) en Yelp, Facebook, Manta, Nextdoor, BBB y directorios CPA.</li>
+    <li>Publicaciones semanales en GBP (fechas fiscales, ITIN, LLC) enlazando al blog.</li></ul>`,
+    impact: 'Muy alto (nº1 en llamadas)', effort: 'Medio (proceso continuo)', where: 'Google Business Profile · directorios'
+  },
+  {
+    sev: 'critical', cat: 'Indexación',
+    title: 'Señales de indexación muy pobre: el buscador solo devuelve 1 URL del dominio',
+    body: `<p>Una consulta <code>site:hispanic.financial</code> en el buscador consultado devolvió únicamente <code>/en</code>. Aunque cada buscador difiere, es coherente con un dominio joven, sin backlinks y con las páginas clave huérfanas: hay ~60 URLs en el sitemap que apenas se están descubriendo.</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Verificar la propiedad en <b>Google Search Console</b> (y Bing Webmaster Tools), enviar <code>sitemap.xml</code> y revisar el informe de Cobertura/Indexación de páginas.</li>
+    <li>Solicitar indexación manual de las ~15 páginas de dinero (servicios, ciudades, países).</li>
+    <li>Corregir el enlazado interno (hallazgo nº1): es la causa raíz más probable.</li>
+    <li>Revisar en GSC que el canonical de <code>/</code> → <code>/es</code> se esté interpretando bien.</li></ul>`,
+    impact: 'Muy alto', effort: 'Bajo (1 h + seguimiento)', where: 'Google Search Console · Bing WMT'
+  },
+  {
+    sev: 'serious', cat: 'Autoridad / Enlaces',
+    title: 'Dominio nuevo sin backlinks: sin autoridad no hay ranking en keywords competitivas',
+    body: `<p>El dominio <code>hispanic.financial</code> es reciente y no se encontraron menciones/enlaces relevantes más allá de directorios con la marca antigua. Competidores en "crear LLC en Florida" (Firmaway, Globalfy, etc.) tienen años de contenido y enlaces.</p>
+    <h4>Plan de link building realista y local</h4><ul>
+    <li><b>Listado CAA del IRS</b>: aparecer en la página oficial "Acceptance Agents – Florida" de irs.gov con la marca y datos actuales (enlace .gov de altísima confianza para la página ITIN).</li>
+    <li>Cámaras de comercio: Coral Springs Chamber, cámaras hispanas de Broward/Miami.</li>
+    <li>Directorios profesionales: AICPA, CPAdirectory, Alignable, BBB, Nextdoor Business.</li>
+    <li>Prensa/medios hispanos locales (El Sentinel, Diario Las Américas): columnas sobre impuestos para inmigrantes.</li>
+    <li>Los 302 desde <code>hispanictaxinc.com</code> deben ser 301 (ver hallazgo específico).</li></ul>`,
+    impact: 'Alto (medio plazo)', effort: 'Medio-alto (continuo)', where: 'Off-page'
+  },
+  {
+    sev: 'serious', cat: 'Datos estructurados',
+    title: 'Dos bloques FAQPage en la misma página: schema en conflicto en todas las páginas de servicios',
+    body: `<p>Verificado en el HTML servido de <code>/es/servicios/itin</code>: el layout global (<code>StructuredData.tsx</code>) inyecta un <code>FAQPage</code> genérico en <b>todas</b> las páginas, y las páginas de servicios añaden su propio <code>FAQPage</code>. Dos FAQPage por URL es markup inválido para Google y anula la elegibilidad de rich results; además el FAQ global no corresponde a contenido visible en esas páginas.</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Renderizar el <code>FAQPage</code> del <code>@graph</code> global <b>solo en la home</b> (condicionar por ruta o moverlo a <code>app/[locale]/page.tsx</code>).</li>
+    <li>Mantener el FAQPage propio de cada página de servicio (ese sí refleja contenido visible).</li>
+    <li>Validar después con la prueba de resultados enriquecidos de Google.</li></ul>`,
+    impact: 'Medio-alto', effort: 'Bajo (30 min)', where: 'StructuredData.tsx · layout.tsx'
+  },
+  {
+    sev: 'serious', cat: 'Datos estructurados',
+    title: 'aggregateRating inventado (5.0 · 47 reseñas) sin reseñas visibles en el sitio',
+    body: `<p><code>StructuredData.tsx</code> declara <code>aggregateRating: 5.0, ratingCount: 47</code> pero el sitio no muestra ninguna reseña. Google ignora (y puede tratar como spam estructurado) las valoraciones "self-serving" en LocalBusiness que no provienen de reseñas visibles en la propia página. Riesgo de acción manual de datos estructurados.</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Opción A (mejor): añadir una sección de testimonios/reseñas reales visibles y basar el aggregateRating en ellas.</li>
+    <li>Opción B: eliminar el bloque <code>aggregateRating</code> del schema y concentrar las reseñas en el perfil de Google.</li></ul>`,
+    impact: 'Medio (riesgo)', effort: 'Bajo', where: 'StructuredData.tsx'
+  },
+  {
+    sev: 'serious', cat: 'Metadatos',
+    title: 'Títulos duplicados "… | Hispanic Financial | Hispanic Financial" en las 16 páginas de países',
+    body: `<p>Verificado en vivo: <code>/es/internacional/colombia</code> muestra el título <i>"Crear LLC en USA desde Colombia | Hispanic Financial | Hispanic Financial"</i>. Causa: los títulos en <code>internacional/[pais]/page.tsx</code> ya incluyen "| Hispanic Financial" y el template del layout (<code>%s | Hispanic Financial</code>) lo añade otra vez. Afecta a 8 países × 2 idiomas.</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Quitar el sufijo "| Hispanic Financial" de los <code>titleEs/titleEn</code> del array de países (el template ya lo pone), o usar <code>title: { absolute: ... }</code>.</li></ul>`,
+    impact: 'Medio (CTR en SERP)', effort: 'Muy bajo (15 min)', where: 'internacional/[pais]/page.tsx'
+  },
+  {
+    sev: 'warning', cat: 'Redirecciones',
+    title: 'El dominio antiguo hispanictaxinc.com redirige con 302 (temporal) en vez de 301',
+    body: `<p>Verificado: <code>www.hispanictaxinc.com</code> → <code>hispanic.financial/es</code> con estado <b>302 Found</b>. Un 302 comunica "temporal" y retrasa/limita la transferencia de señales del dominio antiguo (que tiene años de historial y citas) al nuevo.</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Configurar redirección <b>301 permanente</b> en el DNS/hosting del dominio antiguo, idealmente ruta a ruta si el sitio viejo tenía páginas indexadas.</li>
+    <li>Mantener el dominio antiguo renovado indefinidamente.</li></ul>`,
+    impact: 'Medio', effort: 'Muy bajo', where: 'DNS / hosting del dominio antiguo'
+  },
+  {
+    sev: 'warning', cat: 'Rendimiento',
+    title: '1.26 MB de JavaScript en la home (chunk de 500 KB): riesgo de Core Web Vitals en móvil',
+    body: `<p>Medido en el navegador: 17 chunks JS, ~1.26 MB decodificados, el mayor de 500 KB (three.js/react-three-fiber para el brochure 3D) más framer-motion y GTM. El TTFB es excelente (36 ms en Netlify) y CLS ≈ 0, pero ese peso castiga INP/TBT en móviles de gama media — el dispositivo típico del público objetivo. (PageSpeed API no respondió durante la auditoría: quota; conviene medirlo en pagespeed.web.dev.)</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Cargar <code>Brochure3D</code> solo tras interacción (click en la sección) en vez de al hacer scroll, o sustituir el 3D de la home por las imágenes webp del brochure ya existentes.</li>
+    <li>Revisar si <code>AIAssistant</code> puede cargarse tras la primera interacción.</li>
+    <li>Medir en PageSpeed Insights (móvil) tras los cambios; objetivo: LCP &lt; 2.5 s, INP &lt; 200 ms en campo.</li></ul>`,
+    impact: 'Medio', effort: 'Medio', where: 'page.tsx · BrochureDownload.tsx · AIAssistant.tsx'
+  },
+  {
+    sev: 'warning', cat: 'Datos estructurados',
+    title: 'Schema "Event" para fechas fiscales en la home: tipo incorrecto',
+    body: `<p>Verificado en vivo: la home emite 4 bloques <code>Event</code> (calendario fiscal). Las fechas límite del IRS no son eventos (sin lugar, sin entradas); Google puede marcarlo como markup de eventos inválido/engañoso.</p>
+    <h4>Cómo corregirlo</h4><ul><li>Eliminar el schema Event del calendario fiscal (la tabla visible es suficiente), o modelarlo como contenido normal sin structured data.</li></ul>`,
+    impact: 'Bajo-medio (riesgo)', effort: 'Bajo', where: 'FiscalCalendar.tsx'
+  },
+  {
+    sev: 'warning', cat: 'Contenido / E-E-A-T',
+    title: 'Sin páginas dedicadas de Nosotros y Contacto; autor del blog sin página propia',
+    body: `<p>"Nosotros" y "Contacto" existen solo como secciones de la home (anclas <code>#about</code>, <code>#contact</code>). Para YMYL (finanzas/impuestos) Google pondera fuerte el E-E-A-T: una página de equipo con credenciales verificables (CAA del IRS, afiliaciones ACFE/AICPA con nº de miembro si es posible) y una página de contacto indexable refuerzan la confianza. Los artículos citan a Alvaro Patino pero no hay página de autor enlazable.</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Crear <code>/nosotros</code> (equipo, credenciales, historia, fotos) y <code>/contacto</code> (NAP + mapa + formulario).</li>
+    <li>Crear <code>/nosotros/alvaro-patino</code> como página de autor y enlazarla desde cada artículo (schema Person ya existe — enlazarlo con <code>url</code> propio).</li></ul>`,
+    impact: 'Medio', effort: 'Medio', where: 'Nuevas rutas + blog'
+  },
+  {
+    sev: 'warning', cat: 'Enlazado interno',
+    title: 'Enlaces del footer a /privacy y /terms sin prefijo de idioma (salto de redirección) y anclas rotas en páginas interiores',
+    body: `<p>El footer enlaza <code>/privacy</code> y <code>/terms</code> (sin <code>/es</code> o <code>/en</code>), lo que fuerza una redirección del middleware en cada clic/rastreo. Además los "enlaces rápidos" del footer usan anclas (<code>#services</code>, <code>#about</code>…) que en páginas interiores no llevan a ningún sitio.</p>
+    <h4>Cómo corregirlo</h4><ul>
+    <li>Usar <code>/[locale]/privacy</code> y <code>/[locale]/terms</code> (con el locale activo) en Footer.tsx.</li>
+    <li>Prefijar las anclas con la home: <code>/[locale]#services</code> (como ya hace el botón de contacto del navbar).</li></ul>`,
+    impact: 'Bajo', effort: 'Muy bajo', where: 'Footer.tsx'
+  },
+  {
+    sev: 'warning', cat: 'Sitemap',
+    title: 'sitemap.xml declara lastModified = fecha del build en casi todas las URLs',
+    body: `<p><code>sitemap.ts</code> usa <code>new Date()</code> como <code>lastModified</code> por defecto: cada deploy marca todas las páginas como "modificadas hoy". Google aprende a ignorar lastmod poco fiables, perdiendo una señal útil de recrawl (solo los 3 artículos del blog tienen fecha real).</p>
+    <h4>Cómo corregirlo</h4><ul><li>Mantener fechas reales de última edición por página (constante actualizada manualmente o derivada de git).</li></ul>`,
+    impact: 'Bajo', effort: 'Bajo', where: 'sitemap.ts'
+  },
+  {
+    sev: 'info', cat: 'Internacional',
+    title: 'x-default del hreflang apunta a /en aunque el público principal es hispanohablante',
+    body: `<p>El sitio define <code>x-default → /en</code> en todas las páginas, pero el locale por defecto del sitio es <code>es</code> (la raíz <code>/</code> redirige a <code>/es</code>) y la marca/negocio es Spanish-first. El x-default se sirve a usuarios cuyo idioma no coincide con ninguna alternativa — en este nicho, mayoritariamente hispanohablantes de países no listados.</p>
+    <h4>Recomendación</h4><ul><li>Valorar <code>x-default → /es</code> para alinearlo con el redirect de la raíz. Es una decisión estratégica, no un error.</li></ul>`,
+    impact: 'Bajo', effort: 'Muy bajo', where: 'layout.tsx y páginas'
+  },
+  {
+    sev: 'info', cat: 'Contenido',
+    title: 'Blog con solo 3 artículos y sin flujo de publicación',
+    body: `<p>Los 3 artículos existentes son largos, útiles y bien estructurados (schema Article, enlaces internos a servicios). Pero 3 artículos no sostienen crecimiento orgánico frente a competidores con blogs de 50+ guías. Ver pestaña <b>Keywords</b> para el calendario propuesto.</p>`,
+    impact: 'Alto (medio plazo)', effort: 'Continuo', where: 'Blog'
+  },
+  {
+    sev: 'info', cat: 'Técnico menor',
+    title: 'Detalles menores: metadataBase ausente, 1 imagen sin alt, keywords meta tag',
+    body: `<ul>
+    <li><code>metadataBase</code> no está definido en el layout (hoy no rompe nada porque todas las URLs son absolutas; definirlo evita errores futuros).</li>
+    <li>1 de 94 imágenes de la home sin atributo <code>alt</code>.</li>
+    <li>La etiqueta <code>keywords</code> es ignorada por Google desde 2009 — inofensiva, pero no dedicarle esfuerzo.</li>
+    <li>Banderas en PNG podrían ser SVG/WebP (ahorro menor).</li></ul>`,
+    impact: 'Muy bajo', effort: 'Bajo', where: 'layout.tsx · Hero.tsx'
+  },
+];
+
+const CHECKLIST = [
+  { group: 'Semana 1 — Arreglos rápidos de alto impacto', items: [
+    ['Añadir ITIN y Payroll al menú Servicios (Navbar + Footer)', 'Navbar.tsx · Footer.tsx'],
+    ['Añadir columna "Áreas que servimos" (5 ciudades + Internacional) en el Footer', 'Footer.tsx'],
+    ['Quitar "| Hispanic Financial" duplicado en títulos de países', 'internacional/[pais]/page.tsx'],
+    ['FAQPage global solo en la home (eliminar duplicado en servicios)', 'StructuredData.tsx'],
+    ['Quitar aggregateRating o respaldarlo con reseñas visibles', 'StructuredData.tsx'],
+    ['Cambiar 302 → 301 en hispanictaxinc.com', 'DNS/hosting dominio antiguo'],
+    ['Verificar GSC + Bing, enviar sitemap y pedir indexación de páginas de dinero', 'Search Console'],
+  ]},
+  { group: 'Semanas 2–4 — Local y contenido', items: [
+    ['Actualizar Google Business Profile (marca, URL nueva, categorías, fotos, español)', 'GBP'],
+    ['Lanzar flujo de reseñas por WhatsApp post-servicio (meta: 5–10/mes)', 'Proceso interno'],
+    ['Unificar NAP en Yelp, Facebook, Manta, BBB, Nextdoor', 'Directorios'],
+    ['Confirmar listado CAA actualizado en irs.gov (Acceptance Agents – Florida)', 'IRS'],
+    ['Crear páginas /nosotros y /contacto indexables', 'Nuevas rutas'],
+    ['Sección "Servimos el sur de Florida" en la home con enlaces a ciudades', 'page.tsx'],
+    ['Publicar 2 artículos nuevos del calendario de keywords', 'Blog'],
+  ]},
+  { group: 'Mes 2–3 — Autoridad y rendimiento', items: [
+    ['Quitar schema Event del calendario fiscal', 'FiscalCalendar.tsx'],
+    ['Brochure 3D bajo interacción o sustituir por imágenes (reducir 500 KB de JS)', 'BrochureDownload.tsx'],
+    ['Medir PageSpeed móvil antes/después (objetivo LCP < 2.5 s)', 'pagespeed.web.dev'],
+    ['Alta en cámaras de comercio (Coral Springs, hispanas de Broward/Miami)', 'Off-page'],
+    ['Pitch a medios hispanos locales (columna de impuestos)', 'Off-page'],
+    ['lastModified reales en sitemap.ts', 'sitemap.ts'],
+    ['2 ciudades nuevas con contenido único (Margate, Tamarac o Plantation)', 'ciudades/[ciudad]'],
+    ['Publicar 2–4 artículos más; añadir página de autor', 'Blog'],
+  ]},
+];
+
+const KEYWORDS = [
+  { title: 'Dinero inmediato (páginas de servicio — reforzar las existentes)', rows: [
+    ['solicitar ITIN / renovar ITIN + agente certificado', 'Alta', '/servicios/itin (ya existe — necesita enlaces internos y GBP)'],
+    ['impuestos en español coral springs / broward', 'Alta', 'Home + GBP + reseñas con la frase natural'],
+    ['crear LLC en florida para extranjeros', 'Muy alta', '/servicios/creacion-de-llc + blog existente + países'],
+    ['contador hispano en miami / fort lauderdale', 'Alta', '/ciudades/* (ya existen — desahuérfanalas)'],
+    ['FIRPTA retención venta casa extranjero', 'Media', '/servicios/real-estate + artículo nuevo'],
+  ]},
+  { title: 'Calendario editorial propuesto (blog en español, 2/mes)', rows: [
+    ['¿Puedo declarar taxes sin seguro social? (ITIN)', 'Alta', 'Ago 2026 — enlaza a /servicios/itin'],
+    ['Cuánto cuesta hacer los taxes con un contador en Florida', 'Alta', 'Ago 2026 — captura búsqueda de precio'],
+    ['LLC vs Corporación para hispanos: cuál conviene', 'Alta', 'Sep 2026'],
+    ['Cómo abrir cuenta de banco para tu LLC sin SSN', 'Alta', 'Sep 2026'],
+    ['Impuestos de nómina (payroll) para pequeños negocios', 'Media', 'Oct 2026 — enlaza a /servicios/payroll'],
+    ['Guía FIRPTA 2027: vender propiedad siendo extranjero', 'Media', 'Oct 2026'],
+    ['Fechas límite de taxes 2027 (actualización anual del calendario)', 'Alta', 'Dic 2026'],
+    ['Qué pasa si no declaro impuestos siendo inmigrante', 'Alta', 'Ene 2027 — temporada alta'],
+  ]},
+  { title: 'Páginas país (ya creadas — potenciar)', rows: [
+    ['abrir LLC en USA desde Colombia / México / Argentina…', 'Alta', 'Enlazar hub /internacional desde home+footer; añadir FAQ única por país y casos reales'],
+    ['llevar contabilidad de mi LLC viviendo fuera de USA', 'Media', 'Artículo que enlace a los 8 países'],
+  ]},
+];
+
+const STRENGTHS = [
+  ['Metadatos por página impecables', 'title/description únicos, canonical correcto por idioma y hreflang es/en/x-default presente en todas las plantillas verificadas.'],
+  ['Sitemap con alternates de idioma', 'sitemap.ts genera las 2 variantes de cada URL con sus alternates — poco común verlo bien hecho.'],
+  ['JSON-LD rico y bien conectado', 'Graph de AccountingService/LocalBusiness + Person + Service + BreadcrumbList con NAP, geo, horarios y catálogo de servicios.'],
+  ['robots.txt + llms.txt', 'Crawlers de IA explícitamente permitidos y un llms.txt de calidad — posicionamiento en respuestas de asistentes de IA (AEO), muy adelantado al sector.'],
+  ['Contenido de blog de calidad', 'Los 3 artículos son guías largas, con schema Article, autor visible y enlaces internos a servicios.'],
+  ['Infraestructura rápida', 'TTFB de 36 ms (Netlify edge), HTTPS, headers de seguridad, imágenes AVIF/WebP, CLS ≈ 0.'],
+  ['Estructura internacional ya construida', '8 páginas de países + 5 ciudades con contenido específico y FAQs — solo falta enlazarlas y darles autoridad.'],
+  ['Conversión bien pensada', 'WhatsApp flotante, teléfono en el título/description (CTR), formulario y asistente IA.'],
+];
+
+/* ============ RENDER ============ */
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+/* tiles */
+$('#tiles').innerHTML = SCORES.map(s => `
+  <div class="tile">
+    <div class="t-label">${s.label}</div>
+    <div class="t-value">${s.val}<small>/10</small></div>
+    <div class="meter" role="img" aria-label="${s.label}: ${s.val} de 10"><i style="width:${s.val*10}%"></i></div>
+    <div class="t-note">${s.note}</div>
+  </div>`).join('');
+
+/* tabs */
+const sevCount = FINDINGS.filter(f=>f.sev==='critical').length + FINDINGS.filter(f=>f.sev==='serious').length;
+const TABS = [
+  ['resumen','Resumen'],
+  ['hallazgos',`Hallazgos <span class="cnt">(${FINDINGS.length})</span>`],
+  ['checklist','Plan de acción'],
+  ['keywords','Keywords'],
+  ['fortalezas','Fortalezas'],
+];
+$('#tabs').innerHTML = TABS.map(([id,l],i)=>`<button data-tab="${id}" class="${i===0?'active':''}">${l}</button>`).join('');
+$('#tabs').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active', x===b));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active', p.id==='panel-'+b.dataset.tab));
+});
+$('#panel-resumen').classList.add('active');
+
+/* priority chart */
+const maxP = Math.max(...PRIO.map(p=>p.val));
+$('#prioChart').innerHTML = PRIO.map(p=>`
+  <div class="prio-row">
+    <div class="p-label">${p.label}</div>
+    <div><div class="prio-bar" style="width:${(p.val/maxP*100).toFixed(1)}%" title="${p.label}: ${p.val}/10"></div></div>
+    <div class="p-val">${p.val}/10</div>
+  </div>`).join('') +
+  `<div class="prio-note">Impacto estimado en captación de clientes (escala relativa 0–10, criterio del auditor combinando demanda, competencia y estado actual del sitio).</div>`;
+
+/* quick wins (top 5 by sev + effort) */
+const QW = [0,4,6,2,5].map(i=>FINDINGS[i]);
+$('#quickWins').innerHTML = QW.map((f,i)=>`
+  <div class="strength" style="border-left-color: var(--${f.sev==='critical'?'critical':f.sev==='serious'?'serious':'warning'})">
+    <div><b>${i+1}. ${f.title}</b><br><span style="font-size:.8rem">Esfuerzo: ${f.effort} · Dónde: ${f.where}</span></div>
+  </div>`).join('');
+
+/* findings */
+const SEVS = [['all','Todos'],['critical','Crítico'],['serious','Importante'],['warning','Mejorable'],['info','Informativo']];
+const sevLabel = {critical:'Crítico', serious:'Importante', warning:'Mejorable', info:'Informativo'};
+let sevFilter = 'all';
+$('#sevFilters').innerHTML = SEVS.map(([v,l])=>{
+  const n = v==='all' ? FINDINGS.length : FINDINGS.filter(f=>f.sev===v).length;
+  return `<button data-sev="${v}" class="${v==='all'?'on':''}">${l} (${n})</button>`;
+}).join('');
+$('#sevFilters').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  sevFilter = b.dataset.sev;
+  document.querySelectorAll('#sevFilters button').forEach(x=>x.classList.toggle('on', x===b));
+  renderFindings();
+});
+function renderFindings(){
+  const list = FINDINGS.filter(f=>sevFilter==='all'||f.sev===sevFilter);
+  $('#findings').innerHTML = list.map((f,i)=>`
+    <div class="card" data-i="${i}">
+      <div class="card-head">
+        <span class="dot ${f.sev}"></span>
+        <span class="c-title">${f.title}</span>
+        <span class="badge ${f.sev==='info'?'info':f.sev}">${sevLabel[f.sev]}</span>
+        <span class="c-cat">${f.cat}</span>
+        <span class="chev">▶</span>
+      </div>
+      <div class="card-body">
+        ${f.body}
+        <div class="impact-row">
+          <span class="kv">Impacto: <b>${f.impact}</b></span>
+          <span class="kv">Esfuerzo: <b>${f.effort}</b></span>
+          <span class="kv">Dónde: <b>${f.where}</b></span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+renderFindings();
+$('#findings').addEventListener('click', e=>{
+  const h = e.target.closest('.card-head'); if(!h) return;
+  h.parentElement.classList.toggle('open');
+});
+
+/* checklist */
+let done = new Set();
+function renderChecklist(){
+  let idx = 0, total = 0;
+  $('#checklist').innerHTML = CHECKLIST.map(g=>`
+    <div class="chk-group">
+      <h2 class="sec">${g.group}</h2>
+      ${g.items.map(it=>{
+        const id = idx++; total++;
+        return `<label class="chk-item ${done.has(id)?'done':''}">
+          <input type="checkbox" data-id="${id}" ${done.has(id)?'checked':''}>
+          <span class="c-txt">${it[0]}<small>${it[1]}</small></span>
+        </label>`;
+      }).join('')}
+    </div>`).join('');
+  $('#chkProgress').textContent = `Progreso: ${done.size} de ${total} tareas completadas`;
+}
+renderChecklist();
+$('#checklist').addEventListener('change', e=>{
+  const c = e.target.closest('input'); if(!c) return;
+  const id = +c.dataset.id;
+  c.checked ? done.add(id) : done.delete(id);
+  renderChecklist();
+});
+
+/* keywords */
+$('#kwTables').innerHTML = KEYWORDS.map(k=>`
+  <h2 class="sec">${k.title}</h2>
+  <table class="kw" style="margin-bottom:20px">
+    <thead><tr><th>Keyword / tema</th><th>Intención</th><th>Dónde atacarla</th></tr></thead>
+    <tbody>${k.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</tbody>
+  </table>`).join('') +
+  `<div class="note-box"><b>Nota metodológica:</b> la "intención" es una estimación cualitativa basada en el análisis de las SERPs y la competencia observada durante la auditoría (Firmaway, Globalfy, ATAX, contadores locales). Para volúmenes exactos, validar con Google Keyword Planner o Search Console una vez haya datos.</div>`;
+
+/* strengths */
+$('#strengths').innerHTML = STRENGTHS.map(s=>`<div class="strength">✅<div><b>${s[0]}.</b> ${s[1]}</div></div>`).join('');
+
+/* theme */
+const btn = $('#themeBtn');
+btn.addEventListener('click', ()=>{
+  const dark = document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme', dark?'light':'dark');
+  btn.textContent = dark ? '🌙 Modo oscuro' : '☀️ Modo claro';
+});
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme','dark');
+  btn.textContent = '☀️ Modo claro';
+}
+</script>
+</body>
+</html>

@@ -12,11 +12,21 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     const quickLinks = [
-        { name: navT('services'), href: '#services' },
-        { name: navT('calendar'), href: '#calendar' },
-        { name: navT('resources'), href: '#resources' },
-        { name: navT('about'), href: '#about' },
-        { name: navT('news'), href: '#news' },
+        { name: navT('services'), href: `/${locale}#services` },
+        { name: navT('calendar'), href: `/${locale}#calendar` },
+        { name: navT('resources'), href: `/${locale}#resources` },
+        { name: navT('about'), href: `/${locale}#about` },
+        { name: navT('news'), href: `/${locale}#news` },
+    ];
+
+    const areaLinks = [
+        { name: 'Coral Springs', href: `/${locale}` },
+        { name: 'Miami', href: `/${locale}/ciudades/miami` },
+        { name: 'Fort Lauderdale', href: `/${locale}/ciudades/fort-lauderdale` },
+        { name: 'Boca Raton', href: `/${locale}/ciudades/boca-raton` },
+        { name: 'Pompano Beach', href: `/${locale}/ciudades/pompano-beach` },
+        { name: 'Deerfield Beach', href: `/${locale}/ciudades/deerfield-beach` },
+        { name: locale === 'es' ? 'LLC desde tu país 🌎' : 'LLC from abroad 🌎', href: `/${locale}/internacional` },
     ];
 
     const serviceLinks = locale === 'es'
@@ -26,6 +36,9 @@ export default function Footer() {
             { name: 'Contabilidad QuickBooks',   href: `/${locale}/servicios/contabilidad` },
             { name: 'Real Estate / FIRPTA',      href: `/${locale}/servicios/real-estate` },
             { name: 'Protección Patrimonial',    href: `/${locale}/servicios/proteccion-patrimonial` },
+            { name: 'ITIN — Agente Certificado', href: `/${locale}/servicios/itin` },
+            { name: 'Payroll / Nómina',          href: `/${locale}/servicios/payroll` },
+            { name: 'Todos los servicios',       href: `/${locale}/servicios` },
             { name: 'Blog Financiero',           href: `/${locale}/blog` },
           ]
         : [
@@ -34,6 +47,9 @@ export default function Footer() {
             { name: 'QuickBooks Accounting', href: `/${locale}/servicios/contabilidad` },
             { name: 'Real Estate / FIRPTA',  href: `/${locale}/servicios/real-estate` },
             { name: 'Wealth Protection', href: `/${locale}/servicios/proteccion-patrimonial` },
+            { name: 'ITIN — Acceptance Agent', href: `/${locale}/servicios/itin` },
+            { name: 'Payroll Services',  href: `/${locale}/servicios/payroll` },
+            { name: 'All Services',      href: `/${locale}/servicios` },
             { name: 'Financial Blog',    href: `/${locale}/blog` },
           ];
 
@@ -88,6 +104,20 @@ export default function Footer() {
                                 >
                                     {link.name}
                                 </a>
+                            ))}
+                        </nav>
+                        <h4 className="text-[11px] font-black text-white/40 uppercase tracking-[0.3em] mt-4">
+                            {locale === 'es' ? 'Áreas que servimos' : 'Areas we serve'}
+                        </h4>
+                        <nav className="flex flex-col gap-4">
+                            {areaLinks.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="text-white/70 hover:text-brand-gold hover:translate-x-1 transition-all duration-300 font-medium w-fit text-sm"
+                                >
+                                    {link.name}
+                                </Link>
                             ))}
                         </nav>
                     </div>
@@ -148,11 +178,11 @@ export default function Footer() {
 
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] font-medium text-white/50">
                         <div className="flex items-center gap-6">
-                            <Link href="/privacy" className="hover:text-brand-gold transition-colors">
+                            <Link href={`/${locale}/privacy`} className="hover:text-brand-gold transition-colors">
                                 {t('privacy_policy')}
                             </Link>
                             <span className="w-1 h-1 rounded-full bg-white/20" />
-                            <Link href="/terms" className="hover:text-brand-gold transition-colors">
+                            <Link href={`/${locale}/terms`} className="hover:text-brand-gold transition-colors">
                                 {t('terms_of_service')}
                             </Link>
                         </div>

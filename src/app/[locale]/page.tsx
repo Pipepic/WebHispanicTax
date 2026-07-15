@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import TrustBar from '@/components/TrustBar';
+import { FaqSchema } from '@/components/StructuredData';
 import dynamic from 'next/dynamic';
 
 const SectionSkeleton = () => (
@@ -29,9 +30,11 @@ const NewsFeed = dynamic(() => import('@/components/NewsFeed'), {
   loading: () => <SectionSkeleton />,
 });
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   return (
     <div className="min-h-screen bg-white selection:bg-brand-gold/30">
+      <FaqSchema locale={locale} />
       <Hero />
       <TrustBar />
       <Services />

@@ -49,13 +49,6 @@ export default function StructuredData({ locale }: { locale: string }) {
         "hasMap": "https://maps.app.goo.gl/TEyhaFLDw37udX4n9",
         "currenciesAccepted": "USD",
         "paymentAccepted": "Cash, Credit Card, Debit Card, Check",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "bestRating": "5",
-            "worstRating": "1",
-            "ratingCount": "47"
-        },
         "areaServed": [
             { "@type": "City", "name": "Coral Springs", "sameAs": "https://en.wikipedia.org/wiki/Coral_Springs,_Florida" },
             { "@type": "City", "name": "Fort Lauderdale" },
@@ -171,7 +164,30 @@ export default function StructuredData({ locale }: { locale: string }) {
         ]
     };
 
+    const schema = {
+        "@context": "https://schema.org",
+        "@graph": [organization, person]
+    };
+
+    return (
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+    );
+}
+
+/**
+ * FAQPage schema — se renderiza ÚNICAMENTE en la home.
+ * No debe incluirse en el layout global: las páginas de servicios ya
+ * declaran su propio FAQPage y dos FAQPage en la misma URL invalidan
+ * los rich results de Google.
+ */
+export function FaqSchema({ locale }: { locale: string }) {
+    const isEn = locale === 'en';
+
     const faqPage = {
+        "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": isEn ? [
             {
@@ -258,15 +274,10 @@ export default function StructuredData({ locale }: { locale: string }) {
         ]
     };
 
-    const schema = {
-        "@context": "https://schema.org",
-        "@graph": [organization, person, faqPage]
-    };
-
     return (
         <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
         />
     );
 }

@@ -26,6 +26,8 @@ export default function Navbar() {
         { name: locale === 'es' ? 'Contabilidad QuickBooks' : 'QuickBooks Accounting', href: `/${locale}/servicios/contabilidad` },
         { name: locale === 'es' ? 'Real Estate / FIRPTA' : 'Real Estate / FIRPTA', href: `/${locale}/servicios/real-estate` },
         { name: locale === 'es' ? 'Protección Patrimonial' : 'Wealth Protection', href: `/${locale}/servicios/proteccion-patrimonial` },
+        { name: locale === 'es' ? 'ITIN — Agente Certificado' : 'ITIN — Acceptance Agent', href: `/${locale}/servicios/itin` },
+        { name: locale === 'es' ? 'Payroll / Nómina' : 'Payroll Services', href: `/${locale}/servicios/payroll` },
     ], [locale]);
     const { scrollY, scrollYProgress } = useScroll();
 
