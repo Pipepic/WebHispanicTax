@@ -88,7 +88,7 @@ export default async function BlogLLCPage({ params }: { params: Promise<{ locale
           {/* Header */}
           <div className="premium-gradient text-white pt-28 pb-16 px-6">
             <div className="max-w-3xl mx-auto">
-              <Link href={`/${locale}/blog`} className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors">
+              <Link href={`/${locale}/blog`} className="flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors w-fit">
                 ← Back to Blog
               </Link>
               <span className="inline-block bg-white/10 text-white/90 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
@@ -215,7 +215,7 @@ export default async function BlogLLCPage({ params }: { params: Promise<{ locale
         {/* Header */}
         <div className="premium-gradient text-white pt-28 pb-16 px-6">
           <div className="max-w-3xl mx-auto">
-            <Link href={`/${locale}/blog`} className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors">
+            <Link href={`/${locale}/blog`} className="flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors w-fit">
               ← Volver al Blog
             </Link>
             <span className="inline-block bg-white/10 text-white/90 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">

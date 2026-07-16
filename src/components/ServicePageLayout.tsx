@@ -83,7 +83,7 @@ export default function ServicePageLayout({
           <div className="max-w-4xl mx-auto">
             <Link
               href={`/${locale}#services`}
-              className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors"
+              className="flex items-center gap-2 text-white/60 hover:text-white text-sm mb-8 transition-colors w-fit"
             >
               ← {isEn ? 'Back to Services' : 'Volver a Servicios'}
             </Link>
