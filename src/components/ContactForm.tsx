@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { GoogleMapsEmbed } from '@next/third-parties/google';
 import {
     Send,
     CheckCircle,
@@ -68,13 +69,6 @@ export default function ContactForm() {
 
     const contactItems = [
         {
-            icon: <MapPin className="w-5 h-5" />,
-            label: t('address_label'),
-            value: "7401 Wiles Rd. Suite 126, Coral Springs, FL 33067",
-            accent: "blue",
-            link: "https://maps.app.goo.gl/TEyhaFLDw37udX4n9"
-        },
-        {
             icon: <Phone className="w-5 h-5" />,
             label: t('phone_label'),
             value: "+1 (954) 464-5458",
@@ -94,6 +88,14 @@ export default function ContactForm() {
             value: t('work_hours_value'),
             accent: "dark",
             link: null
+        },
+        {
+            icon: <MapPin className="w-5 h-5" />,
+            label: t('address_label'),
+            value: "7401 Wiles Rd. Suite 126, Coral Springs, FL 33067",
+            accent: "blue",
+            link: "https://maps.app.goo.gl/TEyhaFLDw37udX4n9",
+            isAddress: true
         }
     ];
 
@@ -187,6 +189,59 @@ export default function ContactForm() {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
                                 {contactItems.map((item, idx) => {
                                     const styles = getAccentStyles(item.accent);
+
+                                    if ((item as any).isAddress) {
+                                        return (
+                                            <motion.div
+                                                key={idx}
+                                                initial={{ opacity: 0, x: -20 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ delay: 0.3 + idx * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                                style={{ willChange: 'transform, opacity' }}
+                                                className={`p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm group ${styles.border} hover:shadow-2xl hover:shadow-black/[0.05] flex flex-col gap-6 md:col-span-2 lg:col-span-1`}
+                                            >
+                                                <a href={item.link || '#'} target="_blank" rel="noopener noreferrer" className="flex items-start gap-6 group/link">
+                                                    <div className={`w-14 h-14 rounded-2xl ${styles.bg} ${styles.text} flex items-center justify-center shrink-0 group-hover/link:scale-110 transition-transform duration-500 shadow-sm shadow-black/[0.02]`}>
+                                                        {item.icon}
+                                                    </div>
+                                                    <div className="flex flex-col gap-1.5 overflow-hidden">
+                                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover/link:text-brand-dark/40 transition-colors">
+                                                            {item.label}
+                                                        </span>
+                                                        <p className="text-brand-dark font-bold text-lg leading-snug group-hover/link:text-brand-blue transition-colors lg:whitespace-normal">
+                                                            {item.value}
+                                                        </p>
+                                                    </div>
+                                                </a>
+
+                                                {/* Map embedded inside card */}
+                                                <div className="w-full rounded-2xl overflow-hidden border border-slate-100 shadow-inner h-[220px]">
+                                                    {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? (
+                                                        <GoogleMapsEmbed
+                                                            apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                                                            height={220}
+                                                            width="100%"
+                                                            mode="place"
+                                                            q="7401+Wiles+Rd+Suite+126,+Coral+Springs,+FL+33067"
+                                                        />
+                                                    ) : (
+                                                        <iframe
+                                                            src="https://maps.google.com/maps?q=7401%20Wiles%20Rd%20Suite%20126%2C%20Coral%20Springs%2C%20FL%2033067&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                                            width="100%"
+                                                            height="220"
+                                                            style={{ border: 0 }}
+                                                            allowFullScreen
+                                                            loading="lazy"
+                                                            referrerPolicy="no-referrer-when-downgrade"
+                                                            title="Hispanic Financial Map"
+                                                        />
+                                                    )}
+                                                </div>
+                                            </motion.div>
+                                        );
+                                    }
+
                                     const Content = (
                                         <motion.div
                                             initial={{ opacity: 0, x: -20 }}
@@ -195,7 +250,7 @@ export default function ContactForm() {
                                             transition={{ delay: 0.3 + idx * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                             whileHover={{ x: 8 }}
                                             style={{ willChange: 'transform, opacity' }}
-                                            className={`p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm group cursor-pointer ${styles.border} hover:shadow-2xl hover:shadow-black/[0.05] flex items-start gap-6`}
+                                            className={`p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm group cursor-pointer ${styles.border} hover:shadow-2xl hover:shadow-black/[0.05] flex items-start gap-6 h-full`}
                                         >
                                             <div className={`w-14 h-14 rounded-2xl ${styles.bg} ${styles.text} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-sm shadow-black/[0.02]`}>
                                                 {item.icon}
@@ -212,14 +267,13 @@ export default function ContactForm() {
                                     );
 
                                     return item.link ? (
-                                        <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer">
+                                        <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer" className="block">
                                             {Content}
                                         </a>
                                     ) : (
                                         <div key={idx}>{Content}</div>
                                     );
                                 })}
-
 
                             </div>
                         </div>
@@ -231,16 +285,16 @@ export default function ContactForm() {
                             viewport={{ once: true }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                             style={{ willChange: 'transform, opacity' }}
-                            className="bg-white p-10 md:p-14 rounded-[3rem] border border-slate-100 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.06)] relative flex flex-col gap-12"
+                            className="bg-brand-blue p-10 md:p-14 rounded-[3rem] border border-brand-blue/10 shadow-[0_40px_100px_-30px_rgba(34,104,155,0.25)] relative flex flex-col gap-12 text-white"
                         >
                             {/* Decorative element background */}
-                            <div className="absolute top-0 right-0 w-80 h-80 bg-brand-gold/[0.04] rounded-full blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+                            <div className="absolute top-0 right-0 w-80 h-80 bg-brand-gold/[0.08] rounded-full blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
 
                             <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
                                 <div className="grid md:grid-cols-2 gap-10">
                                     {/* Name Input */}
                                     <div className="group relative flex flex-col gap-3">
-                                        <label htmlFor="name" className="text-[10px] font-black text-slate-400 group-focus-within:text-brand-blue uppercase tracking-[0.2em] px-1 transition-colors">
+                                        <label htmlFor="name" className="text-[10px] font-black text-white group-focus-within:text-brand-gold uppercase tracking-[0.2em] px-1 transition-colors">
                                             {t('name_label')}
                                         </label>
                                         <div className="relative">
@@ -251,7 +305,7 @@ export default function ContactForm() {
                                                 required
                                                 maxLength={100}
                                                 placeholder={t('name_placeholder')}
-                                                className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-blue/30 focus:ring-4 focus:ring-brand-blue/[0.03] outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
+                                                className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-gold/30 focus:ring-4 focus:ring-brand-gold/[0.03] outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
                                                 value={formData.name}
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                             />
@@ -261,7 +315,7 @@ export default function ContactForm() {
                                     {/* Email Input */}
                                     <div className="group relative flex flex-col gap-3">
                                         <div className="flex justify-between items-center px-1">
-                                            <label htmlFor="email" className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors ${emailError ? 'text-red-500' : 'text-slate-400 group-focus-within:text-brand-blue'}`}>
+                                            <label htmlFor="email" className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors ${emailError ? 'text-red-300' : 'text-white group-focus-within:text-brand-gold'}`}>
                                                 {t('email_label')}
                                             </label>
                                             <AnimatePresence>
@@ -270,7 +324,7 @@ export default function ContactForm() {
                                                         initial={{ opacity: 0, x: 10 }}
                                                         animate={{ opacity: 1, x: 0 }}
                                                         exit={{ opacity: 0, x: 10 }}
-                                                        className="text-[9px] font-black text-red-500 uppercase tracking-wider"
+                                                        className="text-[9px] font-black text-red-300 uppercase tracking-wider"
                                                     >
                                                         {t('invalid_email') || 'Email Inválido'}
                                                     </motion.span>
@@ -285,7 +339,7 @@ export default function ContactForm() {
                                                 required
                                                 maxLength={100}
                                                 placeholder={t('email_placeholder')}
-                                                className={`w-full bg-slate-50/80 border hover:bg-slate-100 focus:bg-white focus:ring-4 outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium ${emailError ? 'border-red-400 focus:border-red-500 focus:ring-red-100' : 'border-slate-100 focus:border-brand-blue/30 focus:ring-brand-blue/[0.03]'}`}
+                                                className={`w-full bg-slate-50/80 border hover:bg-slate-100 focus:bg-white focus:ring-4 outline-none px-8 py-5 rounded-[1.5rem] transition-all duration-500 font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium ${emailError ? 'border-red-400 focus:border-red-500 focus:ring-red-100' : 'border-slate-100 focus:border-brand-gold/30 focus:ring-brand-gold/[0.03]'}`}
                                                 value={formData.email}
                                                 onChange={handleEmailChange}
                                             />
@@ -296,10 +350,10 @@ export default function ContactForm() {
                                 {/* Message Input */}
                                 <div className="group relative flex flex-col gap-3">
                                     <div className="flex justify-between items-center px-1">
-                                        <label htmlFor="message" className="text-[10px] font-black text-slate-400 group-focus-within:text-brand-blue uppercase tracking-[0.2em] transition-colors">
+                                        <label htmlFor="message" className="text-[10px] font-black text-white group-focus-within:text-brand-gold uppercase tracking-[0.2em] transition-colors">
                                             {t('message_label')}
                                         </label>
-                                        <span className={`text-[9px] font-black uppercase tracking-wider ${formData.message.length > 450 ? 'text-brand-gold' : 'text-slate-300'}`}>
+                                        <span className={`text-[9px] font-black uppercase tracking-wider ${formData.message.length > 450 ? 'text-brand-gold' : 'text-white/40'}`}>
                                             {formData.message.length} / 500
                                         </span>
                                     </div>
@@ -310,7 +364,7 @@ export default function ContactForm() {
                                             required
                                             maxLength={500}
                                             placeholder={t('message_placeholder')}
-                                            className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-blue/30 focus:ring-4 focus:ring-brand-blue/[0.03] outline-none px-8 py-5 rounded-[2rem] transition-all duration-500 resize-none font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
+                                            className="w-full bg-slate-50/80 border border-slate-100 hover:bg-slate-100 focus:bg-white focus:border-brand-gold/30 focus:ring-4 focus:ring-brand-gold/[0.03] outline-none px-8 py-5 rounded-[2rem] transition-all duration-500 resize-none font-bold text-brand-dark placeholder:text-slate-300 placeholder:font-medium"
                                             value={formData.message}
                                             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                         />
@@ -324,9 +378,9 @@ export default function ContactForm() {
                                         disabled={status === 'loading' || status === 'success' || emailError}
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className={`w-full relative py-6 px-10 rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.3em] overflow-hidden shadow-2xl flex items-center justify-center gap-4 group ${status === 'success' ? 'bg-brand-green shadow-brand-green/30 text-white' :
-                                            status === 'error' ? 'bg-red-500 shadow-red-200 text-white' :
-                                                'bg-brand-blue text-white shadow-brand-blue/25 hover:bg-brand-dark'
+                                        className={`w-full relative py-6 px-10 rounded-[1.5rem] font-black text-[11px] uppercase tracking-[0.3em] overflow-hidden flex items-center justify-center gap-4 group ${status === 'success' ? 'bg-brand-green text-white' :
+                                            status === 'error' ? 'bg-red-500 text-white' :
+                                                'bg-brand-gold text-brand-dark hover:bg-white hover:text-brand-dark'
                                             } ${emailError ? 'opacity-50 cursor-not-allowed' : ''}`}
                                     >
                                         {/* Button shimmer sweep */}
